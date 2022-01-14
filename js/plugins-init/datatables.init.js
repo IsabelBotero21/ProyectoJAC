@@ -48,6 +48,10 @@ let dataSet = [
            $(row).addClass('selected')
         } 
     });
+
+    $(document).ready(function() {
+        $('table.display').DataTable();
+    } );
       
     table.on('click', 'tbody tr', function() {
     var $row = table.row(this).nodes().to$();
