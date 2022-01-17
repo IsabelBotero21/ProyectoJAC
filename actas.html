@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Actas </title>
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -67,14 +69,14 @@
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">         
-                                    </ul>
-                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="list-unstyled">
+                                    <li class="media dropdown-item">
+                                        <span class="success"><i class="ti-user"></i></span>
+                                        <div class="media-body">
+                                </ul>
+                            </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
@@ -108,206 +110,226 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
-                        class="nav-text">Home</span></a></li>
+                                class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
-                        class="nav-text">Usuarios</span></a></li>
-                        <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
-                            class="nav-text">Reuniones</span></a></li>
-                            <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                                class="nav-text">Usuarios</span></a></li>
+                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                                class="nav-text">Reuniones</span></a></li>
+                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                                    <li><a  href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
-                                        class="nav-text">Documentacion</span></a></li>
-                                        <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                            class="nav-text">Comites</span></a></li>
+                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Documentacion</span></a></li>
+                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Comites</span></a></li>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>ACTAS</h4>
+                            <h4>Actas</h4>
                         </div>
                     </div>
                 </div>
-                <!-- row -->
-                <div class="col-lg-12">
+                <div class="col-md-12">
                     <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
+                                onclick="location.href='crearActa.html'"><span
+                                    class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                                </span>Crear acta</button>
+                        </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-responsive-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Titulo</th>
-                                            <th>Fecha</th>
-                                            <th>Hora Inicio</th>
-                                            <th>Hora Final</th>
-                                            <th>Lugar</th>
-                                            <th>Objetivo</th>
-                                            <th>Lista Invitados</th>
-                                            <th>Desarrollo Agenda</th>
-                                            <th>Archivo Acta</th>
-                                            <th>Archivo Asistencia</th>
-                                            <th>Usuario</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Recoleccion de firmas para ajusted del sat</td>
-                                            <td>23/08/2021</td>
-                                            <td>9:00 am</td>
-                                            <td>10:00 am</td>
-                                            <td>Caseta comunal</td>
-                                            <td>recolectar firmas para que el modelo educativo sat continue en el area rural</td>
-                                            <td>Invitados</td>
-                                            <td>Desarrollo Agenda</td>
-                                            <td>Acta</td>
-                                            <td>Asistencia</td>
-                                            <td>Usuario</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Recoleccion de firmas para ajusted del sat</td>
-                                            <td>23/08/2021</td>
-                                            <td>9:00 am</td>
-                                            <td>10:00 am</td>
-                                            <td>Caseta comunal</td>
-                                            <td>recolectar firmas para que el modelo educativo sat continue en el area rural</td>
-                                            <td>Invitados</td>
-                                            <td>Desarrollo Agenda</td>
-                                            <td>Acta</td>
-                                            <td>Asistencia</td>
-                                            <td>Usuario</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Recoleccion de firmas para ajusted del sat</td>
-                                            <td>23/08/2021</td>
-                                            <td>9:00 am</td>
-                                            <td>10:00 am</td>
-                                            <td>Caseta comunal</td>
-                                            <td>recolectar firmas para que el modelo educativo sat continue en el area rural</td>
-                                            <td>Invitados</td>
-                                            <td>Desarrollo Agenda</td>
-                                            <td>Acta</td>
-                                            <td>Asistencia</td>
-                                            <td>Usuario</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Recoleccion de firmas para ajusted del sat</td>
-                                            <td>23/08/2021</td>
-                                            <td>9:00 am</td>
-                                            <td>10:00 am</td>
-                                            <td>Caseta comunal</td>
-                                            <td>recolectar firmas para que el modelo educativo sat continue en el area rural</td>
-                                            <td>Invitados</td>
-                                            <td>Desarrollo Agenda</td>
-                                            <td>Acta</td>
-                                            <td>Asistencia</td>
-                                            <td>Usuario</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Recoleccion de firmas para ajusted del sat</td>
-                                            <td>23/08/2021</td>
-                                            <td>9:00 am</td>
-                                            <td>10:00 am</td>
-                                            <td>Caseta comunal</td>
-                                            <td>recolectar firmas para que el modelo educativo sat continue en el area rural</td>
-                                            <td>Invitados</td>
-                                            <td>Desarrollo Agenda</td>
-                                            <td>Acta</td>
-                                            <td>Asistencia</td>
-                                            <td>Usuario</td>
-                                        </tr>
-                                       
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <!-- Nav tabs -->
+                            <div class="default-tab">
+                                <div class="tab-content pt-3">
+                                    <div class="tab-pane fade show active" id="todas" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripcion</th>
+                                                        <th>Encargado</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Final</th>
+                                                        <th>Lugar</th>
+                                                        <th>Seguimiento</th>
+                                                        <th>Acta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td></td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td></td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="abiertas">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripcion</th>
+                                                        <th>Encargado</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Final</th>
+                                                        <th>Lugar</th>
+                                                        <th>Seguimiento</th>
+                                                        <th>Acta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td></td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td>Hola</td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="cerradas">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripcion</th>
+                                                        <th>Encargado</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Final</th>
+                                                        <th>Lugar</th>
+                                                        <th>Seguimiento</th>
+                                                        <th>Acta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                        <td>Caseta</td>
+                                                        <td></td>
+                                                        <td>...</td>
+                                                    </tr>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /# card -->
-              
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <footer class=" bg-dark text-white py-3">
-            <div class="container">
-                <nav class="row">
-                
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >Contáctenos</li>
-                            <li ><a href="#" class="text-reset"> <i class="fab fa-instagram" ></i> Nombre de Usaurio</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i>  Nombre de Usuario</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
-                            
-                            
-                        </ul>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-6">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >¿Quienes Somos?</li>
-                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
-                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades de nuestros clientes</p>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >PQRS</li>
-                            <li class="d-flex justify-content-between " >
-                                <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
-                                
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                </nav>
+                </div>
+                <script src="./vendor/global/global.min.js"></script>
+                <script src="./js/quixnav-init.js"></script>
+                <script src="./js/custom.min.js"></script>
+                <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
+                <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
-        <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
-            © 2021 Copyright: Todos los derechos reservados a..........
         </div>
-        </footer>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-        
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="./vendor/global/global.min.js"></script>
-    <script src="./js/quixnav-init.js"></script>
-    <script src="./js/custom.min.js"></script>
-    
-
-
 
 </body>
 
