@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <link rel="stylesheet" href="./vendor/select2/css/select2.min.css">
     <link href="./css/style.css" rel="stylesheet">
-
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -62,20 +62,20 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                           
+
                             <div class="search_bar dropdown">
                                 </span>
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">         
-                                    </ul>
-                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="list-unstyled">
+                                    <li class="media dropdown-item">
+                                        <span class="success"><i class="ti-user"></i></span>
+                                        <div class="media-body">
+                                </ul>
+                            </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
@@ -89,7 +89,7 @@
                                     <a href="./page-login.html" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
-                                         
+
                                     </a>
                                 </div>
                             </li>
@@ -110,17 +110,17 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
-                        class="nav-text">Home</span></a></li>
+                                class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
-                        class="nav-text">Usuarios</span></a></li>
-                        <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
-                            class="nav-text">Reuniones</span></a></li>
-                            <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                                class="nav-text">Usuarios</span></a></li>
+                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                                class="nav-text">Reuniones</span></a></li>
+                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                                    <li><a  href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
-                                        class="nav-text">Documentacion</span></a></li>
-                                        <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                            class="nav-text">Comites</span></a></li>
+                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Documentacion</span></a></li>
+                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Comites</span></a></li>
             </div>
         </div>
         <!--**********************************
@@ -134,189 +134,226 @@
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
-                        <div class="welcome-text" >
-                            <h4>DOCUMENTACION</h4>
-                        </div>
-                    </div>
-                </div><br><br><br>
-                <div class="card">
-                    <div class="card-header">
-                        <center><h4 class="card-title">REGISTRAR DOCUMENTACION</h4></center>
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-form">
-                            <form>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label>Descripcion</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Jac (unica)</label>
-                                        <input type="text" class="form-control" placeholder="">
-                                    </div>
-                                        <div class="form-group col-md-4">
-                                            <label></label>
-                                            <select id="inputState" class="form-control">
-                                                <option selected>Tipo documento</option>
-                                                <option>Libros</option>
-                                                <option>Estatutos</option>
-                                                <option>Personeria Juridica</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>Usuario</label>
-                                            <input type="text" class="form-control" placeholder="">
-                                        </div>
-                                    <div class="form-group col-md-6">
-                                        <label></label>
-                                        <input type="text" class="form-control" placeholder="Adjuntar Archivo">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Registar</button>
-                            </form>
+                        <div class="welcome-text">
+                            <h4>REUNIONES</h4>
                         </div>
                     </div>
                 </div>
-                <!-- Column ends -->
-                    <!-- Column starts -->
-                   <center> <div class="col-xl-11">
+                <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header d-block">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
+                                onclick="location.href='Documentacion-formulario.html'"><span
+                                    class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                                </span>Crear documento</button>
                         </div>
                         <div class="card-body">
-                            <div id="accordion-eight" class="accordion accordion-solid-bg">
-                                <div class="accordion__item">
-                                    <div class="accordion__header collapsed accordion__header--primary" data-toggle="collapse" data-target="#solid-bg_collapseOne">
-                                        <span class="accordion__header--icon"></span>
-                                        <span class="accordion__header--text">LIBROS</span>
-                                        <span class="accordion__header--indicator"></span>
-                                    </div>
-                                    <div id="solid-bg_collapseOne" class="collapse accordion__body" data-parent="#accordion-eight">
-                                        <div class="accordion__body--text">
-                                            <div class="form-group">
-                                                <label type="tel" class="form-control" ><a style="color:rgb(48, 180, 81);" href="informes.html"  >Libro Afiliado</a></label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label type="tel" class="form-control" ><a style="color:rgb(48, 180, 81);" href="informes.html"  >Libro Contable</a></label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label type="tel" class="form-control" ><a style="color:rgb(48, 180, 81);" href="informes.html"  >Libro Actas</a></label>
-                                          </div>
+                            <!-- Nav tabs -->
+                            <div class="default-tab">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#libro">Lbro</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#estatutos">Estatutos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#personeriaJuridica">Personería jurídica</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#informes">Informes</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content pt-3">
+                                    <div class="tab-pane fade show active" id="libro" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>JAC</th>
+                                                        <th>Archivo</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Usuario</th>
+                                                        <th>Ver</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion__item">
-                                    <div class="accordion__header collapsed accordion__header--info" data-toggle="collapse" data-target="#solid-bg_collapseTwo">
-                                        <span class="accordion__header--icon"></span>
-                                        <span class="accordion__header--text">ESTATUTOS</span>
-                                        <span class="accordion__header--indicator"></span>
-                                    </div>
-                                    <div id="solid-bg_collapseTwo" class="collapse accordion__body" data-parent="#accordion-eight">
-                                        <div class="accordion__body--text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                    <div class="tab-pane fade" id="estatutos">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>JAC</th>
+                                                        <th>Archivo</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Usuario</th>
+                                                        <th>Ver</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion__item">
-                                    <div class="accordion__header collapsed accordion__header--success" data-toggle="collapse" data-target="#solid-bg_collapseThree">
-                                        <span class="accordion__header--icon"></span>
-                                        <span class="accordion__header--text">PERSONERIA</span>
-                                        <span class="accordion__header--indicator"></span>
-                                    </div>
-                                    <div id="solid-bg_collapseThree" class="collapse accordion__body" data-parent="#accordion-eight">
-                                        <div class="accordion__body--text">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                    <div class="tab-pane fade" id="personeriaJuridica">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripcion</th>
+                                                        <th>Encargado</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Final</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="accordion__item">
-                                    <div class="accordion__header collapsed accordion" data-toggle="collapse" data-target="#solid-bg_collapse">
-                                        <span class="accordion__header--icon"></span>
-                                        <span class="accordion__header--text"><a style="color:rgb(48, 180, 81);" href="informes.html" >INFORMES</a></span>
+                                    <div class="tab-pane fade" id="informes">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripcion</th>
+                                                        <th>Encargado</th>
+                                                        <th>Comite Encargado</th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Final</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Recoleccion de firmas para ajusted del sat</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>desarrollo</td>
+                                                        <td>23/07/2022</td>
+                                                        <td>11:00 am</td>
+                                                        <td>12:00 pm</td>
+                                                    </tr>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div></center><br><br><br>
-        
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <footer class=" bg-dark text-white py-3">
-            <div class="container">
-                <nav class="row">
-                
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >Contáctenos</li>
-                            <li ><a href="#" class="text-reset"> <i class="fab fa-instagram" ></i> Nombre de Usaurio</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i>  Nombre de Usuario</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
-                            
-                            
-                        </ul>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-6">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >¿Quienes Somos?</li>
-                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
-                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades de nuestros clientes</p>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >PQRS</li>
-                            <li class="d-flex justify-content-between " >
-                                <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
-                                
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                </nav>
+                </div>
+                <script src="./vendor/global/global.min.js"></script>
+                <script src="./js/quixnav-init.js"></script>
+                <script src="./js/custom.min.js"></script>
+                <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
+                <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
-        <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
-            © 2021 Copyright: Todos los derechos reservados a..........
         </div>
-        </footer>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-        
-    </div>
-    <!--**********************************
+            <!--**********************************
         Main wrapper end
     ***********************************-->
 
-    <!--**********************************
+            <!--**********************************
         Scripts
     ***********************************-->
-    <!-- Required vendors -->
-    <script src="./vendor/global/global.min.js"></script>
-    <script src="./js/quixnav-init.js"></script>
-    <script src="./js/custom.min.js"></script>
-    
+            <!-- Required vendors -->
+            <script src="./vendor/global/global.min.js"></script>
+            <script src="./js/quixnav-init.js"></script>
+            <script src="./js/custom.min.js"></script>
 
-    <script src="./vendor/select2/js/select2.full.min.js"></script>
-    <script src="./js/plugins-init/select2-init.js"></script>
+
+            <script src="./vendor/select2/js/select2.full.min.js"></script>
+            <script src="./js/plugins-init/select2-init.js"></script>
 
 </body>
 
