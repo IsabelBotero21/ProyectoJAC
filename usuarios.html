@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Usuarios</title>
+    <title>Reuniones</title>
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
-
+    <!-- Custom style reuniones -->
+    <link rel="stylesheet" href="./css/reuniones.css">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,7 +45,7 @@
         ***********************************-->
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="icons/bandera2.jpg" alt="" >
+                <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
             <div class="nav-control">
@@ -67,52 +71,27 @@
                             </div>
                         </div>
                         <ul class="navbar-nav header-right">
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <ul class="list-unstyled">
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-user"></i></span>
-                                            <div class="media-body">         
-                                    </ul>
-                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="list-unstyled">
+                                    <li class="media dropdown-item">
+                                        <span class="success"><i class="ti-user"></i></span>
+                                        <div class="media-body">
+                                </ul>
+                            </div>
                             </li>
-                             <li class="nav-item dropdown header-profile">
+                            <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="./app-profile.html" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil</span>
                                     </a>
-                                    <a href="./email-inbox.html" class="dropdown-item">
-                                        <i class="icon-envelope-open"></i>
-                                        <span class="ml-2">Inbox </span>
-                                    </a>
-                                    <a class="dropdown-item">
+                                    <a href="./page-login.html" class="dropdown-item">
                                         <i class="icon-key"></i>
-                                        
-                                         <!-- Button trigger modal -->
-                                         <span class="ml-2"button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Modal centered</span>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Modal title</h5>
-                                                    <span button type="button" class="close" data-dismiss="modal"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <span class="ml-2">Cerrar sesión </span>
                                     </a>
                                 </div>
                             </li>
@@ -133,197 +112,112 @@
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
-                        class="nav-text">Home</span></a></li>
+                                class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
-                        class="nav-text">Usuarios</span></a></li>
-                        <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
-                            class="nav-text">Reuniones</span></a></li>
-                            <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                                class="nav-text">Usuarios</span></a></li>
+                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                                class="nav-text">Reuniones</span></a></li>
+                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                                    <li><a  href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
-                                        class="nav-text">Documentacion</span></a></li>
-                                        <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                            class="nav-text">Comites</span></a></li>
+                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Documentacion</span></a></li>
+                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Comites</span></a></li>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>USUARIOS</h4>
+                            <h4>Usuarios</h4>
                         </div>
                     </div>
                 </div>
-                <!-- row -->
-                <div class="col-lg-12">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            
+                            <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
+                                onclick="location.href='crearUsuario.html'"><span
+                                    class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                                </span>Crear usuario</button>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-hover table-responsive-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Documento de Identidad</th>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Direccion</th>
-                                            <th>Telefono Fijo</th>
-                                            <th>Telefono Celular</th>
-                                            <th>Fecha de Nacimiento</th>
-                                            <th>Confirmado</th>
-                                            <th>Perfil</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>45376489</td>
-                                            <td>Juana Lucia</td>
-                                            <td>molsalve Castrillon</td>
-                                            <td>Abejorral</td>
-                                            <td></td>
-                                            <td>3115678958</td>
-                                            <td>1999/mayo/28</td>
-                                            <td>si</td>
-                                            <td>Secretario</td>
-                                        </tr>
-                                        <tr>
-                                            <td>45376489</td>
-                                            <td>Pedro</td>
-                                            <td>Camacho</td>
-                                            <td>Abejorral</td>
-                                            <td></td>
-                                            <td>3115678958</td>
-                                            <td>1899/mayo/28</td>
-                                            <td>si</td>
-                                            <td>Tesorero</td>
-                                        </tr>
-                                        <tr>
-                                            <td>45376489</td>
-                                            <td>Alejandro</td>
-                                            <td>Moreno</td>
-                                            <td>Abejorral</td>
-                                            <td></td>
-                                            <td>3115678958</td>
-                                            <td>2000/enero/28</td>
-                                            <td>si</td>
-                                            <td>Fiscal</td>
-                                        </tr>
-                                        <tr>
-                                            <td>45376489</td>
-                                            <td>Luz Alba </td>
-                                            <td>Franco Osorio</td>
-                                            <td>Abejorral</td>
-                                            <td></td>
-                                            <td>3115678958</td>
-                                            <td>1968/marzo/21</td>
-                                            <td>si</td>
-                                            <td>Presidenta</td>
-                                        </tr>
-                                        <tr>
-                                            <td>45376489</td>
-                                            <td>Orlando de jesus</td>
-                                            <td>Otalvaro</td>
-                                            <td>Abejorral</td>
-                                            <td></td>
-                                            <td>3115678958</td>
-                                            <td>1975/febrero/12</td>
-                                            <td>si</td>
-                                            <td>Vicepresidente</td>
-                                        </tr>
-                                       
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <!-- Nav tabs -->
+                            <div class="default-tab">
+                                <div class="tab-content pt-3">
+                                    <div class="tab-pane fade show active" id="todas" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Acciones</th>
+                                                        <th>Número de documento</th>
+                                                        <th>Nombres</th>
+                                                        <th>Apellidos</th>
+                                                        <th>Dirección</th>
+                                                        <th>Telefono fijo / celular</th>
+                                                        <th>Email</th>
+                                                        <th>Perfil</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><i class="far fa-edit"></i></td>
+                                                        <td>70754566</td>
+                                                        <td>Juan Alberto</td>
+                                                        <td>Rojas Sanchez</td>
+                                                        <td>Los Llanos</td>
+                                                        <td>3124547865</td>
+                                                        <td>Juan@gmail.com</td>
+                                                        <td>Afiliado</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="far fa-edit"></i></td>
+                                                        <td>1000564676</td>
+                                                        <td>Juana Lucia</td>
+                                                        <td>Torres Botero</td>
+                                                        <td>los Llanos</td>
+                                                        <td>8765456</td>
+                                                        <td>juana@gmail.com</td>
+                                                        <td>Fiscal</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="far fa-edit"></i></td>
+                                                        <td>1012346765</td>
+                                                        <td>Sara Isabel</td>
+                                                        <td>Castillo Usma</td>
+                                                        <td>Los Llanos</td>
+                                                        <td>312565321</td>
+                                                        <td>Sara@gmail.com</td>
+                                                        <td>Afiliado</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><i class="far fa-edit"></i></td>
+                                                        <td>1008565435</td>
+                                                        <td>Luis Felipe</td>
+                                                        <td>Cardona Chica</td>
+                                                        <td>Los Llanos</td>
+                                                        <td>3122454600</td>
+                                                        <td>luisfe@gmail.com</td>
+                                                        <td>Tesorero</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /# card -->
-               
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <footer class=" bg-dark text-white py-3">
-            <div class="container">
-                <nav class="row">
-                
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >Contáctenos</li>
-                            <li ><a href="#" class="text-reset"> <i class="fab fa-instagram" ></i> Nombre de Usaurio</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i>  Nombre de Usuario</a></li>
-                            <li ><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
-                            
-                            
-                        </ul>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-6">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >¿Quienes Somos?</li>
-                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
-                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades de nuestros clientes</p>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >PQRS</li>
-                            <li class="d-flex justify-content-between " >
-                                <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
-                                
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                </nav>
+                </div>
+                <script src="./vendor/global/global.min.js"></script>
+                <script src="./js/quixnav-init.js"></script>
+                <script src="./js/custom.min.js"></script>
+                <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
+                <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
-        <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
-            © 2021 Copyright: Todos los derechos reservados a..........
         </div>
-        </footer>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-        
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="./vendor/global/global.min.js"></script>
-    <script src="./js/quixnav-init.js"></script>
-    <script src="./js/custom.min.js"></script>
-    
-
-
-
 </body>
 
 </html>
