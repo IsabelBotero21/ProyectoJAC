@@ -7,5 +7,5 @@ unset ($_SESION['user_id']);
 session_destroy();
 
 //nos envia a el index o inicio
-header('location: index.php');
+header('location: ../index.php');
 ?>
