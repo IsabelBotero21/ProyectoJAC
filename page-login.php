@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="es" class="h-100">
 
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
@@ -23,18 +23,16 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Iniciar sesión</h4>
-                                    <form action="index.html">
-
+                                    <form method="POST" action="controllers/loginController.php">
                                         <div class="card-body">
                                             <div class="basic-form">
-                                                <form class="form-valide-with-icon" action="#" method="post">
                                                     <div class="form-group">
                                                         <label class="text-label">Usuario</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                             </div>
-                                                            <input type="text" class="form-control" id="val-username1" name="val-username" placeholder="">
+                                                            <input type="text" class="form-control" id="email" name="email" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -43,7 +41,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                             </div>
-                                                            <input type="password" class="form-control" id="val-password1" name="val-password" placeholder="">
+                                                            <input type="password" class="form-control" id="clave" name="clave" placeholder="">
                                                             <div class="input-group-append show-pass">
                                                                 <span class="input-group-text"> <i class="fa fa-eye-slash"></i>
                                                                 </span>
@@ -56,7 +54,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
+                                            <button type="submit" class="btn btn-primary btn-block" name="login" value="login">Iniciar sesión</button>
                                         </div>
                                     </form>
                                 </div>
