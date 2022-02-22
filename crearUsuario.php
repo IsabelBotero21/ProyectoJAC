@@ -1,12 +1,19 @@
+<?php
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reuniones</title>
+    <title>Usuarios</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -133,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-                <form>
+                <form action="controllers/insertarUsuario.php" method="post">
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
@@ -141,13 +148,19 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Numero de documento</label>
-                                            <input type="number" class="form-control input-default ">
+                                            <input type="number" class="form-control input-default" name="documento">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Telefono fijo</label>
-                                            <input type="number" class="form-control input-default ">
+                                            <input type="number" class="form-control input-default" name="telefonoFijo">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Contraseña</label>
+                                            <input type="password" class="form-control input-default" name="clave">
                                         </div>
                                     </div>
                                 </div>
@@ -155,13 +168,19 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input type="text" class="form-control input-default ">
+                                            <input type="text" class="form-control input-default" name="nombres">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Celular</label>
-                                            <input type="Number" class="form-control input-default ">
+                                            <input type="Number" class="form-control input-default" name="celular">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Fecha de nacimiento</label>
+                                            <input type="date" class="form-control input-default" name="fechaNacimiento">
                                         </div>
                                     </div>
                                 </div>
@@ -169,18 +188,18 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Apellidos</label>
-                                            <input type="text" class="form-control input-default ">
+                                            <input type="text" class="form-control input-default" name="apellidos">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Perfil</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="perfil">
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
                                                 <option>
-                                                    Afiliado
+                                                    1
                                                 </option>
                                                 <option>
                                                     Secretario
@@ -194,20 +213,31 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Foto</label>
+                                            <input type="file" class="form-control input-default" name="foto">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Direccion</label>
-                                            <input type="text" class="form-control input-default ">
+                                            <input type="text" class="form-control input-default" name="direccion">
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check mb-2 form-group"> 
-                                            <label>Estado</label>
+                                            <label>Email</label>
+                                            <input type="email" class="form-control input-default" name="email">
+                                        </div>
+                                    </div><br><br>
+                                    <div class="col-auto">
+                                        <div class="form-check mb-2">
                                             <input class="form-check-input" type="checkbox">
                                             <label class="form-check-label">
-                                                Activo
+                                                Estado
                                             </label>
                                         </div>
                                     </div>
@@ -215,7 +245,7 @@
                             </div>
                             <div class="p-3">
                                 <button type="reset" class="btn btn-primary">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit" class="btn btn-primary" value="guardar">Guardar</button>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reuniones</title>
+    <title>Usuarios</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -115,7 +123,7 @@
                                 class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
-                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
                     <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
@@ -138,7 +146,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                                onclick="location.href='crearUsuario.html'"><span
+                                onclick="location.href='crearUsuario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
                                 </span>Crear usuario</button>
                         </div>
@@ -163,7 +171,9 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><i class="far fa-edit"></i></td>
+                                                        <td><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><br>
+                                                        
+                                                        <button type="button" class="btn btn-primary"><i class="fal fa-trash-alt"></i></button></td>
                                                         <td>70754566</td>
                                                         <td>Juan Alberto</td>
                                                         <td>Rojas Sanchez</td>

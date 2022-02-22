@@ -3,11 +3,11 @@ include("../util/conexion.php");
 session_start();
 
 if(isset($_POST['login'])){
-    $email = $_POST['email'];
+    $docIdentidad = $_POST['docIdentidad'];
     $clave =  $_POST['clave'];
 
-    $query = $connection->prepare("SELECT * FROM tblusuario WHERE email=:email");
-    $query->bindParam("email", $email, PDO::PARAM_STR);
+    $query = $connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad=:docIdentidad");
+    $query->bindParam("docIdentidad", $docIdentidad, PDO::PARAM_STR);
     $query->execute();
 
     $result = $query->fetch(PDO::FETCH_ASSOC);

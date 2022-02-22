@@ -135,7 +135,7 @@ if(!isset($_SESSION['user_id'])){
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
