@@ -166,13 +166,15 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Numero de documento</label>
-                                            <?php
-                                                echo $edit? 
-                                                "<input type='number' class='form-control input-default' name='documento' disabled value='{$user["docIdentidad"]}'>"
-                                                :'<input type="number" class="form-control input-default" name="documento">'
+                                        <?php
+                                            if($edit){
+                                                $_SESSION['doc_update'] = $user["docIdentidad"];
+                                                echo "<input type='number' class='form-control input-default' name='documento' disabled value='{$user["docIdentidad"]}'>";
+                                            }else{
+                                                echo '<input type="number" class="form-control input-default" name="documento">';
+                                            }
                                             ?>
-                                            
+                                            <label>Numero de documento</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
