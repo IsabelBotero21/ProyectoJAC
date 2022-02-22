@@ -166,6 +166,7 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
+                                            <label>Numero de documento</label>
                                         <?php
                                             if($edit){
                                                 $_SESSION['doc_update'] = $user["docIdentidad"];
@@ -173,8 +174,7 @@ if($id){
                                             }else{
                                                 echo '<input type="number" class="form-control input-default" name="documento">';
                                             }
-                                            ?>
-                                            <label>Numero de documento</label>
+                                        ?>
                                         </div>
                                     </div>
                                     <div class="col-12">
