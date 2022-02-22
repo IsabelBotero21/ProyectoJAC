@@ -189,7 +189,7 @@ while ($fila = $sel->fetch())
                                                         <td>
                                                             <!-- <button type="button" class="btn btn-primary"><i class="far fa-trash"></i></button><br> -->
                                                         
-                                                            <button type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></button>
+                                                            <a type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a>
                                                         </td>
                                                         <td><?php echo "{$fila["docIdentidad"]}" ?></td>
                                                         <td><?php echo "{$fila["nombres"]}" ?></td>

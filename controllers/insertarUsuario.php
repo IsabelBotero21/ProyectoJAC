@@ -14,8 +14,10 @@ $foto = $_POST['foto'];
 $direccion = $_POST['direccion'];
 $email = $_POST['email'];
 
-$ins = $connection->query("INSERT INTO tblusuario (docIdentidad,nombres,apellidos,direccion,telefonoFijo, telefonoCelular,email,clave,fechaNacimiento,foto,perfil) VALUES ('$numeroDocumento','$nombres','$apellidos','$direccion','$telefonoFijo','$celular','$email','$clave','$fechaNacimiento','$foto','$perfil')");
+$ins = $connection->prepare("INSERT INTO tblusuario (docIdentidad,nombres,apellidos,direccion,telefonoFijo, telefonoCelular,email,clave,fechaNacimiento,foto,perfil) VALUES ('$numeroDocumento','$nombres','$apellidos','$direccion','$telefonoFijo','$celular','$email','$clave','$fechaNacimiento','$foto','$perfil')");
 
+
+$ins->execute();
 if ($ins) {
 	        echo "<h1> Registro guardo con exito. </h1>";
           }

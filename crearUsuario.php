@@ -1,9 +1,22 @@
 <?php
+include("util/conexion.php");
 session_start();
- 
+
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
+}
+$id = $_REQUEST['id'];
+$edit = false;
+if($id){
+    $edit = true;
+    $stmt = $connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = $id");
+    // Especificamos el fetch mode antes de llamar a fetch()
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    // Ejecutamos
+    $stmt->execute();
+    $user = $stmt->fetch();
+
 }
 ?>
 <!DOCTYPE html>
@@ -136,11 +149,17 @@ if(!isset($_SESSION['user_id'])){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Crear usuario</h4>
+                            <?php
+                                echo $edit? '<h4>Editar usuario</h4>': "<h4>Crear usuario</h4>";
+                            ?>
                         </div>
                     </div>
                 </div>
-                <form action="controllers/insertarUsuario.php" method="post">
+                <?php
+                echo $edit 
+                ? '<form action="controllers/actualizarUsuario.php" method="post">'
+                :'<form action="controllers/insertarUsuario.php" method="post">'
+                ?>
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
@@ -148,19 +167,24 @@ if(!isset($_SESSION['user_id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Numero de documento</label>
-                                            <input type="number" class="form-control input-default" name="documento">
+                                            <?php
+                                                echo $edit? 
+                                                "<input type='number' class='form-control input-default' name='documento' disabled value='{$user["docIdentidad"]}'>"
+                                                :'<input type="number" class="form-control input-default" name="documento">'
+                                            ?>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Telefono fijo</label>
-                                            <input type="number" class="form-control input-default" name="telefonoFijo">
+                                            <input type="number" class="form-control input-default" name="telefonoFijo" value="<?php echo $edit? $user["telefonoFijo"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Contraseña</label>
-                                            <input type="password" class="form-control input-default" name="clave">
+                                            <input type="password" class="form-control input-default" name="clave" value="<?php echo $edit? $user["clave"]: "" ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -168,19 +192,19 @@ if(!isset($_SESSION['user_id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Nombres</label>
-                                            <input type="text" class="form-control input-default" name="nombres">
+                                            <input type="text" class="form-control input-default" name="nombres" value="<?php echo $edit? $user["nombres"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Celular</label>
-                                            <input type="Number" class="form-control input-default" name="celular">
+                                            <input type="Number" class="form-control input-default" name="celular" value="<?php echo $edit? $user["telefonoCelular"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha de nacimiento</label>
-                                            <input type="date" class="form-control input-default" name="fechaNacimiento">
+                                            <input type="date" class="form-control input-default" name="fechaNacimiento" value="<?php echo $edit? $user["fechaNacimiento"]: "" ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -188,13 +212,13 @@ if(!isset($_SESSION['user_id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Apellidos</label>
-                                            <input type="text" class="form-control input-default" name="apellidos">
+                                            <input type="text" class="form-control input-default" name="apellidos" value="<?php echo $edit? $user["apellidos"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Perfil</label>
-                                            <select class="form-control" name="perfil">
+                                            <select class="form-control" name="perfil" >
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
@@ -224,21 +248,13 @@ if(!isset($_SESSION['user_id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Direccion</label>
-                                            <input type="text" class="form-control input-default" name="direccion">
+                                            <input type="text" class="form-control input-default" name="direccion" value="<?php echo $edit? $user["direccion"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check mb-2 form-group"> 
                                             <label>Email</label>
-                                            <input type="email" class="form-control input-default" name="email">
-                                        </div>
-                                    </div><br><br>
-                                    <div class="col-auto">
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox">
-                                            <label class="form-check-label">
-                                                Estado
-                                            </label>
+                                            <input type="email" class="form-control input-default" name="email" value="<?php echo $edit? $user["email"]: "" ?>">
                                         </div>
                                     </div>
                                 </div>

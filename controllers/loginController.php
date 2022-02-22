@@ -18,6 +18,7 @@ if(isset($_POST['login'])){
     if($clave === $result['clave']){
         echo "clave correcta";
         $_SESSION['user_id'] = $result['docIdentidad'];
+        // $_SESSION['JAC'] = $result[]
         echo "Login correcto";
         header("HTTP/1.1 302 Moved Temporarily"); 
         header("Location: ../index.php"); 
