@@ -170,48 +170,28 @@ if(!isset($_SESSION['user_id'])){
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php
+                                                        $sel = $connection->query("SELECT * FROM tblusuario");
+                                                        while ($fila = $sel -> fetch_assoc())
+
+                                                        {
+                                                    ?>
                                                     <tr>
                                                         <td><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><br>
                                                         
-                                                        <button type="button" class="btn btn-primary"><i class="fal fa-trash-alt"></i></button></td>
-                                                        <td>70754566</td>
-                                                        <td>Juan Alberto</td>
-                                                        <td>Rojas Sanchez</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>3124547865</td>
-                                                        <td>Juan@gmail.com</td>
-                                                        <td>Afiliado</td>
+                                                        <button type="button" class="btn btn-primary" href="actualizar.php?id=<?php echo $fila['docidentidad'] ?>"><i class="fal fa-trash-alt"></i></button></td>
+                                                        <td><?php echo $fila['docidentidad'] ?></td>
+                                                        <td><?php echo $fila['nombres'] ?></td>
+                                                        <td><?php echo $fila['apellidos'] ?></td>
+                                                        <td><?php echo $fila['direccion'] ?></td>
+                                                        <td><?php echo $fila['telefonoFijo']."/". $fila['telefonoCelular'] ?></td>
+                                                        <td><?php echo $fila['email'] ?></td>
+                                                        <td><?php echo $fila['perfil'] ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1000564676</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>Torres Botero</td>
-                                                        <td>los Llanos</td>
-                                                        <td>8765456</td>
-                                                        <td>juana@gmail.com</td>
-                                                        <td>Fiscal</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1012346765</td>
-                                                        <td>Sara Isabel</td>
-                                                        <td>Castillo Usma</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>312565321</td>
-                                                        <td>Sara@gmail.com</td>
-                                                        <td>Afiliado</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1008565435</td>
-                                                        <td>Luis Felipe</td>
-                                                        <td>Cardona Chica</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>3122454600</td>
-                                                        <td>luisfe@gmail.com</td>
-                                                        <td>Tesorero</td>
-                                                    </tr>
+                                                    <?php
+
+                                                        }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
