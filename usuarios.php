@@ -6,7 +6,13 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-echo $con;
+$sel = $connection->prepare("SELECT * FROM tblusuario");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
+while ($fila = $sel->fetch())
+{
+    echo "Nombre: {$fila["docIdentidad"]} <br>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +39,13 @@ echo $con;
     <!--*******************
         Preloader start
     ********************-->
-    <!--<div id="preloader">
+    <div id="preloader">
         <div class="sk-three-bounce">
             <div class="sk-child sk-bounce1"></div>
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>-->
+    </div>
     <!--*******************
         Preloader end
     ********************-->
@@ -173,22 +179,25 @@ echo $con;
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        $sel = $connection->query("SELECT * FROM tblusuario");
-                                                        while ($fila = $sel -> fetch_assoc())
-
+                                                        $sel = $connection->prepare("SELECT * FROM tblusuario");
+                                                        $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                        $sel->execute();
+                                                        while ($fila = $sel->fetch())
                                                         {
                                                     ?>
                                                     <tr>
-                                                        <td><button type="button" class="btn btn-primary"><i class="far fa-edit"></i></button><br>
+                                                        <td>
+                                                            <!-- <button type="button" class="btn btn-primary"><i class="far fa-trash"></i></button><br> -->
                                                         
-                                                        <button type="button" class="btn btn-primary" href="actualizar.php?id=<?php echo $fila['docidentidad'] ?>"><i class="fal fa-trash-alt"></i></button></td>
-                                                        <td><?php echo $fila['docidentidad'] ?></td>
-                                                        <td><?php echo $fila['nombres'] ?></td>
-                                                        <td><?php echo $fila['apellidos'] ?></td>
-                                                        <td><?php echo $fila['direccion'] ?></td>
-                                                        <td><?php echo $fila['telefonoFijo']."/". $fila['telefonoCelular'] ?></td>
-                                                        <td><?php echo $fila['email'] ?></td>
-                                                        <td><?php echo $fila['perfil'] ?></td>
+                                                            <button type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></button>
+                                                        </td>
+                                                        <td><?php echo "{$fila["docIdentidad"]}" ?></td>
+                                                        <td><?php echo "{$fila["nombres"]}" ?></td>
+                                                        <td><?php echo "{$fila["apellidos"]}" ?></td>
+                                                        <td><?php echo "{$fila["direccion"]}" ?></td>
+                                                        <td><?php echo "{$fila["telefonoFijo"]}/{$fila["telefonoCelular"]}" ?></td>
+                                                        <td><?php echo "{$fila["email"]}" ?></td>
+                                                        <td><?php echo "{$fila["perfil"]}" ?></td>
                                                     </tr>
                                                     <?php
 
