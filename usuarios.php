@@ -168,12 +168,12 @@ while ($fila = $sel->fetch())
                                                 <thead>
                                                     <tr>
                                                         <th>Acciones</th>
-                                                        <th>Número de documento</th>
+                                                        <th>Número de Documento</th>
                                                         <th>Nombres</th>
                                                         <th>Apellidos</th>
                                                         <th>Dirección</th>
-                                                        <th>Telefono fijo / celular</th>
-                                                        <th>Email</th>
+                                                        <th>Telefono fijo / Celular</th>
+                                                        <th>Correo</th>
                                                         <th>Perfil</th>
                                                     </tr>
                                                 </thead>
@@ -187,8 +187,6 @@ while ($fila = $sel->fetch())
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <!-- <button type="button" class="btn btn-primary"><i class="far fa-trash"></i></button><br> -->
-                                                        
                                                             <a type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a>
                                                         </td>
                                                         <td><?php echo "{$fila["docIdentidad"]}" ?></td>

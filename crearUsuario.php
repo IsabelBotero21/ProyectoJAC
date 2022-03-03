@@ -166,7 +166,7 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Numero de documento</label>
+                                            <label>Número de Documento *</label>
                                         <?php
                                             if($edit){
                                                 $_SESSION['doc_update'] = $user["docIdentidad"];
@@ -179,13 +179,13 @@ if($id){
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Telefono fijo</label>
+                                            <label>Teléfono Fijo</label>
                                             <input type="number" class="form-control input-default" name="telefonoFijo" value="<?php echo $edit? $user["telefonoFijo"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Contraseña</label>
+                                            <label>Contraseña *</label>
                                             <input type="password" class="form-control input-default" name="clave" value="<?php echo $edit? $user["clave"]: "" ?>">
                                         </div>
                                     </div>
@@ -193,19 +193,19 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Nombres</label>
+                                            <label>Nombres *</label>
                                             <input type="text" class="form-control input-default" name="nombres" value="<?php echo $edit? $user["nombres"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Celular</label>
+                                            <label>Teléfono Celular *</label>
                                             <input type="Number" class="form-control input-default" name="celular" value="<?php echo $edit? $user["telefonoCelular"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Fecha de nacimiento</label>
+                                            <label>Fecha de Nacimiento *</label>
                                             <input type="date" class="form-control input-default" name="fechaNacimiento" value="<?php echo $edit? $user["fechaNacimiento"]: "" ?>">
                                         </div>
                                     </div>
@@ -213,35 +213,31 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Apellidos</label>
+                                            <label>Apellidos *</label>
                                             <input type="text" class="form-control input-default" name="apellidos" value="<?php echo $edit? $user["apellidos"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Perfil</label>
+                                            <label>Perfil *</label>
                                             <select class="form-control" name="perfil" >
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
-                                                <option>
-                                                    1
-                                                </option>
-                                                <option>
-                                                    Secretario
-                                                </option>
-                                                <option>
-                                                    Tesorero
-                                                </option>
-                                                <option>
-                                                    Fiscal
-                                                </option>
+                                                <?php
+                                                $query = $connection->prepare("SELECT * FROM tblperfil");
+                                                $query->execute();
+                                                $data = $query->fetchAll();
+                                                foreach($data as $user):
+                                                    echo '<option value="'.$user["id"].'">'.$user["descripcion"].'</option>';
+                                                endforeach;
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Foto</label>
+                                            <label>Foto de perfil</label>
                                             <input type="file" class="form-control input-default" name="foto">
                                         </div>
                                     </div>
@@ -249,18 +245,19 @@ if($id){
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Direccion</label>
+                                            <label>Dirección *</label>
                                             <input type="text" class="form-control input-default" name="direccion" value="<?php echo $edit? $user["direccion"]: "" ?>">
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-check mb-2 form-group"> 
-                                            <label>Email</label>
+                                            <label>Correo *</label>
                                             <input type="email" class="form-control input-default" name="email" value="<?php echo $edit? $user["email"]: "" ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <p>Los campos con * son requeridos</p>
                             <div class="p-3">
                                 <button type="reset" class="btn btn-primary">Cancelar</button>
                                 <button type="submit" class="btn btn-primary" value="guardar">Guardar</button>
