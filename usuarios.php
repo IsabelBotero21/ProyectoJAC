@@ -9,10 +9,6 @@ if(!isset($_SESSION['user_id'])){
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
-while ($fila = $sel->fetch())
-{
-    echo "Nombre: {$fila["docIdentidad"]} <br>";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,11 +123,11 @@ while ($fila = $sel->fetch())
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
-                    <li><a href="usuarios.php" aria-expanded="false"><i class="far fa-handshake"></i><span
+                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
                     <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>

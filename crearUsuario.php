@@ -6,9 +6,11 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-$id = $_REQUEST['id'];
+if(!empty($_REQUEST['id'])){
+    $id = $_REQUEST['id'];
+}
 $edit = false;
-if($id){
+if(!empty($id)){
     $edit = true;
     $stmt = $connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = $id");
     // Especificamos el fetch mode antes de llamar a fetch()
@@ -18,6 +20,12 @@ if($id){
     $user = $stmt->fetch();
 
 }
+
+$numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoErr = $perfilErr = $direccionErr = $emailErr = "";
+// if(isset($_GET['claveErr'])){
+    $claveErr = $_GET['claveErr'];
+    echo $claveErr;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,9 +138,9 @@ if($id){
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -187,6 +195,7 @@ if($id){
                                         <div class="form-group">
                                             <label>Contraseña *</label>
                                             <input type="password" class="form-control input-default" name="clave" value="<?php echo $edit? $user["clave"]: "" ?>">
+                                            <h2><?php echo $claveErr;?></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -228,8 +237,8 @@ if($id){
                                                 $query = $connection->prepare("SELECT * FROM tblperfil");
                                                 $query->execute();
                                                 $data = $query->fetchAll();
-                                                foreach($data as $user):
-                                                    echo '<option value="'.$user["id"].'">'.$user["descripcion"].'</option>';
+                                                foreach($data as $opt):
+                                                    echo '<option value="'.$opt["id"].'">'.$opt["descripcion"].'</option>';
                                                 endforeach;
                                                 ?>
                                             </select>
@@ -250,7 +259,7 @@ if($id){
                                         </div>
                                     </div>
                                     <div class="col-auto">
-                                        <div class="form-check mb-2 form-group"> 
+                                        <div class="form-group"> 
                                             <label>Correo *</label>
                                             <input type="email" class="form-control input-default" name="email" value="<?php echo $edit? $user["email"]: "" ?>">
                                         </div>

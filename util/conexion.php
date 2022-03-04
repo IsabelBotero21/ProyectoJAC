@@ -1,7 +1,7 @@
 <?php
 
 define('USER', 'root');
-define('PASSWORD', '');
+define('PASSWORD', 'root');
 define('HOST', 'localhost');
 define('DATABASE', 'jac');
 
