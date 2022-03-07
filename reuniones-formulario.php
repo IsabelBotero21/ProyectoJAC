@@ -167,7 +167,7 @@ if($id){
                                     <div class="col-12">
                                         
                                         <div class="form-group">
-                                        <label>Encargado</label>
+                                        <label>Encargado o encargado</label>
                                             <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["encargado"]: ""?>">
                                            <?php
                                            $query=$connection->prepare("SELECT * FROM tblusuario");
