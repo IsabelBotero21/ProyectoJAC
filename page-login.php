@@ -32,7 +32,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                             </div>
-                                                            <input type="text" class="form-control" id="email" name="email" placeholder="">
+                                                            <input type="text" class="form-control" id="docIdentidad" name="docIdentidad" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

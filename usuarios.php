@@ -1,3 +1,15 @@
+<?php
+include("util/conexion.php");
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+$sel = $connection->prepare("SELECT * FROM tblusuario");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +17,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reuniones</title>
+    <title>Usuarios</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -111,9 +123,9 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -138,7 +150,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                                onclick="location.href='crearUsuario.html'"><span
+                                onclick="location.href='crearUsuario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
                                 </span>Crear usuario</button>
                         </div>
@@ -152,56 +164,39 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Acciones</th>
-                                                        <th>Número de documento</th>
+                                                        <th>Número de Documento</th>
                                                         <th>Nombres</th>
                                                         <th>Apellidos</th>
                                                         <th>Dirección</th>
-                                                        <th>Telefono fijo / celular</th>
-                                                        <th>Email</th>
+                                                        <th>Telefono fijo / Celular</th>
+                                                        <th>Correo</th>
                                                         <th>Perfil</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php
+                                                        $sel = $connection->prepare("SELECT * FROM tblusuario");
+                                                        $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                        $sel->execute();
+                                                        while ($fila = $sel->fetch())
+                                                        {
+                                                    ?>
                                                     <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>70754566</td>
-                                                        <td>Juan Alberto</td>
-                                                        <td>Rojas Sanchez</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>3124547865</td>
-                                                        <td>Juan@gmail.com</td>
-                                                        <td>Afiliado</td>
+                                                        <td>
+                                                            <a type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a>
+                                                        </td>
+                                                        <td><?php echo "{$fila["docIdentidad"]}" ?></td>
+                                                        <td><?php echo "{$fila["nombres"]}" ?></td>
+                                                        <td><?php echo "{$fila["apellidos"]}" ?></td>
+                                                        <td><?php echo "{$fila["direccion"]}" ?></td>
+                                                        <td><?php echo "{$fila["telefonoFijo"]}/{$fila["telefonoCelular"]}" ?></td>
+                                                        <td><?php echo "{$fila["email"]}" ?></td>
+                                                        <td><?php echo "{$fila["perfil"]}" ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1000564676</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>Torres Botero</td>
-                                                        <td>los Llanos</td>
-                                                        <td>8765456</td>
-                                                        <td>juana@gmail.com</td>
-                                                        <td>Fiscal</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1012346765</td>
-                                                        <td>Sara Isabel</td>
-                                                        <td>Castillo Usma</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>312565321</td>
-                                                        <td>Sara@gmail.com</td>
-                                                        <td>Afiliado</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>1008565435</td>
-                                                        <td>Luis Felipe</td>
-                                                        <td>Cardona Chica</td>
-                                                        <td>Los Llanos</td>
-                                                        <td>3122454600</td>
-                                                        <td>luisfe@gmail.com</td>
-                                                        <td>Tesorero</td>
-                                                    </tr>
+                                                    <?php
+
+                                                        }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
