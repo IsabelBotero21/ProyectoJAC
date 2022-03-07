@@ -137,13 +137,13 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
-                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                    <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
                     <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
                     <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
-                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
             </div>
         </div>
