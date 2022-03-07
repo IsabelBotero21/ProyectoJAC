@@ -1,3 +1,17 @@
+<?php
+include('util/conexion.php');
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+$sel = $connection->prepare("SELECT * FROM tblactividad");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,17 +126,17 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
-                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                    <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
-                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
-                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
             </div>
         </div>
@@ -139,7 +153,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                                onclick="location.href='reuniones-formulario.html'"><span
+                                onclick="location.href='reuniones-formulario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
                                 </span>Crear reunión</button>
                         </div>
@@ -164,78 +178,43 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Acciones</th>
-                                                        <th>Descripcion</th>
                                                         <th>Encargado</th>
                                                         <th>Comite Encargado</th>
                                                         <th>Fecha</th>
                                                         <th>Hora Inicio</th>
                                                         <th>Hora Final</th>
+                                                        <th>Descripcion</th>
                                                         <th>Lugar</th>
                                                         <th>Seguimiento</th>
                                                         <th>Acta</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i></td>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juan Alberto</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td></td>
-                                                        <td>...</td>
+                                                    <?php $sel= $connection->prepare("SELECT * FROM tblactividad");
+                                                    $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                    $sel->execute();
+                                                    while($fila=$sel->fetch())
+                                                    {
+                                                    ?>
+                                                <tr>
+                                                        <td> 
+                                                            <a type="button" class="btn btn-primary"
+                                                         href="reuniones-formulario.php? id=<?php echo"{$fila["id"]}"?>
+                                                         "><i class="far fa-edit"></i> </a>
+                                                        </td>
+                                                        <td><?php echo  "{$fila ["encargado"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["comiteEncargado"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["fecha"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["horaInicio"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["horaFinal"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["descripcion"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["lugar"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["seguimiento"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["acta"]}" ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td></td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                    </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>

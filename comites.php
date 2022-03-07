@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,16 +26,16 @@
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>
-    <!--*******************
+     </div>
+     <!--*******************
         Preloader end
-    ********************-->
+     ********************-->
 
 
-    <!--**********************************
+     <!--**********************************
         Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+     ***********************************-->
+     <div id="main-wrapper">
 
         <!--**********************************
             Nav header start
@@ -111,13 +112,13 @@
                         class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
                         class="nav-text">Usuarios</span></a></li>
-                        <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                        <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                             class="nav-text">Reuniones</span></a></li>
                             <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
                                     <li><a  href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
                                         class="nav-text">Documentacion</span></a></li>
-                                        <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                        <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                             class="nav-text">Comites</span></a></li>
             </div>
         </div>
@@ -138,48 +139,17 @@
                     </div>
                 </div>
                 <!-- row -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Crear Comite</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-form">
-                            <form>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto">
-                                        <label class="sr-only">JAC</label>
-                                        <input type="text" class="form-control mb-2" placeholder="JAC">
-                                    </div>
-                                    <div class="col-auto">
-                                        <label class="sr-only">NOMBRE</label>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                            </div>
-                                            <input type="text" class="form-control" placeholder="Nombre">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input" type="checkbox">
-                                            <label class="form-check-label">
-                                                Estado
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary mb-2">Crear</button>
-                                        <button type="submit" class="btn btn-primary mb-2">Cancelar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-               
+                
+            
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">Afiliado</h4>
+                            <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
+                            onclick="location.href='crearComite.html'"><span
+                                class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                            </span>Crear Comite</button>
+                    </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -195,27 +165,61 @@
                                     <tbody>
                                         <tr>
                                             <td>  <!-- Large modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">ver</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar I</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar C</button>
                                                 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Modal title</h5>
+                                                                <h5 class="modal-title">Agregar Integrantes Comité</h5>
                                                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                                                 </button>
-                                                            </div>
+                                                            </div><br>
+                                                            <div class="card">
+                                            
+                                                                <div class="card-body">
+                                                                    <div class="basic-form">
+                                                                        <form>
+                                                                            <div class="form-row align-items-center">
+                                                                               
+                                                                                <div class="col-auto">
+                                                                                <label>Usuario</label>
+              
+                                                                                    <div class="input-group mb-2">
+                                                                                        <div class="input-group-prepend">
+                                                                                        </div>
+                                                                                        <input type="text" class="form-control" placeholder="Usuario">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                    <div class="form-check mb-2">
+                                                                                        <input class="form-check-input" type="checkbox">
+                                                                                        <label class="form-check-label">
+                                                                                            Estado
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 400px;">Agregar</button>
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
                                                             <div class="modal-body"><!-- row -->
                                                                 <div class="col-lg-12">
                                                                     <div class="card">
                                                                         <div class="card-header">
                                                                             
-                                                                        </div>
+                                                                        </div> <div class="tab-pane fade show active" id="todas" role="tabpanel">
                                                                         <div class="card-body">
                                                                             <div class="table-responsive">
                                                                                 <table class="table table-hover table-responsive-sm">
                                                                                     <thead>
                                                                                     <tbody>
                                                                                         <tr>
+                                                                                            <th>Editar</th>
                                                                                             <th>Documento de Identidad</th>
                                                                                             <th>Nombres</th>
                                                                                             <th>Apellidos</th>
@@ -229,6 +233,7 @@
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <tr>
+                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
                                                                                             <td>45376489</td>
                                                                                             <td>Juana Lucia</td>
                                                                                             <td>molsalve Castrillon</td>
@@ -240,6 +245,7 @@
                                                                                             <td>Secretario</td>
                                                                                         </tr>
                                                                                         <tr>
+                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
                                                                                             <td>45376489</td>
                                                                                             <td>Pedro</td>
                                                                                             <td>Camacho</td>
@@ -251,6 +257,7 @@
                                                                                             <td>Tesorero</td>
                                                                                         </tr>
                                                                                         <tr>
+                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
                                                                                             <td>45376489</td>
                                                                                             <td>Alejandro</td>
                                                                                             <td>Moreno</td>
@@ -262,6 +269,7 @@
                                                                                             <td>Fiscal</td>
                                                                                         </tr>
                                                                                         <tr>
+                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
                                                                                             <td>45376489</td>
                                                                                             <td>Luz Alba </td>
                                                                                             <td>Franco Osorio</td>
@@ -273,6 +281,7 @@
                                                                                             <td>Presidenta</td>
                                                                                         </tr>
                                                                                         <tr>
+                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
                                                                                             <td>45376489</td>
                                                                                             <td>Orlando de jesus</td>
                                                                                             <td>Otalvaro</td>
@@ -303,7 +312,8 @@
                                         </tr>
                                         <tr>
                                             <td><!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ver</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar I</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar C</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalCenter">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -314,7 +324,44 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <h4 class="card-title">Editar Comite</h4>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="basic-form">
+                                                                            <form>
+                                                                                <div class="form-row align-items-center">
+                                                                                    <div class="col-auto">
+                                                                                        <label class="sr-only">JAC</label>
+                                                                                        <input type="text" class="form-control mb-2" placeholder="JAC">
+                                                                                    </div>
+                                                                                    <div class="col-auto">
+                                                                                        <label class="sr-only">NOMBRE</label>
+                                                                                        <div class="input-group mb-2">
+                                                                                            <div class="input-group-prepend">
+                                                                                            </div>
+                                                                                            <input type="text" class="form-control" placeholder="Nombre">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-auto">
+                                                                                        <div class="form-check mb-2">
+                                                                                            <input class="form-check-input" type="checkbox">
+                                                                                            <label class="form-check-label">
+                                                                                                Estado
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+                                                                                        <button type="submit" class="btn btn-primary mb-2">Cancelar</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -332,7 +379,8 @@
                                         </tr>
                                         <tr>
                                             <td><!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ver</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar I</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar C</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalCenter">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -361,7 +409,8 @@
                                         </tr>
                                         <tr>
                                             <td><!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ver</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar I</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar C</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalCenter">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -390,7 +439,8 @@
                                         </tr>
                                         <tr>
                                             <td><!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Ver</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Agregar I</button>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar C</button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="exampleModalCenter">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
