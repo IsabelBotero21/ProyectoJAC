@@ -21,11 +21,11 @@ $strSQL = "UPDATE tblusuario SET
                $apellidos
                $perfil
                $foto
+               $email
+               $fechaNacimiento
                $direccion WHERE docIdentidad = $numeroDocumento";
 
 $ins = $connection->prepare($strSQL);
-
-
 $ins->execute();
 if (true) {
 	        echo "<h1> Registro guardo con exito. </h1>";

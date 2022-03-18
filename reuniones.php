@@ -125,7 +125,7 @@ $sel->execute();
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">MENU</li>
+                    <li class="nav-label first">MENÚ</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span

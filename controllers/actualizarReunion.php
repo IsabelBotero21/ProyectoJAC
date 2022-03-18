@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('../util/conexion.php');
-
+//$id=$_POST['id'];
+$id = $_SESSION['idReunion'];
 $usuario = $_POST['usuario'];
 $fechaInicio = $_POST['fechaInicio'];
 $horaInicio = $_POST['horaInicio'];
@@ -21,7 +22,7 @@ $horaInicio
 $horaFin
 $lugar
 $seguimiento
-$acta WHERE id=$lugar";
+$acta WHERE id= $id";
 $insertar=$connection->prepare($strSQL);
 $insertar->execute();
 
