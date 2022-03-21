@@ -1,44 +1,30 @@
 <?php
+if (isset($_GET['id'])) {
+    exit;
+}
+
 session_start();
 include('../util/conexion.php');
 
+//print_r($persona)
+$id=$_POST['id'];
+$descripcion = $_POST['descripcion'];
 $usuario = $_POST['usuario'];
+$comiteEncargado = $_POST['comiteEncargado'];
 $fechaInicio = $_POST['fechaInicio'];
 $horaInicio = $_POST['horaInicio'];
-$seguimiento = $_POST['seguimiento'];
-$comiteEncargado = $_POST['comiteEncargado'];
-$horaFin = $_POST['horaFin'];
+$horaFin = $_POST['horaFinal'];
 $lugar = $_POST['lugar'];
-$descripcion = $_POST['descripcion'];
+$seguimiento = $_POST['seguimiento'];
 $acta = $_POST['acta'];
- 
-$strSQL="UPDATE tblactividad SET
-$descripcion 
-$usuario
-$comiteEncargado
-$fechaInicio
-$horaInicio 
-$horaFin
-$lugar
-$seguimiento
-$acta WHERE id=$lugar";
-$insertar=$connection->prepare($strSQL);
-$insertar->execute();
 
-
-if (true) {
+$stmt=$connection->prepare("UPDATE tblactividad SET descripcion=?, encargado=?, comiteEncargado=?, fecha=?,
+horaInicio=?, horaFinal=?, lugar=?, seguimiento=?, acta=? WHERE  id=?;");
+$resultado=$stmt->execute([$descripcion, $usuario, $comiteEncargado, $fechaInicio, $horaInicio, $horaFin,
+$lugar, $seguimiento, $acta, $id]);
+if ($resultado) {
     echo "<h1> Registro guardo con exito. </h1>";
-    
-    echo $descripcion ;
-echo $usuario;
-echo $comiteEncargado;
-echo $fechaInicio;
-echo $horaInicio ;
-echo $horaFin;
-echo $lugar;
-echo $seguimiento;
-echo $acta;
-
+    echo $lugar;
   }
 
 else  {
@@ -46,4 +32,6 @@ else  {
 }
 
 echo "<h1> <a href='formulario.php' </a> Regresar al Formulario </h1>";
+
+
 ?>

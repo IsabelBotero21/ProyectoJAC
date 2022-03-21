@@ -187,10 +187,11 @@ $sel->execute();
                                                         <th>Lugar</th>
                                                         <th>Seguimiento</th>
                                                         <th>Acta</th>
+                                                        <th>Eliminar</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $sel= $connection->prepare("SELECT * FROM tblactividad");
+                                                    <?php $sel= $connection->prepare("SELECT * FROM vtaactividaad  ");
                                                     $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                     $sel->execute();
                                                     while($fila=$sel->fetch())
@@ -199,18 +200,23 @@ $sel->execute();
                                                 <tr>
                                                         <td> 
                                                             <a type="button" class="btn btn-primary"
-                                                         href="reuniones-formulario.php? id=<?php echo"{$fila["id"]}"?>
+                                                         href="editarReuniones.php? id=<?php echo"{$fila["id"]}"?>
                                                          "><i class="far fa-edit"></i> </a>
+                                                         
                                                         </td>
-                                                        <td><?php echo  "{$fila ["encargado"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["comiteEncargado"]}" ?></td>
+                                                       
+                                                        <td><?php echo  "{$fila ["nombres"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["nombre"]}" ?></td>
                                                         <td><?php echo  "{$fila ["fecha"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaInicio"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaFinal"]}" ?></td>
                                                         <td><?php echo  "{$fila ["descripcion"]}" ?></td>
                                                         <td><?php echo  "{$fila ["lugar"]}" ?></td>
                                                         <td><?php echo  "{$fila ["seguimiento"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["acta"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["titulo"]}" ?></td>
+                                                        <td> <a type="button" class="btn btn-primary"
+                                                         href="controllers/eliminarReunion.php? id=<?php echo"{$fila["id"]}"?>
+                                                         "><i class="far fa-edit"></i> </a></td>
                                                     </tr>
                                                     <?php
                                                     }

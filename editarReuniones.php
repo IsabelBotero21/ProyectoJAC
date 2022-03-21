@@ -1,4 +1,5 @@
 <?php
+
 include("util/conexion.php");
 session_start();
  
@@ -6,18 +7,18 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-$id=$_REQUEST['id'];
-$edit=false;
-if($id){
-    $edit=true;
-    $stmt=$connection->prepare("SELECT * FROM tblactividad WHERE id = $id");
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+if(!isset($_GET['id'])){
+    exit();
+ }
+ $id=$_GET['id'];
+ $sentecia=$connection->prepare("SELECT * FROM  tblactividad WHERE id=?;");
+ $sentecia->execute([$id]);
+ $persona=$sentecia->fetch(PDO::FETCH_OBJ);
+ //print_r($persona);
 
-    $stmt->execute();
-    $actividad=$stmt->fetch();
-    $_POST['id']=$id;
-}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +27,7 @@ if($id){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Reuniones</title>
+    <title>Editar Reuniones</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -149,58 +150,42 @@ if($id){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <?php
-                            echo $edit? '<h4> Editar Reunión</h4>': "<h4>Crear Reunión</h4>";
-                            ?>
+                        <h4> Editar Reunión</h4>
                         </div>
                     </div>
                 </div>
-               
-                <?php
-                echo $edit? '<form action="controllers/actualizarReunion.php" method="post">':
-                    '<form action="controllers/insertarReunion.php" method="post">'
-                ?>
-              
+                
+                <form action="controllers/editarProceso.php" method="post">
+                
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="col-12">
-                                        <div class="form-group">
-                                        <label>Encargado </label>
-                                            <select class="form-control" name="usuario" value="<?php  echo $edit? $actividad["encargado"]: ""?>">
-                                            <option selected value="">
-                                                    --Selecciona--
-                                                </option>
-                                           <?php
-                                           $query=$connection->prepare("SELECT * FROM tblusuario");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $opcion):
-                                            echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
+                                        <div class="form-group" >
+                                        <label>Encargados</label>
+                                            <input class="form-control" name="usuario" value="<?php echo $persona->encargado; ?>">
+      
+                                           
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha Inicio</label>
-                                            <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $edit? $actividad["fecha"]: ""?>">
+                                            <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $persona->fecha;?>">
 
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Hora Inicio</label>
-                                            <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $edit? $actividad["horaInicio"]: ""?>">
+                                            <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $persona->horaInicio;?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Seguimiento</label>
-                                            <input type="text" name="seguimiento" class="form-control input-default" value="<?php echo $edit? $actividad["seguimiento"]: ""?>">
+                                            <input type="text" name="seguimiento" class="form-control input-default" value="<?php echo $persona->seguimiento;?>">
                                         </div>
                                     </div>
                                 </div>
@@ -209,39 +194,27 @@ if($id){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Comite Encargado</label>
-                                            <select class="form-control" name="comiteEncargado" value="<?php echo $edit? $actividad["comiteEncargado"]: ""?>">
-                                                <option selected value="">
-                                                    --Selecciona--
-                                                </option>
-                                                <?php
-                                           $query=$connection->prepare("SELECT * FROM tblcomite");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $opcion):
-                                            echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
+                                            <input class="form-control" name="comiteEncargado" value="<?php echo $persona->comiteEncargado;?>">
+                                               
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                         <label>Hora final</label>
-                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $edit? $actividad["horaFinal"]: ""?>">
+                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $persona->horaFinal;?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Lugar</label>
-                                            <input type="text" name="lugar" class="form-control input-default " value="<?php echo $edit? $actividad["lugar"]: ""?>">
+                                            <input type="text" name="lugar" class="form-control input-default " value="<?php echo $persona->lugar;?>">
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $edit? $actividad["descripcion"]: ""?>">
+                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $persona->descripcion;?>">
                                         </div>
                                     </div>
                                 </div>
@@ -249,24 +222,13 @@ if($id){
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Acta</label>
-                                    <select class="form-control" name="acta" value="<?php echo $edit? $actividad["acta"]: ""?>">
-                                                <option selected value="">
-                                                    --Selecciona--
-                                                </option>
-                                                <?php
-                                           $query=$connection->prepare("SELECT * FROM tblacta");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $actividad):
-                                            echo '<option value="'.$actividad["id"].'">'.$actividad["titulo"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
+                                    <input sclass="form-control" name="acta" value="<?php echo $persona->acta;?>">
+                                
                                 </div>
                             </div>
                             <div>
-                            <input type="hidden" name="id" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
+                            <input type="hidden" name="oculto"> 
+                            <input type="hidden" name="id" value="<?php echo $persona->id;?>">
                                         </div>
                             <div class="p-3">
                                 <button type="reset"  class="btn btn-primary"><a href="reuniones.php" aria-expanded="false">Cancelar</button >
@@ -287,5 +249,6 @@ if($id){
     <script src="./js/plugins-init/datatables.init.js"></script>
 
 </body>
+
 
 </html>
