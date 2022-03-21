@@ -15,7 +15,12 @@ if($id){
 
     $stmt->execute();
     $actividad=$stmt->fetch();
+<<<<<<< HEAD
     $_POST['id']=$id;
+=======
+    //$_POST['id']=$id;
+    $_SESSION['idReunion']=$id;
+>>>>>>> 62a555b0c87e5cb7c9e9d0311de894111077177e
 }
 ?>
 <!DOCTYPE html>

@@ -108,18 +108,18 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li class="nav-label first">MENÚ</li>
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
-                    <li><a href="reuniones.html" aria-expanded="false"><i class="far fa-handshake"></i><span
+                    <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
-                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
-                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
             </div>
         </div>
@@ -152,7 +152,7 @@
                             <div class="default-tab">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#libro">Lbro</a>
+                                        <a class="nav-link active" data-toggle="tab" href="#libro">Libros</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#estatutos">Estatutos</a>

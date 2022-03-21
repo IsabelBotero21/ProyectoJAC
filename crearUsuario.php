@@ -264,6 +264,17 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                             <input type="email" class="form-control input-default" name="email" value="<?php echo $edit? $user["email"]: "" ?>">
                                         </div>
                                     </div>
+                                    <br>
+                                    <div class="col-auto"><br>
+                                        <div class="form-check mb-2">
+                                             <input class="form-check-input" type="checkbox">
+                                             <label class="form-check-label">
+                                            Estado
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
                                 </div>
                             </div>
                             <p>Los campos con * son requeridos</p>
