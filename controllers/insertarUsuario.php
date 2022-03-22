@@ -74,13 +74,13 @@ $ins = $connection->prepare("INSERT INTO tblusuario (docIdentidad,nombres,apelli
 
 $ins->execute();
 if ($ins) {
-	        echo "<h1> Registro guardo con exito. </h1>";
+          header('Location:../usuarios.php');?>
+          <script>Se ha creado el usuario correctamente</script>
+          <?php
           }
 
 else  {
 	     echo "<h1> Registro no guardo con exito. </h1> <br/>";
       }
-
- echo "<h1> <a href='crearUsuario.php' </a> Regresar al Formulario </h1>";
 
  ?>
