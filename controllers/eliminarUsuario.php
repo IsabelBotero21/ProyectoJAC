@@ -1,16 +1,15 @@
 <?php
 include ('../util/conexion.php');
-$documento=$_REQUEST['id'];
-echo $documento;
-$consulta=$connection->prepare("DELETE FROM tblusuario WHERE docIdentidad=:documento");
-$consulta->bindParam(":documento",$id);
-$consulta->execute();
-
-if ($consulta->execute()) {
-    echo "Usuario eliminado correctamente";
-
-}else{
-    echo "No se ha podido eliminar el usuario";
+if(!isset($_GET['id'])){
+    exit();
 }
-?>
+$documento=$_GET['id'];
+$consulta=$connection->prepare("DELETE FROM tblusuario WHERE docIdentidad=?;");
+$resultado=$consulta->execute([$documento]);
 
+if($resultado){
+    header('Location:../usuarios.php');
+ }else {
+     echo "Error. No se ha podido eliminar su registro";
+ }
+?>

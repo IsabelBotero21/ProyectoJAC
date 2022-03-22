@@ -183,7 +183,7 @@ $sel->execute();
                                                     ?>
                                                     <tr>
                                                         <td>
-                                                            <a type="button" class="btn btn-primary" href="crearUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
+                                                            <a type="button" class="btn btn-primary" href="editarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
                                                             <a type="button" class="btn btn-primary" href="controllers/eliminarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                         </td>
                                                         <td><?php echo "{$fila["docIdentidad"]}" ?></td>
