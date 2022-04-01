@@ -145,7 +145,7 @@ $sel->execute();
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>REUNIONES</h4>
+                            <h4>Reuniones</h4>
                         </div>
                     </div>
                 </div>
@@ -175,19 +175,19 @@ $sel->execute();
                                     <div class="tab-pane fade show active" id="todas" role="tabpanel">
                                         <div class="table-responsive">
                                             <table id="" class="display" style="width:100%">
-                                                <thead>
+                                                <thead style="width: 100px;"> 
                                                     <tr>
                                                         <th>Acciones</th>
                                                         <th>Encargado</th>
-                                                        <th>Comite Encargado</th>
+                                                        <th>Comité Encargado</th>
                                                         <th>Fecha</th>
                                                         <th>Hora Inicio</th>
-                                                        <th>Hora Final</th>
+                                                        <th>Hora Fin</th>
                                                         <th>Descripcion</th>
                                                         <th>Lugar</th>
                                                         <th>Seguimiento</th>
                                                         <th>Acta</th>
-                                                        <th>Eliminar</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -201,7 +201,8 @@ $sel->execute();
                                                         <td> 
                                                             <a type="button" class="btn btn-primary"
                                                          href="editarReuniones.php? id=<?php echo"{$fila["id"]}"?>
-                                                         "><i class="far fa-edit"></i> </a>
+                                                         "><i class="far fa-edit"></i> </a><br><br>
+                                                         <a type="button" class="btn btn-primary" href="controllers/eliminarReunion.php?id=<?php echo "{$fila["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                          
                                                         </td>
                                                        
@@ -214,9 +215,6 @@ $sel->execute();
                                                         <td><?php echo  "{$fila ["lugar"]}" ?></td>
                                                         <td><?php echo  "{$fila ["seguimiento"]}" ?></td>
                                                         <td><?php echo  "{$fila ["titulo"]}" ?></td>
-                                                        <td> <a type="button" class="btn btn-primary"
-                                                         href="controllers/eliminarReunion.php? id=<?php echo"{$fila["id"]}"?>
-                                                         "><i class="far fa-edit"></i> </a></td>
                                                     </tr>
                                                     <?php
                                                     }
@@ -230,12 +228,12 @@ $sel->execute();
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Descripcion</th>
+                                                        <th>Descripción</th>
                                                         <th>Encargado</th>
-                                                        <th>Comite Encargado</th>
+                                                        <th>Comité Encargado</th>
                                                         <th>Fecha</th>
                                                         <th>Hora Inicio</th>
-                                                        <th>Hora Final</th>
+                                                        <th>Hora Fin</th>
                                                         <th>Lugar</th>
                                                         <th>Seguimiento</th>
                                                         <th>Acta</th>

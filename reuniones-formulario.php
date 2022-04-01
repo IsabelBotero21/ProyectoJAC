@@ -6,7 +6,7 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-$id=$_REQUEST['id'];
+@$id=$_REQUEST['id'];
 $edit=false;
 if($id){
     $edit=true;
@@ -172,8 +172,8 @@ if($id){
                                 <div class="col-6">
                                     <div class="col-12">
                                         <div class="form-group">
-                                        <label>Encargado </label>
-                                            <select class="form-control" name="usuario" value="<?php  echo $edit? $actividad["encargado"]: ""?>">
+                                        <label>Encargado * </label>
+                                            <select class="form-control" name="usuario" required value="<?php  echo $edit? $actividad["encargado"]: ""?>">
                                             <option selected value="">
                                                     --Selecciona--
                                                 </option>
@@ -191,21 +191,21 @@ if($id){
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Fecha Inicio</label>
+                                            <label>Fecha Inicio </label>
                                             <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $edit? $actividad["fecha"]: ""?>">
 
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Hora Inicio</label>
-                                            <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $edit? $actividad["horaInicio"]: ""?>">
+                                        <label>Hora fin </label>
+                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $edit? $actividad["horaFinal"]: ""?>">
                                         </div>
-                                    </div>
+                                        </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Seguimiento</label>
-                                            <input type="text" name="seguimiento" class="form-control input-default" value="<?php echo $edit? $actividad["seguimiento"]: ""?>">
+                                            <label>Seguimiento *</label>
+                                            <textarea type="text" name="seguimiento" class="form-control input-default" required value="<?php echo $edit? $actividad["seguimiento"]: ""?>"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -213,8 +213,8 @@ if($id){
                                 <div class="col-6">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Comite Encargado</label>
-                                            <select class="form-control" name="comiteEncargado" value="<?php echo $edit? $actividad["comiteEncargado"]: ""?>">
+                                            <label>Comité Encargado *</label>
+                                            <select class="form-control" name="comiteEncargado" required value="<?php echo $edit? $actividad["comiteEncargado"]: ""?>">
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
@@ -232,29 +232,29 @@ if($id){
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                        <label>Hora final</label>
-                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $edit? $actividad["horaFinal"]: ""?>">
+                                            <label>Hora Inicio </label>
+                                            <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $edit? $actividad["horaInicio"]: ""?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Lugar</label>
+                                            <label>Lugar </label>
                                             <input type="text" name="lugar" class="form-control input-default " value="<?php echo $edit? $actividad["lugar"]: ""?>">
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Descripción</label>
-                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $edit? $actividad["descripcion"]: ""?>">
+                                            <label>Descripción </label>
+                                            <textarea type="text" name="descripcion" class="form-control input-default" value="<?php echo $edit? $actividad["descripcion"]: ""?>"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label>Acta</label>
-                                    <select class="form-control" name="acta" value="<?php echo $edit? $actividad["acta"]: ""?>">
+                                    <label>Acta *</label>
+                                    <select class="form-control" name="acta" required value="<?php echo $edit? $actividad["acta"]: ""?>">
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
@@ -270,6 +270,9 @@ if($id){
                                             </select>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                    <p>Los campos con * son requeridos</p>
+                                        </div>
                             <div>
                             <input type="hidden" name="id" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
                                         </div>

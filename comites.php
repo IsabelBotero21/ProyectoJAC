@@ -1,4 +1,17 @@
+<?php
+include("util/conexion.php");
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
 
+    $stmt=$connection->query("SELECT * FROM tblintegrantescomite;");
+    $integrante = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -178,22 +191,81 @@
                                                             <div class="card">
                                             
                                                                 <div class="card-body">
+                                                                    
                                                                     <div class="basic-form">
-                                                                        <form>
+                                                                        <form action="controllers/insertarIntegranteComite.php" method="post">
                                                                             <div class="form-row align-items-center">
-                                                                               
                                                                                 <div class="col-auto">
                                                                                 <label>Usuario</label>
+                                                                                <div class="input-group mb-2">
+                                                                                        <div class="input-group-prepend">
+                                                                                        <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["usuario"]: ""?>">
+                                                                                         <option selected value="">
+                                                                                                 --Selecciona--
+                                                                                         </option>
+                                                                                         <?php
+                                                                                            $query=$connection->prepare("SELECT * FROM tblusuario");
+                                                                                            $query->execute();
+                                                                                            $data=$query->fetchAll();
+
+                                                                                            foreach ($data as $opcion):
+                                                                                             echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"].'</option>';
+                                                                                            endforeach;
+                                                                                            ?>
+                                                                                         </select>  
+                                                                                         </div>
+                                                                                         </div>          
+                                                                                     </div>
+                                                                                <div class="col-auto">
+                                                                                <label>comité</label>
+                                                                                <div class="input-group mb-2">
+                                                                                        <div class="input-group-prepend">
+                                                                                        <select class="form-control" name="comite" value="<?php echo $edit? $actividad["comite"]: ""?>">
+                                                                                            <option selected value="">
+                                                                                                --Selecciona--
+                                                                                            </option>
+                                                                                            <?php
+                                                                                               $query=$connection->prepare("SELECT * FROM tblcomite");
+                                                                                               $query->execute();
+                                                                                               $data=$query->fetchAll();
+
+                                                                                               foreach ($data as $opcion):
+                                                                                                echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                                                                               endforeach;
+                                                                                            ?>
+                                                                                         </select> 
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-auto">
+                                                                                <label>Período</label>
               
                                                                                     <div class="input-group mb-2">
                                                                                         <div class="input-group-prepend">
+                                                                                           <select class="form-control" name="periodo" value="<?php echo $edit? $actividad["periodo"]: ""?>">
+                                                                                               <option selected value="">
+                                                                                                   --Selecciona--
+                                                                                               </option>
+                                                                                               <?php
+                                                                                                  $query=$connection->prepare("SELECT * FROM tblperiodo");
+                                                                                                  $query->execute();
+                                                                                                  $data=$query->fetchAll();
+
+                                                                                                  foreach ($data as $opcion):
+                                                                                                   echo '<option value="'.$opcion["id"].'">'.$opcion["fechaInicio"]." / ".$opcion["fechaFinal"].'</option>';
+                                                                                                  endforeach;
+                                                                                                ?>
+                                                                                           </select> 
                                                                                         </div>
-                                                                                        <input type="text" class="form-control" placeholder="Usuario">
+                                                                                            <div>
+                                                                                                <input type="hidden" name="oculto" value="1">
+                                                                                            </div>                                                                                  
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-auto">
                                                                                     <div class="form-check mb-2">
-                                                                                        <input class="form-check-input" type="checkbox">
+                                                                                    <input class="form-check-input" name="estado" type="hidden" value="0">
+                                                                                        <input class="form-check-input" name="estado" type="checkbox" value="si">
                                                                                         <label class="form-check-label">
                                                                                             Estado
                                                                                         </label>
@@ -219,81 +291,33 @@
                                                                                     <thead>
                                                                                     <tbody>
                                                                                         <tr>
-                                                                                            <th>Editar</th>
-                                                                                            <th>Documento de Identidad</th>
+                                                                                            <th>Acciones</th>
                                                                                             <th>Nombres</th>
-                                                                                            <th>Apellidos</th>
-                                                                                            <th>Direccion</th>
-                                                                                            <th>Telefono Fijo</th>
-                                                                                            <th>Telefono Celular</th>
-                                                                                            <th>Fecha de Nacimiento</th>
-                                                                                            <th>Confirmado</th>
-                                                                                            <th>Perfil</th>
+                                                                                            <th>Comite</th>
+                                                                                            <th>Período</th>
+                                                                                            <th>Estado</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr>
-                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
-                                                                                            <td>45376489</td>
-                                                                                            <td>Juana Lucia</td>
-                                                                                            <td>molsalve Castrillon</td>
-                                                                                            <td>Abejorral</td>
-                                                                                            <td></td>
-                                                                                            <td>3115678958</td>
-                                                                                            <td>1999/mayo/28</td>
-                                                                                            <td>si</td>
-                                                                                            <td>Secretario</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
-                                                                                            <td>45376489</td>
-                                                                                            <td>Pedro</td>
-                                                                                            <td>Camacho</td>
-                                                                                            <td>Abejorral</td>
-                                                                                            <td></td>
-                                                                                            <td>3115678958</td>
-                                                                                            <td>1899/mayo/28</td>
-                                                                                            <td>si</td>
-                                                                                            <td>Tesorero</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
-                                                                                            <td>45376489</td>
-                                                                                            <td>Alejandro</td>
-                                                                                            <td>Moreno</td>
-                                                                                            <td>Abejorral</td>
-                                                                                            <td></td>
-                                                                                            <td>3115678958</td>
-                                                                                            <td>2000/enero/28</td>
-                                                                                            <td>si</td>
-                                                                                            <td>Fiscal</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
-                                                                                            <td>45376489</td>
-                                                                                            <td>Luz Alba </td>
-                                                                                            <td>Franco Osorio</td>
-                                                                                            <td>Abejorral</td>
-                                                                                            <td></td>
-                                                                                            <td>3115678958</td>
-                                                                                            <td>1968/marzo/21</td>
-                                                                                            <td>si</td>
-                                                                                            <td>Presidenta</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Editar </button></td>
-                                                                                            <td>45376489</td>
-                                                                                            <td>Orlando de jesus</td>
-                                                                                            <td>Otalvaro</td>
-                                                                                            <td>Abejorral</td>
-                                                                                            <td></td>
-                                                                                            <td>3115678958</td>
-                                                                                            <td>1975/febrero/12</td>
-                                                                                            <td>si</td>
-                                                                                            <td>Vicepresidente</td>
-                                                                                        </tr>
-                                                                                       
-                                                                                        </tr>
+                                                                                        <?php
+                                                                                        $sel= $connection->prepare("SELECT * FROM vtaintegrantescomite   ");
+                                                                                        $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                                                        $sel->execute();
+                                                                                        while($integrante = $sel->fetch()){
+                                                                                            ?>
+                                                                                            <tr>
+                                                                                                 <td><a type="button" class="btn btn-primary"
+                                                         href="editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>
+                                                         "><i class="far fa-edit"></i> </a><br><br>
+                                                         <a type="button" class="btn btn-primary" href="controllers/eliminaIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>>
+                                                                                                 </td>
+                                                                                                 <td><?php echo "{$integrante["nombres"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["nombre"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["fechaInicio"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["estado"]}";?></td>
+                                                                                            </tr><?php
+                                                                                        }
+                                                                                        ?>
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
