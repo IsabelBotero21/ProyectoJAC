@@ -206,7 +206,7 @@ $sel->execute();
                                                          
                                                         </td>
                                                        
-                                                        <td><?php echo  "{$fila ["nombres"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["nombres"]} {$fila["apellidos"]}" ?></td>
                                                         <td><?php echo  "{$fila ["nombre"]}" ?></td>
                                                         <td><?php echo  "{$fila ["fecha"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaInicio"]}" ?></td>

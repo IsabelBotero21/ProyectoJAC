@@ -179,16 +179,14 @@ if(!isset($_GET['id'])){
                                                                                 <div>
                                                                                         <div class="input-group-prepend">
                                                                                         <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["usuario"]: ""?>">
-                                                                                         <option selected value="">
-                                                                                                 --Selecciona--
-                                                                                         </option>
+                                                                                         
                                                                                          <?php
                                                                                             $query=$connection->prepare("SELECT * FROM tblusuario");
                                                                                             $query->execute();
                                                                                             $data=$query->fetchAll();
 
                                                                                             foreach ($data as $opcion):
-                                                                                             echo '<option '.(($integrante->docIdentidad == $opcion["docIdentidad"]) ? 'selected' : '').' value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"].'</option>';
+                                                                                             echo '<option '.(($integrante->docIdentidad == $opcion["docIdentidad"]) ? 'selected' : '').' value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
                                                                                             endforeach;
                                                                                             ?>
                                                                                          </select>  
@@ -197,12 +195,10 @@ if(!isset($_GET['id'])){
                                                                                      </div>
                                                                                 <div class="col-6">
                                                                                 <label>comité</label>
-                                                                                <div class="input-group mb-2">
-                                                                                        <div class="input-group-prepend">
+                                                                                <div >
+                                                                                        <div >
                                                                                         <select class="form-control" name="comite" value="<?php echo $edit? $actividad["comite"]: ""?>">
-                                                                                            <option selected value="">
-                                                                                                --Selecciona--
-                                                                                            </option>
+                                                                                            
                                                                                             <?php
                                                                                                $query=$connection->prepare("SELECT * FROM tblcomite");
                                                                                                $query->execute();
@@ -216,15 +212,13 @@ if(!isset($_GET['id'])){
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-6">
+                                                                                <div class="col-6"><br>
                                                                                 <label>Período</label>
               
-                                                                                    <div class="input-group mb-4">
-                                                                                        <div class="input-group-prepend">
+                                                                                    <div>
+                                                                                        <div >
                                                                                            <select class="form-control" name="periodo" value="<?php echo $edit? $actividad["periodo"]: ""?>">
-                                                                                               <option selected value="">
-                                                                                                   --Selecciona--
-                                                                                               </option>
+                                                                                               
                                                                                                <?php
                                                                                                   $query=$connection->prepare("SELECT * FROM tblperiodo");
                                                                                                   $query->execute();
@@ -244,7 +238,7 @@ if(!isset($_GET['id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-auto">
-                                                                                    <div class="form-check mb-2">
+                                                                                    <div  style="margin-left: 50px;" ><br><br>
                                                                                     <input class="form-check-input" name="estado" type="hidden" value="0">
                                                                                         <input class="form-check-input" name="estado" type="checkbox" value="si">
                                                                                         <label class="form-check-label">
@@ -252,10 +246,9 @@ if(!isset($_GET['id'])){
                                                                                         </label>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-auto">
-                                                                                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 400px;">Agregar</button>
+                                                                                <div class="col-auto"><br><br>
+                                                                                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 270px;">Actualizar</button>
                                                                                 </div>
-                                                                                
                                                                             </div>
                                                                         </form>
                                                                     </div>

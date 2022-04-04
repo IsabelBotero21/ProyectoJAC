@@ -1,24 +1,25 @@
-<?php
+<?php 
+	session_start();
+	if(!isset($_SESSION['user_id'])){
+        header('Location: page-login.php');
+        exit;
+    }
 
-include("util/conexion.php");
-session_start();
- 
-if(!isset($_SESSION['user_id'])){
-    header('Location: page-login.php');
-    exit;
-}
-if(!isset($_GET['id'])){
-    exit();
- }
- $id=$_GET['id'];
- $sentecia=$connection->prepare("SELECT * FROM  tblactividad WHERE id=?;");
- $sentecia->execute([$id]);
- $persona=$sentecia->fetch(PDO::FETCH_OBJ);
- //print_r($persona);
+	if (!isset($_SESSION['user_id'])) {
+		header('Location: page-login.php');
+	}elseif(isset($_SESSION['user_id'])){
+		include ('util/conexion.php');
+		$id = $_GET['id'];
 
+		$sel = $connection->prepare("SELECT * FROM tbljac WHERE id = ?;");
+		$sel->execute([$id]);
+		$fila = $sel->fetch(PDO::FETCH_OBJ);
+		//print_r($persona);
+	}else{
+		echo "Error en el sistema";
+	}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +28,7 @@ if(!isset($_GET['id'])){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Editar Reuniones</title>
+    <title>Crear Jac</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -131,18 +132,20 @@ if(!isset($_GET['id'])){
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
-                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -150,129 +153,80 @@ if(!isset($_GET['id'])){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                        <h4> Editar Reunión</h4>
+                            <h4>Crear Jac</h4>
                         </div>
                     </div>
                 </div>
-                
-                <form action="controllers/editarProceso.php" method="post">
-                
+                <form action="controllers/actualizarJac.php" method="post" id="" name="">
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="col-12">
-                                        <div class="form-group" >
-                                        <label>Encargado *</label>
-                                        <select class="form-control" required name="usuario" >
-                                        <option selected value="">
-                                        --Selecciona--
-                                                </option>
-                                           <?php
-                                           $query=$connection->prepare("SELECT * FROM tblusuario");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $opcion):
-                                            echo '<option '.(($persona->encargado == $opcion["docIdentidad"]) ? 'selected' : '').' value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
-      
-                                           
+                                        <div class="form-group">
+                                            <label>Nit</label>
+                                            <input type="number" name="nit2" class="form-control input-default " value="<?php echo $fila->nit; ?>" Required>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Fecha Inicio</label>
-                                            <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $persona->fecha;?>">
-
+                                            <label>Dirección</label>
+                                            <input type="text" name="direccion2" class="form-control input-default " value="<?php echo $fila->direccion; ?>">
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label>Hora fin</label>
-                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $persona->horaFinal;?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Seguimiento *</label>
-                                            <input type="text" name="seguimiento" class="form-control input-default" required value="<?php echo $persona->seguimiento;?>"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group" >
-                                        <label>Acta *</label>
-                                    <select class="form-control" required name="acta" >
-                                    <?php
-                                           $query=$connection->prepare("SELECT * FROM tblacta");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $opcion):
-                                            echo '<option '.(($persona->acta == $opcion["id"]) ? 'selected' : '').' value="'.$opcion["id"].'">'.$opcion["titulo"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                    <p>Los campos con * son requeridos</p>
-                                        </div>
                                 </div>
 
-                                <div class="col-6">
+                                <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Comité Encargado *</label>
-                                            <select class="form-control" required name="comiteEncargado">
-                                            <?php
-                                           $query=$connection->prepare("SELECT * FROM tblcomite");
+                                            <label>Nombre</label>
+                                            <input type="text" name="nombre2" class="form-control input-default " value="<?php echo $fila->nombre; ?>" Required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Telefono</label>
+                                            <input type="text" name="telefono2" class="form-control input-default " value="<?php echo $fila->telefono; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Municipio</label>
+                                            <select class="form-control" name="municipio2" value="<?php echo $fila->municipio; ?>" Required>
+                                                <option selected value="">
+                                                    --Selecciona--
+                                                </option>
+                                                <?php
+                                           $query=$connection->prepare("SELECT * FROM tblmunicipio");
                                            $query->execute();
                                            $data=$query->fetchAll();
 
-                                           foreach ($data as $opcion):
-                                            echo '<option '.(($persona->comiteEncargado == $opcion["id"]) ? 'selected' : '').' value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                           foreach ($data as $municipio):
+                                            echo '<option value="'.$municipio["id"].'">'.$municipio["nombre"].'</option>';
                                            endforeach;
                                            ?>
-                                           </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Hora Inicio</label>
-                                            <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $persona->horaInicio;?>">
-                                        </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Lugar </label>
-                                            <input type="text" name="lugar" class="form-control input-default " value="<?php echo $persona->lugar;?>">
+                                            </select>
                                         </div>
                                     </div>
                                     
+                                <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Descripción </label>
-                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $persona->descripcion;?>"></textarea>
+                                            <label>Gmail</label>
+                                            <input type="text" name="gmail2" class="form-control input-default " value="<?php echo $fila->email; ?>">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            </div>
-                            <div>
-                            <input type="hidden" name="oculto"> 
-                            <input type="hidden" name="id" value="<?php echo $persona->id;?>">
-                                        </div>
-                                        
+
                             <div class="p-3">
-                                <button type="reset"  class="btn btn-primary"><a href="reuniones.php" aria-expanded="false">Cancelar</button >
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button><br>
+                                <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                             </div>
                         </div>
                     </div>
                 </form>
-
             </div>
 
         </div>
@@ -284,6 +238,5 @@ if(!isset($_GET['id'])){
     <script src="./js/plugins-init/datatables.init.js"></script>
 
 </body>
-
 
 </html>

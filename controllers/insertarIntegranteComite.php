@@ -16,4 +16,7 @@ if ($resultado==TRUE){
    header('location:../comites.php');
 }
 
+foreach($estado as $sino){
+   echo $sino;
+}
  ?>

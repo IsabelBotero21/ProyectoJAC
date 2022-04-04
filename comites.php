@@ -209,7 +209,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             $data=$query->fetchAll();
 
                                                                                             foreach ($data as $opcion):
-                                                                                             echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"].'</option>';
+                                                                                             echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
                                                                                             endforeach;
                                                                                             ?>
                                                                                          </select>  
@@ -263,16 +263,17 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="col-auto">
-                                                                                    <div class="form-check mb-2">
-                                                                                    <input class="form-check-input" name="estado" type="hidden" value="0">
-                                                                                        <input class="form-check-input" name="estado" type="checkbox" value="si">
+                                                                                    <div class="form-check mb-2"><br>
+                                                                                    <input class="form-check-input" name="estado" type="checkbox" value="No">
+                                                                                        <input class="form-check-input" name="estado" type="checkbox" value="Si">
                                                                                         <label class="form-check-label">
                                                                                             Estado
                                                                                         </label>
+                                                                                        
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="col-auto">
-                                                                                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 400px;">Agregar</button>
+                                                                                <div class="col-auto"><br>
+                                                                                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 20px;">Agregar</button>
                                                                                 </div>
                                                                                 
                                                                             </div>
@@ -293,7 +294,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                         <tr>
                                                                                             <th>Acciones</th>
                                                                                             <th>Nombres</th>
-                                                                                            <th>Comite</th>
+                                                                                            <th>Comité</th>
                                                                                             <th>Período</th>
                                                                                             <th>Estado</th>
                                                                                         </tr>
@@ -306,14 +307,12 @@ if(!isset($_SESSION['user_id'])){
                                                                                         while($integrante = $sel->fetch()){
                                                                                             ?>
                                                                                             <tr>
-                                                                                                 <td><a type="button" class="btn btn-primary"
-                                                         href="editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>
-                                                         "><i class="far fa-edit"></i> </a><br><br>
-                                                         <a type="button" class="btn btn-primary" href="controllers/eliminaIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>>
+                                                                                                 <td><a type="button" class="btn btn-primary"href="formulario-editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
+                                                                                                     <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                                                                  </td>
-                                                                                                 <td><?php echo "{$integrante["nombres"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["nombres"]} {$integrante["apellidos"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["nombre"]}";?></td>
-                                                                                                 <td><?php echo "{$integrante["fechaInicio"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["fechaInicio"]} - {$integrante["fechaFinal"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["estado"]}";?></td>
                                                                                             </tr><?php
                                                                                         }
