@@ -131,7 +131,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                 class="nav-text">Actas</span></a></li>
                     <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
-                    <li><a href="comites.html" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
             </div>
         </div>
@@ -152,7 +152,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Número de Documento *</label>
-                                            <input type="number" class="form-control input-default" name="documento"  value="<?php echo $persona->docIdentidad ?>">
+                                            <input type="number" class="form-control input-default" name="documento" disabled value="<?php echo $persona->docIdentidad ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -198,8 +198,8 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Perfil *</label>
-                                            <select class="form-control" name="perfil" >
-                                                <option selected value="<?php echo $persona->perfil ?>">
+                                            <select class="form-control" name="perfil" required>
+                                                <option value="">
                                                     --Selecciona--
                                                 </option>
                                                 <?php
@@ -207,7 +207,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                                 $query->execute();
                                                 $data = $query->fetchAll();
                                                 foreach($data as $opt):
-                                                    echo '<option value="'.$opt["id"].'">'.$opt["descripcion"].'</option>';
+                                                    echo '<option '.(($persona->perfil == $opt["id"]) ? 'selected' : '').' value="'.$opt["id"].'">'.$opt["descripcion"].'</option>';
                                                 endforeach;
                                                 ?>
                                             </select>

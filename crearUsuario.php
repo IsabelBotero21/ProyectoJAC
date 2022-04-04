@@ -178,7 +178,7 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                         <?php
                                             if($edit){
                                                 $_SESSION['doc_update'] = $user["docIdentidad"];
-                                                echo "<input type='number' class='form-control input-default' name='documento' disabled value='{$user["docIdentidad"]}'>";
+                                                echo "<input type='number' class='form-control input-default' name='documento' disabled required value='{$user["docIdentidad"]}'>";
                                             }else{
                                                 echo '<input type="number" class="form-control input-default" name="documento">';
                                             }
@@ -277,9 +277,9 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                 </div>
                                 </div>
                             </div>
-                            <p>Los campos con * son requeridos</p>
                             <div class="p-3">
-                                <button type="reset" class="btn btn-primary">Cancelar</button>
+                            <p>Los campos con * son requeridos</p>
+                                <button type="button"  onclick="location.href='usuarios.php'" class="btn btn-primary">Cancelar</button>
                                 <button type="submit" class="btn btn-primary" value="guardar">Guardar</button>
                             </div>
                         </div>

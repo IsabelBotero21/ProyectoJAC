@@ -168,7 +168,7 @@ $sel->execute();
                                                         <th>Nombres</th>
                                                         <th>Apellidos</th>
                                                         <th>Dirección</th>
-                                                        <th>Telefono fijo / Celular</th>
+                                                        <th>Teléfono Fijo / Celular</th>
                                                         <th>Correo</th>
                                                         <th>Perfil</th>
                                                     </tr>
