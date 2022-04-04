@@ -145,6 +145,8 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <!--**********************************
