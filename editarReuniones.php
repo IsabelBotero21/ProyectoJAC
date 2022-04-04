@@ -156,15 +156,44 @@ if(!isset($_GET['id'])){
                 </div>
                 
                 <form action="controllers/editarProceso.php" method="post">
-                
+                <script>
+var fecha = new Date();
+var anio = fecha.getFullYear();
+var dia = fecha.getDate();
+var _mes = fecha.getMonth(); //viene con valores de 0 al 11
+_mes = _mes + 1; //ahora lo tienes de 1 al 12
+if (_mes < 10) //ahora le agregas un 0 para el formato date
+{
+  var mes = "0" + _mes;
+} else {
+  var mes = _mes.toString;
+}
+
+let fecha_minimo = anio + '-' + mes + '-' + dia; // Nueva variable
+
+document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
+  </script>
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="col-12">
                                         <div class="form-group" >
-                                        <label>Encargados</label>
-                                            <input class="form-control" name="usuario" value="<?php echo $persona->encargado; ?>">
+                                        <label>Encargado *</label>
+                                        <select class="form-control" required name="usuario" >
+                                        <option selected value="">
+                                        --Selecciona--
+                                                </option>
+                                           <?php
+                                           $query=$connection->prepare("SELECT * FROM tblusuario");
+                                           $query->execute();
+                                           $data=$query->fetchAll();
+
+                                           foreach ($data as $opcion):
+                                            echo '<option '.(($persona->encargado == $opcion["docIdentidad"]) ? 'selected' : '').' value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"].'</option>';
+                                           endforeach;
+                                           ?>
+                                            </select>
       
                                            
                                         </div>
@@ -172,8 +201,58 @@ if(!isset($_GET['id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha Inicio</label>
-                                            <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $persona->fecha;?>">
+                                            <input type="date" id="fechaReserva" min='1899-01-01' max='2000-13-13'>>
 
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                        <label>Hora fin</label>
+                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $persona->horaFinal;?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Seguimiento *</label>
+                                            <input type="text" name="seguimiento" class="form-control input-default" required value="<?php echo $persona->seguimiento;?>"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group" >
+                                        <label>Acta *</label>
+                                    <select class="form-control" required name="acta" >
+                                    <?php
+                                           $query=$connection->prepare("SELECT * FROM tblacta");
+                                           $query->execute();
+                                           $data=$query->fetchAll();
+
+                                           foreach ($data as $opcion):
+                                            echo '<option '.(($persona->acta == $opcion["id"]) ? 'selected' : '').' value="'.$opcion["id"].'">'.$opcion["titulo"].'</option>';
+                                           endforeach;
+                                           ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                    <p>Los campos con * son requeridos</p>
+                                        </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Comité Encargado *</label>
+                                            <select class="form-control" required name="comiteEncargado">
+                                            <?php
+                                           $query=$connection->prepare("SELECT * FROM tblcomite");
+                                           $query->execute();
+                                           $data=$query->fetchAll();
+
+                                           foreach ($data as $opcion):
+                                            echo '<option '.(($persona->comiteEncargado == $opcion["id"]) ? 'selected' : '').' value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                           endforeach;
+                                           ?>
+                                           </select>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -181,55 +260,27 @@ if(!isset($_GET['id'])){
                                             <label>Hora Inicio</label>
                                             <input type="time" name="horaInicio" class="form-control input-default " value="<?php echo $persona->horaInicio;?>">
                                         </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Seguimiento</label>
-                                            <input type="text" name="seguimiento" class="form-control input-default" value="<?php echo $persona->seguimiento;?>">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Comite Encargado</label>
-                                            <input class="form-control" name="comiteEncargado" value="<?php echo $persona->comiteEncargado;?>">
-                                               
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                        <label>Hora final</label>
-                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $persona->horaFinal;?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Lugar</label>
+                                            <label>Lugar </label>
                                             <input type="text" name="lugar" class="form-control input-default " value="<?php echo $persona->lugar;?>">
                                         </div>
                                     </div>
                                     
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Descripción</label>
-                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $persona->descripcion;?>">
+                                            <label>Descripción </label>
+                                            <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $persona->descripcion;?>"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>Acta</label>
-                                    <input sclass="form-control" name="acta" value="<?php echo $persona->acta;?>">
-                                
-                                </div>
                             </div>
                             <div>
                             <input type="hidden" name="oculto"> 
                             <input type="hidden" name="id" value="<?php echo $persona->id;?>">
                                         </div>
+                                        
                             <div class="p-3">
                                 <button type="reset"  class="btn btn-primary"><a href="reuniones.php" aria-expanded="false">Cancelar</button >
                                 <button type="submit" class="btn btn-primary">Guardar</button>
