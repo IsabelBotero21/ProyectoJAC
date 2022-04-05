@@ -212,14 +212,12 @@
                                         </div>
                                     </div>
                                     
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Gmail</label>
-                                            <input type="text" name="gmail2" class="form-control input-default " value="<?php echo $fila->email; ?>">
+                                <div class="col-12">
+                                <div class="form-group">
+                                            <label>Correo</label>
+                                            <input type="text" name="gmail" class="form-control input-default " value="<?php echo $fila->email; ?>">
                                         </div>
-                                    </div>
-
+                                    </div>        
                             <div class="p-3">
                                 <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button><br>
                                 <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>

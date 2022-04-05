@@ -11,7 +11,7 @@ include ('../util/conexion.php');
 @$municipio2 = $_POST['municipio2'];
 @$direccion2 = $_POST['direccion2'];
 @$telefono2 = $_POST['telefono2'];
-@$email2 = $_POST['email2'];
+@$email2 = $_POST['gmail'];
 
 $up = $connection->prepare("UPDATE tbljac SET nit = ?, nombre = ?, municipio = ?, 
 direccion = ?, telefono = ?, email = ? WHERE id = ?;");

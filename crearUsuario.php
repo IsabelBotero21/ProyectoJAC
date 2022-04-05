@@ -9,7 +9,7 @@ if(!isset($_SESSION['user_id'])){
 if(!empty($_REQUEST['id'])){
     $id = $_REQUEST['id'];
 }
-$edit = false;
+
 if(!empty($id)){
     $edit = true;
     $stmt = $connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = $id");
@@ -21,11 +21,6 @@ if(!empty($id)){
 
 }
 
-$numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoErr = $perfilErr = $direccionErr = $emailErr = "";
-// if(isset($_GET['claveErr'])){
-    $claveErr = $_GET['claveErr'];
-    echo $claveErr;
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -157,17 +152,11 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <?php
-                                echo $edit? '<h4>Editar usuario</h4>': "<h4>Crear usuario</h4>";
-                            ?>
+                               <h4>Crear usuario</h4>
                         </div>
                     </div>
                 </div>
-                <?php
-                echo $edit 
-                ? '<form action="controllers/actualizarUsuario.php" method="post">'
-                :'<form action="controllers/insertarUsuario.php" method="post">'
-                ?>
+                <form action="controllers/insertarUsuario.php" method="post">
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
@@ -175,27 +164,20 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Número de Documento *</label>
-                                        <?php
-                                            if($edit){
-                                                $_SESSION['doc_update'] = $user["docIdentidad"];
-                                                echo "<input type='number' class='form-control input-default' name='documento' disabled required value='{$user["docIdentidad"]}'>";
-                                            }else{
-                                                echo '<input type="number" class="form-control input-default" name="documento">';
-                                            }
-                                        ?>
+                                            <input type="number" class="form-control input-default" name="documento" required value="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Teléfono Fijo</label>
-                                            <input type="number" class="form-control input-default" name="telefonoFijo" value="<?php echo $edit? $user["telefonoFijo"]: "" ?>">
+                                            <input type="number" class="form-control input-default" name="telefonoFijo" value="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Contraseña *</label>
-                                            <input type="password" class="form-control input-default" name="clave" value="<?php echo $edit? $user["clave"]: "" ?>">
-                                            <h2><?php echo $claveErr;?></h2>
+                                            <input type="password" class="form-control input-default" name="clave" value="">
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -203,19 +185,19 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Nombres *</label>
-                                            <input type="text" class="form-control input-default" name="nombres" value="<?php echo $edit? $user["nombres"]: "" ?>">
+                                            <input type="text" class="form-control input-default" name="nombres" value="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Teléfono Celular *</label>
-                                            <input type="Number" class="form-control input-default" name="celular" value="<?php echo $edit? $user["telefonoCelular"]: "" ?>">
+                                            <input type="Number" class="form-control input-default" name="celular" value="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha de Nacimiento *</label>
-                                            <input type="date" class="form-control input-default" name="fechaNacimiento" value="<?php echo $edit? $user["fechaNacimiento"]: "" ?>">
+                                            <input type="date" class="form-control input-default" name="fechaNacimiento" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +205,7 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Apellidos *</label>
-                                            <input type="text" class="form-control input-default" name="apellidos" value="<?php echo $edit? $user["apellidos"]: "" ?>">
+                                            <input type="text" class="form-control input-default" name="apellidos" value="">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -255,13 +237,13 @@ $numeroDocumentoErr = $claveErr = $nombresErr = $celularErr = $fechaNacimientoEr
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Dirección *</label>
-                                            <input type="text" class="form-control input-default" name="direccion" value="<?php echo $edit? $user["direccion"]: "" ?>">
+                                            <input type="text" class="form-control input-default" name="direccion" value="">
                                         </div>
                                     </div>
                                     <div class="col-auto">
                                         <div class="form-group"> 
                                             <label>Correo *</label>
-                                            <input type="email" class="form-control input-default" name="email" value="<?php echo $edit? $user["email"]: "" ?>">
+                                            <input type="email" class="form-control input-default" name="email" value="">
                                         </div>
                                     </div>
                                     <br>
