@@ -1,19 +1,31 @@
-
+<?php
+include("util/conexion.php");
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+$sel = $connection->prepare("SELECT * FROM tblacta");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Actas </title>
+    <title>Actas</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
+    <!-- Custom style reuniones -->
+    <link rel="stylesheet" href="./css/reuniones.css">
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
@@ -81,15 +93,17 @@
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="./app-profile.html" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Perfil </span>
+                                        <span class="ml-2">Profile </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
                                     </a>
@@ -110,7 +124,7 @@
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">MENÚ</li>
+                    <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
@@ -123,6 +137,8 @@
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -138,104 +154,63 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                                onclick="location.href='crearActa.html'"><span
+                                onclick="location.href='crearActa.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                </span>Crear acta</button>
+                                </span>Crear Acta</button>
                         </div>
                         <div class="card-body">
                             <!-- Nav tabs -->
                             <div class="default-tab">
                                 <div class="tab-content pt-3">
-                                    <div class="tab-pane fade show active" role="tabpanel">
+                                    <div class="tab-pane fade show active" id="todas" role="tabpanel">
                                         <div class="table-responsive">
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
-                                                    <tr>
+                                                <tr>
                                                         <th>Acciones</th>
-                                                        <th>Titulo</th>
+                                                        <th>Ttulo</th>
                                                         <th>Fecha</th>
-                                                        <th>Hora inicio</th>
-                                                        <th>Hora fin</th>
+                                                        <th>Hora Inicio</th>
+                                                        <th>Hora Fin</th>
                                                         <th>Lugar</th>
                                                         <th>Objetivo</th>
-                                                        <th>Lista invitados</th>
-                                                        <th>Desarrollo agenda</th>
-                                                        <th>Archivo acta</th>
-                                                        <th>Archivo asistencia</th>
+                                                        <th>Lista Invitados</th>
+                                                        <th>Desarrollo Agenda</th>
+                                                        <th>Archivo Acta</th>
+                                                        <th>Archivo Asistencia</th>
                                                         <th>Usuario</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i><i class="fas fa-eye"></i></td>
-                                                        <td>Juan Alberto</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td></td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
+                                                    <?php
+                                                        $sel = $connection->prepare("SELECT * FROM tblacta");
+                                                        $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                        $sel->execute();
+                                                        while ($fila = $sel->fetch())
+                                                        {
+                                                    ?>
+                                                     <tr>
+                                                    <td>
+                                                    <a type="button" class="btn btn-primary" href="controllers/eliminarActa.php?id=<?php  echo "{$fila["id"]}" ?>" ?><i class="fa fa-trash-o"></i></a><br><br>
+                                                      <a type="button" class="btn btn-primary" href="FormActualizarActa.php?id=<?php  echo "{$fila["id"]}" ?>"><i class="far fa-edit"></i></a>
+                                                      </td> 
+                                                        <td><?php echo "{$fila["titulo"]}" ?></td>
+                                                        <td><?php echo "{$fila["fecha"]}" ?></td>
+                                                        <td><?php echo "{$fila["horaInicio"]}" ?></td>
+                                                        <td><?php echo "{$fila["horaFin"]}" ?></td>
+                                                        <td><?php echo "{$fila["lugar"]}"?></td>
+                                                        <td><?php echo "{$fila["objetivo"]}" ?></td>
+                                                        <td><?php echo "{$fila["listaInvitados"]}" ?></td>
+                                                        <td><?php echo "{$fila["desarrolloAgenda"]}" ?></td>
+                                                        <td><?php echo "{$fila["archivoActa"]}" ?></td>
+                                                        <td><?php echo "{$fila["archivoAsistencia"]}" ?></td>
+                                                        <td><?php echo "{$fila["usuario"]}" ?></td>
+
                                                     </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i><i class="fas fa-eye"></i></td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td></td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i><i class="fas fa-eye"></i></td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i><i class="fas fa-eye"></i></td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><i class="far fa-edit"></i><i class="fas fa-eye"></i></td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                        <td>Caseta</td>
-                                                        <td>Hola</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                        <td>...</td>
-                                                    </tr>
+                                                    <?php
+
+                                                        }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -252,7 +227,6 @@
                 <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
         </div>
-
 </body>
 
 </html>

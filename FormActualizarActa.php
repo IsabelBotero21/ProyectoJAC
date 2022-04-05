@@ -1,12 +1,25 @@
-<?php
-session_start();
- 
-if(!isset($_SESSION['user_id'])){
-    header('Location: page-login.php');
-    exit;
-}
-?>
+<?php 
+	session_start();
+	if(!isset($_SESSION['user_id'])){
+        header('Location: page-login.php');
+        exit;
+    }
 
+	if (!isset($_SESSION['user_id'])) {
+		header('Location: page-login.php');
+	}elseif(isset($_SESSION['user_id'])){
+		include ('util/conexion.php');
+		$id = $_GET['id'];
+
+		$sel = $connection->prepare("SELECT * FROM tblacta WHERE id = ?;");
+		$sel->execute([$id]);
+		$fila = $sel->fetch(PDO::FETCH_OBJ);
+		//print_r($persona);
+	}else{
+		echo "Error en el sistema";
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,26 +155,27 @@ if(!isset($_SESSION['user_id'])){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Crear Acta</h4>
+                            <h4>Editar Acta</h4>
                         </div>
                     </div>
                 </div>
                 <!-- inicio insert -->
-                <form action="controllers/insertarActa.php" method="post" id="" name="">
+                <form action="controllers/actualizarActa.php" method="post" id="" name="">
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
+                            <input type="hidden" name="id" value="<?php echo $id2 ?>"> 
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Título *</label>
-                                            <input type="text"  name="titulo" class="form-control input-default " Required>
+                                            <input type="text"  name="titulo2" class="form-control input-default " value="<?php echo $fila->titulo; ?>" required maxlength="100">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Lugar *</label>
-                                            <input type="text"  name="lugar" class="form-control input-default " Required>
+                                            <input type="text"  name="lugar2" class="form-control input-default " value="<?php echo $fila->lugar; ?>" required="150">
                                         </div>
                                     </div>
                                 </div>
@@ -170,42 +184,42 @@ if(!isset($_SESSION['user_id'])){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha *</label>
-                                            <input type="date"  name="fecha" class="form-control input-default " Required>
+                                            <input type="date"  name="fecha2" class="form-control input-default " value="<?php echo $fila->fecha; ?>" required="">
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Objetivo *</label>
-                                            <input type="text"  name="objetivo" class="form-control input-default " Required>
+                                            <input type="text"  name="objetivo2" class="form-control input-default " value="<?php echo $fila->objetivo; ?>" required="600">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Hora Inicio *</label>
-                                            <input type="time"  name="horaInicio" class="form-control input-default " Required>
+                                            <label>Hora Inicial *</label>
+                                            <input type="time"  name="horaInicio2" class="form-control input-default " value="<?php echo $fila->horaInicio; ?>" required="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Archivo Asistencia *</label>
-                                            <input type="file" name="archivoAsistencia" class="form-control input-default " Required>
+                                            <input type="file" name="archivoAsistencia2" class="form-control input-default " value="<?php echo $fila->archivoAsistencia; ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Hora Fin *</label>
-                                            <input type="time" name="horaFin" class="form-control input-default " Required>
+                                            <label>Hora Final *</label>
+                                            <input type="time" name="horaFin2" class="form-control input-default " value="<?php echo $fila->horaFin; ?>" required="">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Archivo Acta *</label>
-                                            <input type="file" name="archivoActa" class="form-control input-default " accept="util/pdf.php" Required>
+                                            <input type="file" name="archivoActa2" class="form-control input-default " value="<?php echo $fila->archivoActa; ?>" required="260">
                                         </div>
                                     </div>
                                    </div>
@@ -214,27 +228,27 @@ if(!isset($_SESSION['user_id'])){
                                    <div class="col-6">
                                       <div class="form-group">
                                         <label>Lista Invitados</label>
-                                        <textarea type="text" name="listaInvitados" class="form-control input-default "
+                                        <textarea type="text" name="listaInvitados2" class="form-control input-default " value="<?php echo $fila->listaInvitados; ?>"
                                             ></textarea>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Desarrollo Agenda</label>
-                                        <textarea type="text" name="desarrolloAgenda"class="form-control input-default "
+                                        <textarea type="text" name="desarrolloAgenda2"class="form-control input-default " value="<?php echo $fila->desarrolloAgenda; ?>"
                                             ></textarea>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                         <div class="form-group">
                                             <label>Usuario *</label>
-                                            <input type="text" name="usuario"  class="form-control input-default "   Required> <!--value="<?php echo ($_SESSION['user_id']) ?>" disabled-->
+                                            <input type="text" name="usuario2"  class="form-control input-default "  value="<?php echo $fila->usuario; ?>" required="" > <!--value="<?php echo ($_SESSION['user_id']) ?>" disabled-->
                                         </div>
                                     </div>
                                   </div><p>Los campos con * son requeridos</p>
                                 <div class="p-3">
                                 <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                             </div>
                         </div>
                     </div>
@@ -247,8 +261,8 @@ if(!isset($_SESSION['user_id'])){
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </body>
 
 </html>
+
