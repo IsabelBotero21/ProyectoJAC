@@ -123,7 +123,7 @@ $sel->execute();
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
+                                class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span

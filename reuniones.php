@@ -127,7 +127,7 @@ $sel->execute();
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENÚ</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
+                                class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -138,6 +138,8 @@ $sel->execute();
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -191,7 +193,7 @@ $sel->execute();
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $sel= $connection->prepare("SELECT * FROM vtaactividaad  ");
+                                                    <?php $sel= $connection->prepare("SELECT * FROM tblactividad  ");
                                                     $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                     $sel->execute();
                                                     while($fila=$sel->fetch())
@@ -206,15 +208,15 @@ $sel->execute();
                                                          
                                                         </td>
                                                        
-                                                        <td><?php echo  "{$fila ["nombres"]} {$fila["apellidos"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["nombre"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["encargado"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["comiteEncargado"]}" ?></td>
                                                         <td><?php echo  "{$fila ["fecha"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaInicio"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaFinal"]}" ?></td>
                                                         <td><?php echo  "{$fila ["descripcion"]}" ?></td>
                                                         <td><?php echo  "{$fila ["lugar"]}" ?></td>
                                                         <td><?php echo  "{$fila ["seguimiento"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["titulo"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["acta"]}" ?></td>
                                                     </tr>
                                                     <?php
                                                     }
