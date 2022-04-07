@@ -178,7 +178,7 @@ if(!isset($_GET['id'])){
                                                                                 <label>Usuario</label>
                                                                                 <div>
                                                                                         <div class="input-group-prepend">
-                                                                                        <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["usuario"]: ""?>">
+                                                                                        <select class="form-control" name="usuario">
                                                                                          
                                                                                          <?php
                                                                                             $query=$connection->prepare("SELECT * FROM tblusuario");

@@ -175,7 +175,7 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        $sel = $connection->prepare("SELECT * FROM  vtauser ");
+                                                        $sel = $connection->prepare("SELECT * FROM  vtausers ");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($fila = $sel->fetch())
