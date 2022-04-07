@@ -122,7 +122,7 @@ if(!isset($_SESSION['user_id'])){
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                        class="nav-text">Home</span></a></li>
+                        class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                         class="nav-text">Usuarios</span></a></li>
                         <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -133,6 +133,8 @@ if(!isset($_SESSION['user_id'])){
                                         class="nav-text">Documentacion</span></a></li>
                                         <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                             class="nav-text">Comites</span></a></li>
+                                            <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <!--**********************************
@@ -147,7 +149,7 @@ if(!isset($_SESSION['user_id'])){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>COMITES</h4>
+                            <h4>Comités</h4>
                         </div>
                     </div>
                 </div>
@@ -157,7 +159,6 @@ if(!isset($_SESSION['user_id'])){
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">Afiliado</h4>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                             onclick="location.href='crearComite.html'"><span
                                 class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
@@ -301,7 +302,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                     </thead>
                                                                                     <tbody>
                                                                                         <?php
-                                                                                        $sel= $connection->prepare("SELECT * FROM vtaintegrantescomite   ");
+                                                                                        $sel= $connection->prepare("SELECT * FROM tblintegrantescomite   ");
                                                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                         $sel->execute();
                                                                                         while($integrante = $sel->fetch()){
@@ -310,9 +311,9 @@ if(!isset($_SESSION['user_id'])){
                                                                                                  <td><a type="button" class="btn btn-primary"href="formulario-editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
                                                                                                      <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                                                                  </td>
-                                                                                                 <td><?php echo "{$integrante["nombres"]} {$integrante["apellidos"]}";?></td>
-                                                                                                 <td><?php echo "{$integrante["nombre"]}";?></td>
-                                                                                                 <td><?php echo "{$integrante["fechaInicio"]} - {$integrante["fechaFinal"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["docIdentidad"]} ";?></td>
+                                                                                                 <td><?php echo "{$integrante["idComite"]}";?></td>
+                                                                                                 <td><?php echo "{$integrante["periodo"]} ";?></td>
                                                                                                  <td><?php echo "{$integrante["estado"]}";?></td>
                                                                                             </tr><?php
                                                                                         }

@@ -14,7 +14,7 @@ if(!isset($_SESSION['user_id'])){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Home</title>
+    <title>Inicio</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
@@ -75,6 +75,7 @@ if(!isset($_SESSION['user_id'])){
                                 </span>
                             </div>
                         </div>
+                        <h2>Junta Acción Comunal Abejorral - Antioquia</h2>
                         <ul class="navbar-nav header-right">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -134,7 +135,7 @@ if(!isset($_SESSION['user_id'])){
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENÚ</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
+                                class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -156,119 +157,18 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
+        <div class="">
+            <div class="container-fluid"style=" margin-top:100px;" >
 
 
-                <div class="row">
+                <div class="row"style="margin-left:600px;">
                     <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">New Orders</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Product</th>
-                                                <th>quantity</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>Lew Shawon</td>
-                                                <td><span>Dell-985</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>Lew Shawon</td>
-                                                <td><span>Asus-565</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-warning">Pending</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>lew Shawon</td>
-                                                <td><span>Dell-985</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>Lew Shawon</td>
-                                                <td><span>Asus-565</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-warning">Pending</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>lew Shawon</td>
-                                                <td><span>Dell-985</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-success">Done</span></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <div class="round-img">
-                                                        <a href=""><img width="35" src="./images/avatar/1.png"
-                                                                alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td>Lew Shawon</td>
-                                                <td><span>Asus-565</span></td>
-                                                <td><span>456 pcs</span></td>
-                                                <td><span class="badge badge-warning">Pending</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="card"  >
+                            
+                          <img src="icons/escudo.jpg" alt="imagen"      >
                         </div>
                     </div>
-                    <div class="col-lg-6 col-sm-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Bar Chart</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="flotBar2" class="flot-chart"></div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
             </div>
@@ -281,44 +181,6 @@ if(!isset($_SESSION['user_id'])){
         ***********************************-->
         </div>
         <footer class=" bg-dark text-white py-3">
-            <div class="container">
-                <nav class="row">
-
-                    <div class="col-sm-3 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase">Contáctenos</li>
-                            <li><a href="#" class="text-reset"> <i class="fab fa-instagram"></i> Nombre de Usaurio</a>
-                            </li>
-                            <li><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i> Nombre de Usuario</a>
-                            </li>
-                            <li><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
-
-
-                        </ul>
-                    </div>
-                    <div class="col-sm-3 col-md-3 col-lg-6">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase">¿Quienes Somos?</li>
-                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando
-                                gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
-                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades
-                                de nuestros clientes</p>
-                        </ul>
-                    </div>
-                    <div class="col-sm-2 col-md-3 col-lg-3">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase">PQRS</li>
-                            <li class="d-flex justify-content-between ">
-                                <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a
-                                        href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
-
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </nav>
-            </div>
             <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
                 © 2021 Copyright: Todos los derechos reservados a..........
             </div>
