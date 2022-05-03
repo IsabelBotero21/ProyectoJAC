@@ -6,11 +6,13 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-
-    $stmt=$connection->query("SELECT * FROM tbldocumentacion");
-    $documento = $stmt->fetchAll(PDO::FETCH_OBJ);
-    
-
+if(!isset($_GET['id'])){
+    exit();
+ }
+ $id=$_GET['id'];
+ $sentecia=$connection->prepare("SELECT * FROM  tbldocumentacion WHERE id=?;");
+ $sentecia->execute([$id]);
+ $documento=$sentecia->fetch(PDO::FETCH_OBJ);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +126,7 @@ if(!isset($_SESSION['user_id'])){
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
+                                class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -160,11 +162,11 @@ if(!isset($_SESSION['user_id'])){
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                        <form action="controllers/insertarDocumentacion.php" method="post">
+                        <form action="controllers/editarDocumentacion.php" method="post">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
                                         <label>Descripcion *</label>
-                                        <textarea type="text" name="descripcion" class="form-control input-default" value="<?php echo $edit? $actividad["descripcion"]: ""?>"></textarea>
+                                        <input type="text" name="descripcion" class="form-control input-default" value="<?php echo $documento->descripcion;?>">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label>Jac * </label>
@@ -178,7 +180,7 @@ if(!isset($_SESSION['user_id'])){
                                                     $data=$query->fetchAll();
 
                                                     foreach ($data as $opcion):
-                                                        echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                                        echo '<option '.(($documento->jac == $opcion["id"]) ? 'selected' :'').' value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
                                                     endforeach;
                                             ?>
                                                 </select>
@@ -195,15 +197,14 @@ if(!isset($_SESSION['user_id'])){
                                                     $data=$query->fetchAll();
 
                                                     foreach ($data as $opcion):
-                                                        echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                                        echo '<option '.(($documento->tipodocumentacion == $opcion["id"]) ? 'selected' :'').' value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
                                                     endforeach;
                                             ?>
                                                 </select>
                                     </div>
                                     <div class="form-group col-md-4">
                                     <label>Usuario *</label>
-                                    <div class="input-group mb-2">
-                                            <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["usuario"]: ""?>">
+                                            <select class="form-control" name="usuario" >
                                              <option selected value="">
                                                      --Selecciona--
                                              </option>
@@ -213,25 +214,25 @@ if(!isset($_SESSION['user_id'])){
                                                 $data=$query->fetchAll();
 
                                                 foreach ($data as $opcion):
-                                                 echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
+                                                    echo '<option '.(($documento->usuario == $opcion["docIdentidad"]) ? 'selected' : '').' value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
                                                 endforeach;
                                                 ?>
-                                            </select>  
-                                    </div> 
+                                             </select>  
                                     </div>
                                     <div class="form-group col-md-4">
-                                        <label>Archivo *</label>
-                                        <input type="file" name="archivoAsistencia" class="form-control input-default "  accept="util/pdf.php" Required>
+                                        <label> Archivo *</label>
+                                        <input type="file" name="archivoAsistencia" class="form-control input-default " value="<?php  echo $documento->archivo;?>" accept="util/pdf.php" Required>
                                     </div>
                                     <div class="col-12">
                                     <p>Los campos con * son requeridos</p>
                                         </div>
                             <div>
-                            <input type="hidden" name="id" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
+                            <input type="hidden" name="oculto"> 
+                            <input type="hidden" name="id" value="<?php echo $documento->id;?>">
                                         </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><a href="Documentacion.php"> Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary">Registar</button>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
                             </form>
                         </div>
                     </div>
@@ -240,6 +241,10 @@ if(!isset($_SESSION['user_id'])){
                 <!--**********************************
             Content body end
         ***********************************-->
+
+
+                
+
                 <!--**********************************
            Support ticket button start
         ***********************************-->
@@ -261,6 +266,10 @@ if(!isset($_SESSION['user_id'])){
             <script src="./vendor/global/global.min.js"></script>
             <script src="./js/quixnav-init.js"></script>
             <script src="./js/custom.min.js"></script>
+
+
+            <script src="./vendor/select2/js/select2.full.min.js"></script>
+            <script src="./js/plugins-init/select2-init.js"></script>
                                             </div>
                                             </div>
 <!--**********************************
@@ -275,10 +284,6 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Footer end
         ***********************************-->
-
-            <script src="./vendor/select2/js/select2.full.min.js"></script>
-            <script src="./js/plugins-init/select2-init.js"></script>
- 
 </body>
 
 </html>

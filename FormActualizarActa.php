@@ -28,7 +28,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Crear Acta</title>
+    <title>Editar Acta</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -108,9 +108,9 @@
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil </span>
                                     </a>
                                     <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
@@ -228,15 +228,15 @@
                                    <div class="col-6">
                                       <div class="form-group">
                                         <label>Lista Invitados</label>
-                                        <textarea type="text" name="listaInvitados2" class="form-control input-default " value="<?php echo $fila->listaInvitados; ?>"
-                                            ></textarea>
+                                        <textarea type="text" name="listaInvitados2" class="form-control input-default "><?php echo $fila->listaInvitados; ?>
+                                            </textarea>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Desarrollo Agenda</label>
-                                        <textarea type="text" name="desarrolloAgenda2"class="form-control input-default " value="<?php echo $fila->desarrolloAgenda; ?>"
-                                            ></textarea>
+                                        <textarea type="text" name="desarrolloAgenda2"class="form-control input-default "><?php echo $fila->desarrolloAgenda; ?>
+                                            </textarea>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -261,7 +261,18 @@
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-
+ <!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

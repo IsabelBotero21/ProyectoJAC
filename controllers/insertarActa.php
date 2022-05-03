@@ -17,16 +17,11 @@ $insertar = $connection->prepare("INSERT INTO tblacta (titulo, fecha, horaInicio
  VALUES ('$titulo','$fecha','$horaInicio','$horaFin','$lugar','$objetivo','$listaInvitados','$desarrolloAgenda','$archivoActa','$archivoAsistencia', '$usuario' )");
  $insertar->execute();
 
-if ($insertar) {
-	        echo "<h1> Registro guardo con exito. <a href='../actas.php' </a>Ver Actas</h1>";
-          }
-
-else  {
-	     echo "<h1> Registro no guardo con exito. </h1> <br/>";
-      }
-
- echo "<h1> <a href='../crearActa.php' </a> Regresar al Formulario </h1>";
-
-
+ if ($insertar) {
+     echo "<script> alert('El registro fue Exitoso'); 	location.href='../actas.php'; </script>";
+   }
+   else  {
+    echo "<script> alert('El registro no fue Exitoso'); 	location.href='../actas.php'; </script>";
+   }
  ?>
   

@@ -92,15 +92,17 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
                                     </a>
@@ -183,8 +185,8 @@ $sel->execute();
                                                     ?>
                                                      <tr>
                                                     <td>
-                                                    <a type="button" class="btn btn-primary" href="controllers/eliminarJac.php?id=<?php  echo "{$fila["id"]}" ?>" ?><i class="fa fa-trash-o"></i></a>
-                                                      <a type="button" class="btn btn-primary" href="FormActualizarJac.php?id=<?php  echo "{$fila["id"]}" ?>"><i class="far fa-edit"></i></a>
+                                                      <a type="button" class="btn btn-primary" href="FormActualizarJac.php?id=<?php  echo "{$fila["id"]}" ?>"><i class="far fa-edit"></i></a><br><br>
+                                                      <a type="button" class="btn btn-primary" href="controllers/eliminarJac.php?id=<?php  echo "{$fila["id"]}" ?>" ?><i class="fa fa-trash-o"></i></a>
                                                       </td> 
                                                         <td><?php echo "{$fila["nit"]}" ?></td>
                                                         <td><?php echo "{$fila["nombre"]}" ?></td>
@@ -213,7 +215,18 @@ $sel->execute();
                 <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
         </div>
-
+<!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

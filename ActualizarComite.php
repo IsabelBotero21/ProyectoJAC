@@ -1,23 +1,18 @@
-<?php 
-	session_start();
-	if(!isset($_SESSION['user_id'])){
-        header('Location: page-login.php');
-        exit;
-    }
-
-	if (!isset($_SESSION['user_id'])) {
-		header('Location: page-login.php');
-	}elseif(isset($_SESSION['user_id'])){
-		include ('util/conexion.php');
-		$id = $_GET['id'];
-
-		$sel = $connection->prepare("SELECT * FROM tbljac WHERE id = ?;");
-		$sel->execute([$id]);
-		$fila = $sel->fetch(PDO::FETCH_OBJ);
-		//print_r($persona);
-	}else{
-		echo "Error en el sistema";
-	}
+<?php
+include("util/conexion.php");
+session_start();
+ 
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+if(!isset($_GET['id'])){
+    exit;
+}
+$id=$_GET['id'];
+$stmt=$connection->prepare("SELECT * FROM tblcomite WHERE id=?;" );
+$stmt->execute([$id]);
+$comite = $stmt->fetch(PDO::FETCH_OBJ);
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +23,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Crear Jac</title>
+    <title>comite</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -50,16 +45,16 @@
             <div class="sk-child sk-bounce2"></div>
             <div class="sk-child sk-bounce3"></div>
         </div>
-    </div>
-    <!--*******************
+     </div>
+     <!--*******************
         Preloader end
-    ********************-->
+     ********************-->
 
 
-    <!--**********************************
+     <!--**********************************
         Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+     ***********************************-->
+     <div id="main-wrapper">
 
         <!--**********************************
             Nav header start
@@ -102,8 +97,8 @@
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"> 
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
                                 </a>
@@ -146,7 +141,7 @@
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
@@ -155,104 +150,95 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Crear Jac</h4>
+                            <h4>Actualizar Comite</h4>
                         </div>
                     </div>
                 </div>
-                <form action="controllers/actualizarJac.php" method="post" id="" name="">
-                    <div class="row card">
-                        <div class="col-12 pt-3">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Nit *</label>
-                                            <input type="number" name="nit2" class="form-control input-default " value="<?php echo $fila->nit; ?>" Required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" name="direccion2" class="form-control input-default " value="<?php echo $fila->direccion; ?>">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-4">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Nombre *</label>
-                                            <input type="text" name="nombre2" class="form-control input-default " value="<?php echo $fila->nombre; ?>" Required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Telefono</label>
-                                            <input type="text" name="telefono2" class="form-control input-default " value="<?php echo $fila->telefono; ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Municipio *</label>
-                                            <select class="form-control" name="municipio2" value="<?php echo $edit? $fila["nombre"]: ""?>" Required>
-                                                <option selected value="">
-                                                    --Selecciona--
-                                                </option>
-                                                <?php
-                                           $query=$connection->prepare("SELECT * FROM tblmunicipio");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $municipio):
-                                            echo '<option '.(($fila->id == $municipio["id"]) ? 'selected' : '').' value="'.$municipio["id"].'">'.$municipio["nombre"].'</option>';
-                                           endforeach;
-                                           ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    
-                                <div class="col-12">
+                <div class="card-body">
+                    <form action="controllers/Actualizarcomite.php" method="POST">
+                        <div class="contenedor-inputs">
+                            <div class="col-6">
                                 <div class="form-group">
-                                            <label>Correo</label>
-                                            <input type="text" name="gmail" class="form-control input-default " value="<?php echo $fila->email; ?>">
-                                        </div>
-                                    </div>        
-                                <div >
+                                    <label>NOMBRE *</label>
+                                    <input type="text" name="nombre" class="form-control" value="<?php echo $comite->nombre?>">
+                                </div>
+                            </div>
+                            <div class="col-6">                                        
+                                <div class="form-group">
+                                    <label>Jac *</label>
+                                    <select name="jac" class="form-control" Required>
+                                        <option value="">
+                                            --Selecciona--
+                                        </option>
+                                        <?php
+                                            $query=$connection->prepare("SELECT * FROM tbljac");
+                                            $query->execute();
+                                            $data=$query->fetchAll();
+
+                                            foreach ($data as $opcion):
+                                                echo '<option '.(($comite->jac == $opcion["id"]) ? 'selected' :'').' value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
+                                            endforeach;
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>                                                                                
+                            <br></br>
+                            <div class="col-6">                                                                                                                          
+                                <p>(*) Campos Obligatorios
                             </div>
                         </div>
-                        <div class="col-12" >
-                        <p>Los campos con * son requeridos</p>
-                        </div>
+                    <div>
+                        <input type="hidden" name="oculto" value="">
+                        <input type="hidden" name="id" value="<?php echo $comite->id;?>">
                     </div>
-                    <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button>
-                     <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
-                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <input  type="submit" class="btn btn-primary" name="continuar" value="continuar">
+                    </div>
+                    </form>                    
+                </div>
             </div>
-
-        </div>
-    </div>
+            <br><br><br><br><br><br><br><br><br><br>    
+            <footer class=" bg-dark text-white py-3">
+            <div class="container">
+                <nav class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <ul class="list-unstyled">
+                        <li class="font-weight-bold text-uppercase" >Contáctenos</li>
+                        <li ><a href="#" class="text-reset"> <i class="fab fa-instagram" ></i>  Nombre de Usaurio</a></li>
+                        <li ><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i>  Nombre de Usuario</a></li>
+                        <li ><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-6">
+                        <ul class="list-unstyled">
+                            <li class="font-weight-bold text-uppercase" >¿Quienes Somos?</li>
+                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
+                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades de nuestros clientes</p>
+                        </ul>
+                </div>
+                <div class="col-sm-2 col-md-3 col-lg-3">
+                    <ul class="list-unstyled">
+                        <li class="font-weight-bold text-uppercase" >PQRS</li>
+                        <li class="d-flex justify-content-between " >
+                        <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
+                        </li>
+                            
+                    </ul>
+                </div>
+                </nav>
+            </div>
+            <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
+                © 2021 Copyright: Todos los derechos reservados a..........
+            </div>
+            </footer>
+        
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-                                        </div>
-                                        </div>
-<!--**********************************
-            Footer start
-        ***********************************-->
-        <div  class= "footer bg-dark text-white">
-            <div class="copyright">
-                <p>© 2021 Copyright: Todos los derechos reservados a</p>
-                <p>..........</p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
+
 </body>
 
 </html>

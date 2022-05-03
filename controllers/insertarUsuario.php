@@ -74,13 +74,9 @@ $ins = $connection->prepare("INSERT INTO tblusuario (docIdentidad,nombres,apelli
 
 $ins->execute();
 if ($ins) {
-          header('Location:../usuarios.php');?>
-          <script>Se ha creado el usuario correctamente</script>
-          <?php
-          }
-
-else  {
-	     echo "<h1> Registro no guardo con exito. </h1> <br/>";
-      }
-
+     echo "<script> alert('El registro fue Exitoso'); 	location.href='../usuarios.php'; </script>";
+   }
+   else  {
+    echo "<script> alert('El registro no fue Exitoso'); 	location.href='../usuarios.php'; </script>";
+   }
  ?>

@@ -1,25 +1,33 @@
 <?php
+include("util/conexion.php");
 session_start();
  
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+$sel = $connection->prepare("SELECT * FROM tblusuario");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
 ?>
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="en">
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Inicio</title>
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
-
+    <!-- Custom style reuniones -->
+    <link rel="stylesheet" href="./css/reuniones.css">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -58,7 +66,6 @@ if(!isset($_SESSION['user_id'])){
                 </div>
             </div>
         </div>
-
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -75,7 +82,7 @@ if(!isset($_SESSION['user_id'])){
                                 </span>
                             </div>
                         </div>
-                        <h2>Junta Acción Comunal Abejorral - Antioquia</h2>
+                        
                         <ul class="navbar-nav header-right">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -87,35 +94,20 @@ if(!isset($_SESSION['user_id'])){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil</span>
                                     </a>
-                                    <div class="sweetalert mt-5">
-                                        <button class="btn btn-warning btn sweet-confirm">Sweet Confirm</button>
-                                    </div>
-                                    <!---<a href="./page-login.html" class="dropdown-item">
+                                    <a href="controllers/cerrarSesion.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
-                                    </a>-->
-                                    <!-- /# row -->
-                                    <!--<div class="row">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title"></h4>
-                                <div class="card-content">
-                                    <div class="sweetalert mt-5">
-                                        <button class="btn btn-warning btn sweet-confirm">Sweet Confirm</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>-->
-                                    <!-- /# card -->
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -128,12 +120,16 @@ if(!isset($_SESSION['user_id'])){
         ***********************************-->
 
         <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
             Sidebar start
         ***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label first">MENÚ</li>
+                    <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
@@ -146,8 +142,8 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Jac</span></a></li>
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <!--**********************************
@@ -157,34 +153,49 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="">
-            <div class="container-fluid"style=" margin-top:100px;" >
-
-
-                <div class="row"style="margin-left:600px;">
-                    <div class="col-lg-6">
-                        <div class="card"  >
-                            
-                          <img src="icons/escudo.jpg" alt="imagen"      >
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0" style="margin-left:250px;">
+                    <h3>Junta Acción Comunal Abejorral - Antioquia</h3>
+                    </div>
+                </div>
+                <!-- contenido -->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <!--imagen-->
+                                    <table class="table header-border" style="min-width: 500px;">
+                                        <thead>
+                                           
+                                        </thead>
+                                        <tbody>
+                                            <center><img src="icons/imagen.jpeg" alt=""  width="800"  class="img-thumbnail" ></center>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
-
             </div>
-            <!--**********************************
+        </div>
+        <!--fin contenido-->
+        <!--**********************************
             Content body end
         ***********************************-->
-
-            <!--**********************************
+        <!--**********************************
             Footer start
         ***********************************-->
-        </div>
-        <footer class=" bg-dark text-white py-3">
-            <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
-                © 2021 Copyright: Todos los derechos reservados a..........
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
             </div>
-        </footer>
+        </div>
         <!--**********************************
             Footer end
         ***********************************-->
@@ -197,7 +208,7 @@ if(!isset($_SESSION['user_id'])){
            Support ticket button end
         ***********************************-->
 
-
+        
     </div>
     <!--**********************************
         Main wrapper end
@@ -210,14 +221,6 @@ if(!isset($_SESSION['user_id'])){
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
-
-
-
-    <script src="./vendor/flot/jquery.flot.js"></script>
-    <script src="./vendor/flot/jquery.flot.pie.js"></script>
-    <script src="./vendor/flot/jquery.flot.resize.js"></script>
-    <script src="./vendor/flot-spline/jquery.flot.spline.min.js"></script>
-    <script src="./js/plugins-init/flot-init.js"></script>
 </body>
 
 </html>

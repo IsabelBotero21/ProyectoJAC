@@ -9,14 +9,11 @@ if(!isset($_GET['id'])){
 
 $sentencia=$connection->prepare("DELETE FROM tblactividad WHERE id=?;");
 $resultado=$sentencia->execute([$id]);
-if ($resultado===TRUE) {
-    echo "<h1> Registro guardo con exito. </h1>";
-  }
-
-else  {
- echo "<h1> Registro no guardo con exito. </h1> <br/>";
+if ($resultado) {
+  echo "<script> alert('El registro fue Eliminado'); 	location.href='../reuniones.php'; </script>";
 }
-
-echo "<h1> <a href='../reuniones.php' </a> Regresar al Formulario </h1>";
+else  {
+ echo "<script> alert('El registro no fue Eliminado'); 	location.href='../reuniones.php'; </script>";
+}
 
 ?>

@@ -17,14 +17,10 @@ $up = $connection->prepare("UPDATE tbljac SET nit = ?, nombre = ?, municipio = ?
 direccion = ?, telefono = ?, email = ? WHERE id = ?;");
 $resultado = $up->execute([$nit2,$nombre2,$municipio2,$direccion2,$telefono2,$email2, $id2]);
 
-if ($resultado === TRUE) {
-	        
-    header('Location: ../jac.php');
- }
-else{
-
-    echo "Error";
- 
-} 
-
+if ($resultado) {
+    echo "<script> alert('El registro fue Actualizado'); 	location.href='../jac.php'; </script>";
+  }
+  else  {
+   echo "<script> alert('El registro no fue Actualizado'); 	location.href='../jac.php'; </script>";
+  }
  ?>

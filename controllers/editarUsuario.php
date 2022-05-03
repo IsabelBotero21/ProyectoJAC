@@ -18,7 +18,10 @@
 
    $resultado = $consulta->execute([$nombres,$apellidos,$direccion,$telefonoFijo,$telefonoCelular,$email,$clave,$fechaNacimiento,$foto,$perfil,$documento]);
 
-   if($resultado){
-       header('Location:../usuarios.php');
-    }
+   if ($resultado) {
+    echo "<script> alert('El registro fue Actualizado'); 	location.href='../usuarios.php'; </script>";
+  }
+  else  {
+   echo "<script> alert('El registro no fue Actualizado'); 	location.href='../usuarios.php'; </script>";
+  }
 ?>

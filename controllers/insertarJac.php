@@ -12,10 +12,11 @@ $insertar = $connection->prepare("INSERT INTO tbljac (nit,nombre,municipio,direc
  VALUES(?,?,?,?,?,?);");
  $resultado = $insertar->execute([$nit,$nombre,$municipio,$direccion,$telefono,$email]);
 
- if ($resultado==TRUE){
-    header('location:../jac.php');
- }else{
-    echo "El registro no fue creado";
-}
+ if ($resultado) {
+   echo "<script> alert('El registro fue Exitoso'); 	location.href='../jac.php'; </script>";
+ }
+ else  {
+  echo "<script> alert('El registro no fue Exitoso'); 	location.href='../jac.php'; </script>";
+ }
  ?>
   

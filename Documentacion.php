@@ -1,3 +1,16 @@
+<?php
+include('util/conexion.php');
+session_start();
+
+if(!isset($_SESSION['user_id'])){
+    header('Location: page-login.php');
+    exit;
+}
+$sel = $connection->prepare("SELECT * FROM tbldocumentacion");
+$sel->setFetchMode(PDO::FETCH_ASSOC);
+$sel->execute();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,11 +95,11 @@
                                     <i class="mdi mdi-account"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil</span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
 
@@ -121,7 +134,7 @@
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
@@ -145,7 +158,7 @@
                     <div class="card">
                         <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                                onclick="location.href='Documentacion-formulario.html'"><span
+                                onclick="location.href='Documentacion-formulario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
                                 </span>Crear documento</button>
                         </div>
@@ -172,55 +185,37 @@
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>JAC</th>
-                                                        <th>Archivo</th>
-                                                        <th>Comite Encargado</th>
+                                                        <th>Acciones</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Jac</th>
+                                                        <th>Tipo Documento</th>
                                                         <th>Usuario</th>
+                                                        <th>Archivo</th>
                                                         <th>Ver</th>
-                                                        <th>Estado</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juan Alberto</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Recoleccion de firmas para ajusted del sat</td>
-                                                        <td>Juana Lucia</td>
-                                                        <td>desarrollo</td>
-                                                        <td>23/07/2022</td>
-                                                        <td>11:00 am</td>
-                                                        <td>12:00 pm</td>
-                                                    </tr>
+                                                <?php
+                                                $sel= $connection->prepare("SELECT * FROM tbldocumentacion   ");
+                                                $sel->setFetchMode(PDO::FETCH_ASSOC);
+                                                $sel->execute();
+                                                while($documento = $sel->fetch()){
+                                                ?>
+                                                <tr>
+                                                     <td>
+                                                         <a type="button" class="btn btn-primary"href="formulario-editarDocumento.php?id=<?php echo"{$documento["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
+                                                         <a type="button" class="btn btn-primary" href="controllers/eliminarDocumento.php?id=<?php echo "{$documento["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
+                                                     </td>
+                                                     <td><?php echo "{$documento["descripcion"]}";?></td>
+                                                     <td><?php echo "{$documento["jac"]}";?></td>
+                                                     <td><?php echo "{$documento["tipodocumentacion"]}";?></td>
+                                                     <td><?php echo "{$documento["usuario"]}";?></td>
+                                                     <td><?php echo "{$documento["archivo"]}";?></td>
+                                                </tr>
+                                                <?php
+                                                }
+                                                ?>
+                                                   
                                                 </tbody>
                                             </table>
                                         </div>
@@ -356,7 +351,18 @@
 
             <script src="./vendor/select2/js/select2.full.min.js"></script>
             <script src="./js/plugins-init/select2-init.js"></script>
-
+ <!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

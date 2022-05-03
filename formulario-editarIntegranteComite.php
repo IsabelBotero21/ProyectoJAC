@@ -96,14 +96,16 @@ if(!isset($_GET['id'])){
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
                                     </a>
@@ -137,6 +139,8 @@ if(!isset($_GET['id'])){
                                         class="nav-text">Documentacion</span></a></li>
                                         <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                             class="nav-text">Comites</span></a></li>
+                                            <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <!--**********************************
@@ -239,8 +243,7 @@ if(!isset($_GET['id'])){
                                                                                 </div>
                                                                                 <div class="col-auto">
                                                                                     <div  style="margin-left: 50px;" ><br><br>
-                                                                                    <input class="form-check-input" name="estado" type="hidden" value="0">
-                                                                                        <input class="form-check-input" name="estado" type="checkbox" value="si">
+                                                                                    <input class="form-check-input" name="estado" type="checkbox" <?php if ($integrante->estado == 1) {echo 'checked="checked"';} ?>>
                                                                                         <label class="form-check-label">
                                                                                             Estado
                                                                                         </label>
@@ -282,8 +285,21 @@ if(!isset($_GET['id'])){
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
-    
-
+ </div>
+  </div>
+                                                                                                </div>
+<!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 
 
 </body>

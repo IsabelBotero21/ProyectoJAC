@@ -23,6 +23,8 @@ if($id){
 
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,15 +107,17 @@ if($id){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
                                     </a>
@@ -135,18 +139,20 @@ if($id){
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.html" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.html" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
-                    <li><a href="actas.html" aria-expanded="false"><i class="fas fa-folder"></i><span
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
                                 class="nav-text">Actas</span></a></li>
-                    <li><a href="Documentacion.html" aria-expanded="false"><i class="fas fa-book"></i><span
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -175,7 +181,7 @@ if($id){
                                         <label>Encargado * </label>
                                             <select class="form-control" name="usuario" required value="<?php  echo $edit? $actividad["encargado"]: ""?>">
                                             <option selected value="">
-                                                    --Selecciona--
+                                                    --Selecciona --
                                                 </option>
                                            <?php
                                            $query=$connection->prepare("SELECT * FROM tblusuario");
@@ -192,8 +198,7 @@ if($id){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha Inicio </label>
-                                            <input type="date" name="fechaInicio" class="form-control input-default" value="<?php echo $edit? $actividad["fecha"]: ""?>">
-
+                                            <input type="date" min="<?php echo date_format(date_create(), 'Y-m-d'); ?>" name="fechaInicio" class="form-control input-default" >
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -238,7 +243,7 @@ if($id){
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Lugar </label>
+                                            <label>Lugar </label> 
                                             <input type="text" name="lugar" class="form-control input-default " value="<?php echo $edit? $actividad["lugar"]: ""?>">
                                         </div>
                                     </div>
@@ -268,7 +273,7 @@ if($id){
                                            endforeach;
                                            ?>
                                             </select>
-                                </div>
+                                </div>   
                             </div>
                             <div class="col-12">
                                     <p>Los campos con * son requeridos</p>
@@ -293,7 +298,18 @@ if($id){
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-
+ <!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

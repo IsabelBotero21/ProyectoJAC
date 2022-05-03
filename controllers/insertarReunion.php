@@ -21,15 +21,10 @@ fecha,horaInicio,horaFinal,lugar,seguimiento,acta)
 
  $stmt->execute();
 
-if ($stmt) {
-	        echo "<h1> Registro guardo con exito. </h1>";
-          }
-
-else  {
-	     echo "<h1> Registro no guardo con exito. </h1> <br/>";
-      }
-
- echo "<h1> <a href='../reuniones-formulario.php' </a> Regresar al Formulario </h1>";
-
-
+ if ($stmt) {
+   echo "<script> alert('El registro fue Exitoso'); 	location.href='../reuniones.php'; </script>";
+ }
+ else  {
+  echo "<script> alert('El registro no fue Exitoso'); 	location.href='../reuniones.php'; </script>";
+ }
  ?>

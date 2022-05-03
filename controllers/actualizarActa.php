@@ -24,14 +24,11 @@ archivoActa = ?, archivoAsistencia = ?, usuario = ? WHERE id = ?;");
 $resultado = $up->execute([$titulo2,$fecha2,$horaInicio2,$horaFin2,$lugar2,$objetivo2,$listaInvitados2,$desarrolloAgenda2,
 $archivoActa2,$archivoAsistencia2,$usuario2, $id2]);
 
-if ($resultado === TRUE) {
-	        
-    header('Location: ../actas.php');
- }
-else{
-
-    echo "Error";
- 
-} 
-
+if ($resultado) {
+    echo "<script> alert('El registro fue Actualizado'); 	location.href='../actas.php'; </script>";
+  }
+  else  {
+   echo "<script> alert('El registro no fue Actualizado'); 	location.href='../actas.php'; </script>";
+  }
  ?>
+s

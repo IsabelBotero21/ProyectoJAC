@@ -24,14 +24,10 @@ horaInicio=?, horaFinal=?, lugar=?, seguimiento=?, acta=? WHERE id=?;");
 
 $resultado=$sentencia->execute([$descripcion,$usuario,$comiteEncargado,$fechaInicio,$horaInicio,
 $horaFin,$lugar,$seguimiento,$acta, $id]);
-if ($resultado===TRUE) {
-    echo "<h1> Registro guardo con exito. </h1>";
-  }
-
-else  {
- echo "<h1> Registro no guardo con exito. </h1> <br/>";
+if ($resultado) {
+  echo "<script> alert('El registro fue Actualizado'); 	location.href='../reuniones.php'; </script>";
 }
-
-echo "<h1> <a href='../reuniones.php' </a> Regresar al Formulario </h1>";
-
+else  {
+ echo "<script> alert('El registro no fue Actualizado'); 	location.href='../reuniones.php'; </script>";
+}
 ?>

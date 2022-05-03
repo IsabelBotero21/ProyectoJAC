@@ -93,11 +93,13 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil</span>
                                     </a>
@@ -135,8 +137,8 @@ $sel->execute();
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                      class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                    class="nav-text">Jac</span></a></li>
+                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -177,7 +179,7 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        $sel = $connection->prepare("SELECT * FROM  vtausers ");
+                                                        $sel = $connection->prepare("SELECT * FROM tblusuario ");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($fila = $sel->fetch())
@@ -216,6 +218,18 @@ $sel->execute();
                 <script src="./js/plugins-init/datatables.init.js"></script>
             </div>
         </div>
+         <!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

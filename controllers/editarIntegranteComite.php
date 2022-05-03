@@ -12,20 +12,16 @@ $id=$_POST['id'];
 $usuario = $_POST['usuario'];
 $comite = $_POST['comite'];
 $periodo = $_POST['periodo'];
-$estado = $_POST['estado'];
+$estado = ($_POST['estado'] == 'on') ? 1 : 0;
 
 $sentencia=$connection->prepare("UPDATE tblintegrantescomite SET docIdentidad=?, idComite=?, estado=?, periodo=? 
 WHERE id=?;");
 
 $resultado=$sentencia->execute([$usuario,$comite,$estado,$periodo,$id]);
-if ($resultado===TRUE) {
-    echo "<h1> Registro guardo con exito. </h1>";
+if ($resultado) {
+	echo "<script> alert('El registro fue Actualizado'); 	location.href='../comites.php'; </script>";
   }
-
-else  {
- echo "<h1> Registro no guardo con exito. </h1> <br/>";
-}
-
-echo "<h1> <a href='../reuniones.php' </a> Regresar al Formulario </h1>";
-
+  else  {
+   echo "<script> alert('El registro no fue Actualizado'); 	location.href='../comites.php'; </script>";
+  }
 ?>

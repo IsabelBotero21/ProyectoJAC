@@ -7,9 +7,10 @@ $documento=$_GET['id'];
 $consulta=$connection->prepare("DELETE FROM tblusuario WHERE docIdentidad=?;");
 $resultado=$consulta->execute([$documento]);
 
-if($resultado){
-    header('Location:../usuarios.php');
- }else {
-     echo "Error. No se ha podido eliminar su registro";
- }
+if ($resultado) {
+    echo "<script> alert('El registro fue Eliminado'); 	location.href='../usuarios.php'; </script>";
+  }
+  else  {
+   echo "<script> alert('El registro no fue Eliminado'); 	location.href='../usuarios.php'; </script>";
+  }
 ?>

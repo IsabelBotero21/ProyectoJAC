@@ -90,15 +90,17 @@ if(!isset($_SESSION['user_id'])){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.html" class="dropdown-item">
+                                    <a href="./app-profile.php" class="dropdown-item">
                                         <i class="icon-user"></i>
-                                        <span class="ml-2">Profile </span>
+                                        <span class="ml-2">Perfil </span>
                                     </a>
-                                    <a href="./page-login.html" class="dropdown-item">
+                                    <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
                                     </a>
@@ -152,7 +154,7 @@ if(!isset($_SESSION['user_id'])){
                                 <div class="col-4">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Nit</label>
+                                            <label>Nit *</label>
                                             <input type="number" name="nit" class="form-control input-default " Required>
                                         </div>
                                     </div>
@@ -167,7 +169,7 @@ if(!isset($_SESSION['user_id'])){
                                 <div class="col-4">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Nombre</label>
+                                            <label>Nombre *</label>
                                             <input type="text" name="nombre" class="form-control input-default " Required>
                                         </div>
                                     </div>
@@ -182,7 +184,7 @@ if(!isset($_SESSION['user_id'])){
                                 <div class="col-4">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Municipio</label>
+                                            <label>Municipio *</label>
                                             <select class="form-control" name="municipio">
                                                 <option selected value="">
                                                     --Selecciona--
@@ -207,11 +209,14 @@ if(!isset($_SESSION['user_id'])){
                                             <input type="text" name="gmail" class="form-control input-default ">
                                         </div>
                                     </div>
-                                <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button><br><br>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
+                               </div>
+                        </div>
+                        <div class="col-12">
+                        <p>Los campos con * son requeridos</p>
                         </div>
                     </div>
+                    <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button>
+                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
 
@@ -222,7 +227,20 @@ if(!isset($_SESSION['user_id'])){
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-
+                                        </div>
+                                        </div>
+<!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>
