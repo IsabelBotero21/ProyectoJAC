@@ -93,7 +93,9 @@ if(!isset($_SESSION['user_id'])){
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="./app-profile.php" class="dropdown-item">
@@ -231,7 +233,7 @@ if(!isset($_SESSION['user_id'])){
                                         </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary"><a href="Documentacion.php"> Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary">Registar</button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
                             </form>
                         </div>
                     </div>
