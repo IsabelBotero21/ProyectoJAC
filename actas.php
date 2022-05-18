@@ -183,7 +183,7 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        $sel = $connection->prepare("SELECT * FROM tblacta");
+                                                        $sel = $connection->prepare("SELECT * FROM vtaacta");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($fila = $sel->fetch())
@@ -204,7 +204,7 @@ $sel->execute();
                                                         <td><?php echo "{$fila["desarrolloAgenda"]}" ?></td>
                                                         <td><?php echo "{$fila["archivoActa"]}" ?></td>
                                                         <td><?php echo "{$fila["archivoAsistencia"]}" ?></td>
-                                                        <td><?php echo "{$fila["usuario"]}" ?></td>
+                                                        <td><?php echo "{$fila["nombres"]} {$fila["apellidos"]}" ?></td>
 
                                                     </tr>
                                                     <?php

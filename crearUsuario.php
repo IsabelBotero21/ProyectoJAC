@@ -201,7 +201,7 @@ if(!empty($id)){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha de Nacimiento *</label>
-                                            <input type="date" class="form-control input-default" name="fechaNacimiento" value="">
+                                            <input type="date" max="<?php echo date_format(date_create(),'Y-m-d');?>" class="form-control input-default" name="fechaNacimiento" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -253,8 +253,8 @@ if(!empty($id)){
                                     <br>
                                     <div class="col-auto"><br>
                                         <div class="form-check mb-2">
-                                             <input class="form-check-input" type="checkbox">
-                                             <label class="form-check-label">
+                                             <input class="form-check-input" type="checkbox" checked="checked">
+                                             <label class="form-check-label" name="estado">
                                             Estado
                                             </label>
                                         </div>

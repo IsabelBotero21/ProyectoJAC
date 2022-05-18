@@ -13,10 +13,11 @@
    $fechaNacimiento=$_POST['fechaNacimiento'];
    $foto=$_POST['foto'];
    $perfil=$_POST['perfil'];
+   $estado = ($_POST['estado'] == 'on') ? 1 : 0;
 
-   $consulta=$connection->prepare("UPDATE tblusuario SET nombres = ?, apellidos = ?, direccion = ?, telefonoFijo = ?, telefonoCelular = ?, email = ?, clave = ?, fechaNacimiento = ?, foto = ?, perfil = ? WHERE docIdentidad = ?;");
+   $consulta=$connection->prepare("UPDATE tblusuario SET nombres = ?, apellidos = ?, direccion = ?, telefonoFijo = ?, telefonoCelular = ?, email = ?, clave = ?, fechaNacimiento = ?, foto = ?, perfil = ?, estado = ? WHERE docIdentidad = ?;");
 
-   $resultado = $consulta->execute([$nombres,$apellidos,$direccion,$telefonoFijo,$telefonoCelular,$email,$clave,$fechaNacimiento,$foto,$perfil,$documento]);
+   $resultado = $consulta->execute([$nombres,$apellidos,$direccion,$telefonoFijo,$telefonoCelular,$email,$clave,$fechaNacimiento,$foto,$perfil,$estado,$documento]);
 
    if ($resultado) {
     echo "<script> alert('El registro fue Actualizado'); 	location.href='../usuarios.php'; </script>";

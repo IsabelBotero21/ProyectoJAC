@@ -156,7 +156,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Número de Documento *</label>
-                                            <input type="number" class="form-control input-default" name="documento" disabled value="<?php echo $persona->docIdentidad ?>">
+                                            <input type="number" class="form-control input-default" name="documento" readonly value="<?php echo $persona->docIdentidad ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -188,7 +188,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha de Nacimiento *</label>
-                                            <input type="date" class="form-control input-default" name="fechaNacimiento" value="<?php echo $persona->fechaNacimiento ?>">
+                                            <input type="date" max="<?php echo date_format(date_create(),'Y-m-d');?>"class="form-control input-default" name="fechaNacimiento" value="<?php echo $persona->fechaNacimiento ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -239,8 +239,8 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     </div>
                                     <br>
                                     <div class="col-auto"><br>
-                                        <div class="form-check mb-2">
-                                             <input class="form-check-input" type="checkbox">
+                                    <div class="form-check mb-2">
+                                             <input class="form-check-input" name="estado" type="checkbox" <?php if($persona->estado == 1) {echo 'checked="checked"';} ?>>
                                              <label class="form-check-label">
                                             Estado
                                             </label>
@@ -252,7 +252,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                             </div>
                             <p>Los campos con * son requeridos</p>
                             <div class="p-3">
-                                <button type="reset" class="btn btn-primary">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="location.href='usuarios.php'">Cancelar</button>
                                 <button type="submit" class="btn btn-primary" value="guardar" >Guardar</button>
                             </div>
                         </div>

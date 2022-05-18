@@ -195,7 +195,7 @@ $sel->execute();
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $sel= $connection->prepare("SELECT * FROM tblactividad  ");
+                                                    <?php $sel= $connection->prepare("SELECT * FROM vtareunion  ");
                                                     $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                     $sel->execute();
                                                     while($fila=$sel->fetch())
@@ -210,15 +210,15 @@ $sel->execute();
                                                          
                                                         </td>
                                                        
-                                                        <td><?php echo  "{$fila ["encargado"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["comiteEncargado"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["nombres"]} {$fila ["apellidos"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["nombre"]}" ?></td>
                                                         <td><?php echo  "{$fila ["fecha"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaInicio"]}" ?></td>
                                                         <td><?php echo  "{$fila ["horaFinal"]}" ?></td>
                                                         <td><?php echo  "{$fila ["descripcion"]}" ?></td>
                                                         <td><?php echo  "{$fila ["lugar"]}" ?></td>
                                                         <td><?php echo  "{$fila ["seguimiento"]}" ?></td>
-                                                        <td><?php echo  "{$fila ["acta"]}" ?></td>
+                                                        <td><?php echo  "{$fila ["titulo"]}" ?></td>
                                                     </tr>
                                                     <?php
                                                     }

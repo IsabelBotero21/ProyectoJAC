@@ -175,11 +175,12 @@ $sel->execute();
                                                         <th>Teléfono Fijo / Celular</th>
                                                         <th>Correo</th>
                                                         <th>Perfil</th>
+                                                        <th>Estado</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php
-                                                        $sel = $connection->prepare("SELECT * FROM tblusuario ");
+                                                        $sel = $connection->prepare("SELECT * FROM vtauser ");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($fila = $sel->fetch())
@@ -197,6 +198,7 @@ $sel->execute();
                                                         <td><?php echo "{$fila["telefonoFijo"]}/{$fila["telefonoCelular"]}" ?></td>
                                                         <td><?php echo "{$fila["email"]}" ?></td>
                                                         <td><?php echo "{$fila["descripcion"]}" ?></td>
+                                                        <td><?php echo "{$fila["estado"]}" ?></td>
                                                     </tr>
                                                     <?php
 
