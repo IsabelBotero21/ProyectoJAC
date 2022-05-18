@@ -297,11 +297,8 @@ if(!isset($_SESSION['user_id'])){
                                                                             </div>
                                                                             <div class="col-auto">
                                                                                 <div class="form-check mb-2"><br>
-                                                                                <input class="form-check-input" name="estado" type="checkbox"
-                                                                                 <?php 
-                                                                                 if($integrante == 1) 
-                                                                                 echo 'checked="checked"';
-                                                                                  ?>>
+                                                                                    <input class="form-check-input" name="estado" type="checkbox" value="No">
+                                                                                    <input class="form-check-input" name="estado" type="checkbox" value="Si">
                                                                                     <label class="form-check-label">
                                                                                         Estado
                                                                                     </label>
@@ -337,7 +334,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
-                                                                                            $sel= $connection->prepare("SELECT * FROM vtaintegrante   ");
+                                                                                            $sel= $connection->prepare("SELECT * FROM tblintegrantescomite  ");
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
                                                                                             while($integrante = $sel->fetch()){

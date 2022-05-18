@@ -92,7 +92,9 @@ $sel->execute();
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="./app-profile.php" class="dropdown-item">
@@ -211,6 +213,7 @@ $sel->execute();
                                                      <td><?php echo "{$documento["tipodocumentacion"]}";?></td>
                                                      <td><?php echo "{$documento["usuario"]}";?></td>
                                                      <td><?php echo "{$documento["archivo"]}";?></td>
+                                                     <td><a type="button" class="btn btn-primary" href=""><i class="fa fa-eye"></i></a></td>
                                                 </tr>
                                                 <?php
                                                 }

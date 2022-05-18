@@ -95,7 +95,9 @@ if(!isset($_GET['id'])){
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"></i>
+                                <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="./app-profile.php" class="dropdown-item">
@@ -221,7 +223,7 @@ if(!isset($_GET['id'])){
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label> Archivo *</label>
-                                        <input type="file" name="archivoAsistencia" class="form-control input-default " value="<?php  echo $documento->archivo;?>" accept="util/pdf.php" Required>
+                                        <input type="file" name="archivoAsistencia" class="form-control input-default "  accept="util/pdf.php"> <a href="Documentacion.php"><?php  echo $documento->archivo;?></a>
                                     </div>
                                     <div class="col-12">
                                     <p>Los campos con * son requeridos</p>
