@@ -6,7 +6,6 @@ if(!isset($_SESSION['user_id'])){
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,98 +146,68 @@ if(!isset($_SESSION['user_id'])){
                     </div>
                 </div>
                 <!-- inicio insert -->
-                <form action="controllers/insertarActa.php" method="post" id="" name="">
-                    <div class="row card">
-                        <div class="col-12 pt-3">
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Título *</label>
+                <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                <form action="controllers/insertarActa.php" method="post" id="" name="">
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Título *</label>
                                             <input type="text"  name="titulo" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Lugar *</label>
-                                            <input type="text"  name="lugar" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Fecha *</label>
-                                            <input type="date"  name="fecha" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Objetivo *</label>
-                                            <input type="text"  name="objetivo" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Hora Inicio *</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Fecha *</label>
+                                            <input type="date"  name="fecha" min="<?php echo date_format(date_create(), 'Y-m-d'); ?>" class="form-control input-default " Required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Hora Inicio *</label>
                                             <input type="time"  name="horaInicio" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Archivo Asistencia *</label>
-                                            <input type="file" name="archivoAsistencia" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Hora Fin *</label>
-                                            <input type="time" name="horaFin" class="form-control input-default " Required>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Archivo Acta *</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Hora Fin *</label>
+                                                <input type="time" name="horaFin" class="form-control input-default " Required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Lugar *</label>
+                                            <input type="text"  name="lugar" class="form-control input-default " Required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Objetivo *</label>
+                                            <input type="text"  name="objetivo" class="form-control input-default " Required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Archivo Asistencia *</label>
+                                                <input type="file" name="archivoAsistencia" class="form-control input-default " Required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Archivo Acta *</label>
                                             <input type="file" name="archivoActa" class="form-control input-default " accept="util/pdf.php" Required>
-                                        </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="row">
-                                   <div class="col-6">
-                                      <div class="form-group">
-                                        <label>Lista Invitados</label>
-                                        <textarea type="text" name="listaInvitados" class="form-control input-default "
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Lista Invitados</label>
+                                        <textarea type="text" name="listaInvitados"class="form-control input-default "
                                             ></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Desarrollo Agenda</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Desarrollo Agenda</label>
                                         <textarea type="text" name="desarrolloAgenda"class="form-control input-default "
                                             ></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Usuario *</label>
-                                            <input type="text" name="usuario"  class="form-control input-default "   Required> <!--value="<?php echo ($_SESSION['user_id']) ?>" disabled-->
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Usuario *</label>
+                                            <input type="text" name="usuario"  class="form-control input-default " readonly required value="<?php echo ($_SESSION['user_id']) ?>">
+                                            </div>
                                         </div>
-                                    </div>
-                                  </div><p>Los campos con * son requeridos</p>
-                                <div class="p-3">
-                                <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <div class="form-group col-md-6"></div>
+                                            <p>Los campos con * son requeridos</p>
+                                                </div>
+                                        <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
                 <!-- fin insert-->
         </div>
     </div>

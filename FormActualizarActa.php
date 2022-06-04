@@ -10,7 +10,6 @@
 	}elseif(isset($_SESSION['user_id'])){
 		include ('util/conexion.php');
 		$id = $_GET['id'];
-
 		$sel = $connection->prepare("SELECT * FROM tblacta WHERE id = ?;");
 		$sel->execute([$id]);
 		$fila = $sel->fetch(PDO::FETCH_OBJ);
@@ -160,99 +159,70 @@
                     </div>
                 </div>
                 <!-- inicio insert -->
-                <form action="controllers/actualizarActa.php" method="post" id="" name="">
-                    <div class="row card">
-                        <div class="col-12 pt-3">
-                            <div class="row">
-                            <input type="hidden" name="id" value="<?php echo $id2 ?>"> 
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Título *</label>
+                <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                <form action="controllers/actualizarActa.php" method="post" id="" name="">
+                                    <div>
+                                    <input type="hidden" name="id" value="<?php echo $id2 ?>"> 
+                                       </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Título *</label>
                                             <input type="text"  name="titulo2" class="form-control input-default " value="<?php echo $fila->titulo; ?>" required maxlength="100">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Lugar *</label>
-                                            <input type="text"  name="lugar2" class="form-control input-default " value="<?php echo $fila->lugar; ?>" required="150">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Fecha *</label>
-                                            <input type="date"  name="fecha2" class="form-control input-default " value="<?php echo $fila->fecha; ?>" required="">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Objetivo *</label>
-                                            <input type="text"  name="objetivo2" class="form-control input-default " value="<?php echo $fila->objetivo; ?>" required="600">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Hora Inicial *</label>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Fecha *</label>
+                                            <input type="date"  name="fecha2" min="<?php echo date_format(date_create(), 'Y-m-d'); ?>" class="form-control input-default " value="<?php echo $fila->fecha; ?>" required="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Hora Inicio *</label>
                                             <input type="time"  name="horaInicio2" class="form-control input-default " value="<?php echo $fila->horaInicio; ?>" required="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Hora Fin *</label>
+                                                <input type="time" name="horaFin2" class="form-control input-default " value="<?php echo $fila->horaFin; ?>" required="">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Lugar *</label>
+                                            <input type="text"  name="lugar2" class="form-control input-default " value="<?php echo $fila->lugar; ?>" required="150" >
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Objetivo *</label>
+                                            <input type="text"  name="objetivo2" class="form-control input-default " value="<?php echo $fila->objetivo; ?>" required="600">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Archivo Asistencia *</label>
+                                                <input type="file" name="archivoAsistencia2" class="form-control input-default " ><a href="actas.php"><?php echo $fila->archivoAsistencia; ?></a>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Archivo Acta *</label>
+                                            <input type="file" name="archivoActa2" class="form-control input-default " accept="util/pdf.php" ><a href="actas.php"><?php echo $fila->archivoActa; ?></a>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Lista Invitados</label>
+                                        <textarea type="text" name="listaInvitados2"class="form-control input-default "
+                                            ><?php echo $fila->listaInvitados; ?></textarea>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Desarrollo Agenda</label>
+                                        <textarea type="text" name="desarrolloAgenda2"class="form-control input-default "
+                                            ><?php echo $fila->desarrolloAgenda; ?></textarea>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Usuario *</label>
+                                            <input type="text" name="usuario2"  class="form-control input-default " readonly required value="<?php echo ($_SESSION['user_id']) ?>" required="" >
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Archivo Asistencia *</label>
-                                            <input type="file" name="archivoAsistencia2" class="form-control input-default " value="<?php echo $fila->archivoAsistencia; ?>">
-                                        </div>
-                                    </div>
+                                        <div class="form-group col-md-6"></div>
+                                            <p>Los campos con * son requeridos</p>
+                                                </div>
+                                        <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
+                                        <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
+                                    </form>
                                 </div>
-                                <div class="col-3">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Hora Final *</label>
-                                            <input type="time" name="horaFin2" class="form-control input-default " value="<?php echo $fila->horaFin; ?>" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Archivo Acta *</label>
-                                            <input type="file" name="archivoActa2" class="form-control input-default " value="<?php echo $fila->archivoActa; ?>" required="260">
-                                        </div>
-                                    </div>
-                                   </div>
-                                </div>
-                                <div class="row">
-                                   <div class="col-6">
-                                      <div class="form-group">
-                                        <label>Lista Invitados</label>
-                                        <textarea type="text" name="listaInvitados2" class="form-control input-default "><?php echo $fila->listaInvitados; ?>
-                                            </textarea>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Desarrollo Agenda</label>
-                                        <textarea type="text" name="desarrolloAgenda2"class="form-control input-default "><?php echo $fila->desarrolloAgenda; ?>
-                                            </textarea>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Usuario *</label>
-                                            <input type="text" name="usuario2"  class="form-control input-default "  value="<?php echo $fila->usuario; ?>" required="" > <!--value="<?php echo ($_SESSION['user_id']) ?>" disabled-->
-                                        </div>
-                                    </div>
-                                  </div><p>Los campos con * son requeridos</p>
-                                <div class="p-3">
-                                <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                             </div>
                         </div>
-                    </div>
-                </form>
                 <!-- fin insert-->
         </div>
     </div>
@@ -261,6 +231,7 @@
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
  <!--**********************************
             Footer start
         ***********************************-->
@@ -276,4 +247,3 @@
 </body>
 
 </html>
-

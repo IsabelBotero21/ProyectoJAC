@@ -6,6 +6,7 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+$_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tbldocumentacion");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -91,19 +92,19 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                <i class="mdi mdi-account"> 
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="./app-profile.php" class="dropdown-item">
+                                    <i class="icon-user"></i>
+                                    <span class="ml-2">Perfil </span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
-                                        <i class="icon-user"></i>
-                                        <span class="ml-2">Perfil</span>
-                                    </a>
-                                    <a href="./page-login.php" class="dropdown-item">
-                                        <i class="icon-key"></i>
-                                        <span class="ml-2">Cerrar sesión </span>
+                                <a href="./page-login.php" class="dropdown-item">
+                                    <i class="icon-key"></i>
+                                    <span class="ml-2">Cerrar sesión </span>
 
                                     </a>
                                 </div>
@@ -135,9 +136,9 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li>
+                                class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']== 1):?>
                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                                class="nav-text">Jac</span></a></li><?php endif ?>
             </div>
         </div>
         <!--**********************************
@@ -158,11 +159,11 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='Documentacion-formulario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                </span>Crear documento</button>
+                                </span>Crear documento</button><?php endif ?>
                         </div>
                         <div class="card-body">
                             <!-- Nav tabs -->
@@ -187,7 +188,7 @@ $sel->execute();
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Acciones</th>
+                                                        <th><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?></th>
                                                         <th>Descripcion</th>
                                                         <th>Jac</th>
                                                         <th>Tipo Documento</th>
@@ -204,10 +205,10 @@ $sel->execute();
                                                 while($documento = $sel->fetch()){
                                                 ?>
                                                 <tr>
-                                                     <td>
+                                                     <td><?php if ($_SESSION['perfil']== 2):?>
                                                          <a type="button" class="btn btn-primary"href="formulario-editarDocumento.php?id=<?php echo"{$documento["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
                                                          <a type="button" class="btn btn-primary" href="controllers/eliminarDocumento.php?id=<?php echo "{$documento["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
-                                                     </td>
+                                                     </td><?php endif ?>
                                                      <td><?php echo "{$documento["descripcion"]}";?></td>
                                                      <td><?php echo "{$documento["jac"]}";?></td>
                                                      <td><?php echo "{$documento["tipodocumentacion"]}";?></td>

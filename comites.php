@@ -136,9 +136,9 @@ if(!isset($_SESSION['user_id'])){
                                 <li><a  href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                     class="nav-text">Documentacion</span></a></li>
                                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                        class="nav-text">Comites</span></a></li>
+                                        class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']== 1):?>
                                         <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                                class="nav-text">Jac</span></a></li><?php endif ?>
         </div>
     </div>
 <!--**********************************
@@ -161,11 +161,11 @@ if(!isset($_SESSION['user_id'])){
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"></h4>
+                        <h4 class="card-title"></h4><?php if ($_SESSION['perfil']== 2):?>
                         <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                         onclick="location.href='crearComite.php'"><span
                             class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                        </span>Crear Comite</button>                        
+                        </span>Crear Comite</button> <?php endif ?>                       
                     </div>
                 </div>
                 
@@ -175,7 +175,7 @@ if(!isset($_SESSION['user_id'])){
                             <table class="table table-hover table-responsive-sm">
                                 <thead>
                                     <tr>
-                                            <th scope="col">Acciones</th>
+                                            <th scope="col"><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?>  </th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">JAC</th>
                                         </tr>
@@ -191,11 +191,11 @@ if(!isset($_SESSION['user_id'])){
                                                         {
                                                     ?>
                                                      <tr>
-                                                    <td>
+                                                    <td><?php if ($_SESSION['perfil']== 2):?>
                                                       <a  class="btn btn-primary" href="controllers/eliminarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class=" fas fa-trash" ></i></a>
                                                       <a  class="btn btn-primary" href="Actualizarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class="far fa-edit" ></i></a>
                                                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-user-plus"></i></button>
-                                                      </td> 
+                                                      </td> <?php endif ?>  
                                                         <td><?php echo "{$comite["nombre"]}" ?></td>
                                                         <td><?php echo "{$comite["jac"]} " ?></td>
                                                     </tr>
@@ -334,7 +334,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
-                                                                                            $sel= $connection->prepare("SELECT * FROM tblintegrantescomite  ");
+                                                                                            $sel= $connection->prepare("SELECT * FROM vtaintegrantecomite  ");
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
                                                                                             while($integrante = $sel->fetch()){

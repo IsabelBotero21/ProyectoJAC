@@ -6,6 +6,7 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+$_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -141,9 +142,11 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li>
+                                class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                      class="nav-text">Jac</span></a></li>
+                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Secretario</span></a></li><?php endif ?>
             </div>
         </div>
         <!--**********************************
