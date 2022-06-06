@@ -6,7 +6,6 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
- $_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -129,7 +128,7 @@ $sel->execute();
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENÚ</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Inicio</span></a></li>
+                                class="nav-text">Inicio</span></a></li><?php if ($_SESSION['perfil']==2):?>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -139,9 +138,11 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                     class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
+                     class="nav-text">Comites</span></a></li><?php endif ?>
                      <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li><?php endif ?>
+                                class="nav-text">Jac</span></a></li>
+                    <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Secretario</span></a></li>
             </div>
         </div>
         <div class="content-body">
@@ -155,11 +156,11 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
+                        <div class="card-header">
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='crearUsuario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                </span>Crear usuario</button><?php endif ?>
+                                </span>Crear usuario</button>
                         </div>
                         <div class="card-body">
                             <!-- Nav tabs -->
@@ -170,7 +171,7 @@ $sel->execute();
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th><?php if ($_SESSION['perfil']== 2):?>Accione<?php endif ?></th>
+                                                        <th>Acciones</th>
                                                         <th>Número de Documento</th>
                                                         <th>Nombres</th>
                                                         <th>Apellidos</th>
@@ -191,10 +192,10 @@ $sel->execute();
                                                         {
                                                     ?>
                                                     <tr>
-                                                        <td><?php if ($_SESSION['perfil']== 2):?>
+                                                        <td>
                                                             <a type="button" class="btn btn-primary" href="editarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
                                                             <a type="button" class="btn btn-primary" href="controllers/eliminarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="fa fa-trash-o"></i></a>
-                                                        </td><?php endif ?>
+                                                        </td>
                                                         <td><?php echo "{$fila["docIdentidad"]}" ?></td>
                                                         <td><?php echo "{$fila["nombres"]}" ?></td>
                                                         <td><?php echo "{$fila["apellidos"]}" ?></td>
@@ -202,7 +203,6 @@ $sel->execute();
                                                         <td><?php echo "{$fila["telefonoFijo"]}/{$fila["telefonoCelular"]}" ?></td>
                                                         <td><?php echo "{$fila["email"]}" ?></td>
                                                         <td><?php echo "{$fila["descripcion"]}" ?></td>
-                                                        <td><?php echo "{$fila["JAC"]}" ?></td>
                                                         <td><?php echo "{$fila["estado"]}" ?></td>
                                                     </tr>
                                                     <?php

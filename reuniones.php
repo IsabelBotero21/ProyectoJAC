@@ -6,6 +6,7 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+ $_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblactividad");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -139,9 +140,9 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li>
+                                class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                                class="nav-text">Jac</span></a></li><?php endif ?>
             </div>
         </div>
         <div class="content-body">
@@ -155,11 +156,11 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header"><?php if ($_SESSION['perfil']==2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='reuniones-formulario.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                                </span>Crear reunión</button>
+                                </span>Crear reunión</button><?php endif ?>
                         </div>
                         <div class="card-body">
                             <!-- Nav tabs -->
@@ -181,7 +182,7 @@ $sel->execute();
                                             <table id="" class="display" style="width:100%">
                                                 <thead style="width: 100px;"> 
                                                     <tr>
-                                                        <th>Acciones</th>
+                                                        <th><?php if ($_SESSION['perfil']==2):?>Acciones<?php endif ?></th>
                                                         <th>Encargado</th>
                                                         <th>Comité Encargado</th>
                                                         <th>Fecha</th>
@@ -202,12 +203,13 @@ $sel->execute();
                                                     {
                                                     ?>
                                                 <tr>
-                                                        <td> 
+                                                        <td> <?php if ($_SESSION['perfil']==2):?>
+                                                            
                                                             <a type="button" class="btn btn-primary"
                                                          href="editarReuniones.php? id=<?php echo"{$fila["id"]}"?>
                                                          "><i class="far fa-edit"></i> </a><br><br>
                                                          <a type="button" class="btn btn-primary" href="controllers/eliminarReunion.php?id=<?php echo "{$fila["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
-                                                         
+                                                         <?php endif ?>
                                                         </td>
                                                        
                                                         <td><?php echo  "{$fila ["nombres"]} {$fila ["apellidos"]}" ?></td>
