@@ -6,6 +6,7 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+$_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -100,7 +101,7 @@ $sel->execute();
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
+                                    <a href="perfil.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil</span>
                                     </a>
@@ -132,8 +133,10 @@ $sel->execute();
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Inicio</span></a></li>
-                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                                <?php if ($_SESSION['perfil']==3): ?>
+                                <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
+                                <?php endif ?>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
                     <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span

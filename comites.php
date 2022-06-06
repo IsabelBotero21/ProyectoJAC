@@ -334,7 +334,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
-                                                                                            $sel= $connection->prepare("SELECT * FROM tblintegrantescomite  ");
+                                                                                            $sel= $connection->prepare("SELECT * FROM  vtaintegrantecomite ");
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
                                                                                             while($integrante = $sel->fetch()){
