@@ -1,6 +1,7 @@
 <?php
 include("util/conexion.php");
 session_start();
+$_SESSION['perfil'];
  
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
@@ -128,9 +129,20 @@ $sel->execute();
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENÚ</li>
-                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i>
+                    <?php if ($_SESSION['perfil']==1): ?>
+                        <span
                                 class="nav-text">Inicio</span></a></li>
-                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Jac</span></a></li>
+                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Secretario</span></a></li>
+                     <?php endif ?>
+
+                     <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                        <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -139,9 +151,8 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                     class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
-                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li><?php endif ?>
+                                class="nav-text">Comites</span></a></li>
+                     <?php endif ?>
             </div>
         </div>
         <div class="content-body">
@@ -178,7 +189,6 @@ $sel->execute();
                                                         <th>Teléfono Fijo / Celular</th>
                                                         <th>Correo</th>
                                                         <th>Perfil</th>
-                                                        <th>JAC</th>
                                                         <th>Estado</th>
                                                     </tr>
                                                 </thead>
@@ -191,7 +201,7 @@ $sel->execute();
                                                         {
                                                     ?>
                                                     <tr>
-                                                        <td><?php if ($_SESSION['perfil']== 2):?>
+                                                        <td><?php if ($_SESSION['perfil']== 2 || $_SESSION['perfil']== 1):?>
                                                             <a type="button" class="btn btn-primary" href="editarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
                                                             <a type="button" class="btn btn-primary" href="controllers/eliminarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                         </td><?php endif ?>
@@ -202,7 +212,6 @@ $sel->execute();
                                                         <td><?php echo "{$fila["telefonoFijo"]}/{$fila["telefonoCelular"]}" ?></td>
                                                         <td><?php echo "{$fila["email"]}" ?></td>
                                                         <td><?php echo "{$fila["descripcion"]}" ?></td>
-                                                        <td><?php echo "{$fila["JAC"]}" ?></td>
                                                         <td><?php echo "{$fila["estado"]}" ?></td>
                                                     </tr>
                                                     <?php

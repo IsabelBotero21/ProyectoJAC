@@ -1,7 +1,7 @@
 <?php
 include("util/conexion.php");
 session_start();
- 
+$_SESSION['perfil'];
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -99,7 +99,7 @@ if(!isset($_SESSION['user_id'])){
                                     </i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="./app-profile.php" class="dropdown-item">
+                                <a href="perfil.php" class="dropdown-item">
                                     <i class="icon-user"></i>
                                     <span class="ml-2">Perfil </span>
                                 </a>
@@ -125,20 +125,30 @@ if(!isset($_SESSION['user_id'])){
         <div class="quixnav-scroll">
             <ul class="metismenu" id="menu">
                 <li class="nav-label first">MENU</li>
-                <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                    class="nav-text">Home</span></a></li>
-                <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
-                    class="nav-text">Usuarios</span></a></li>
+                <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i>
+                    <?php if ($_SESSION['perfil']==1): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Jac</span></a></li>
+                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Secretario</span></a></li>
+                     <?php endif ?>
+
+                     <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                        <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                                class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
-                        class="nav-text">Reuniones</span></a></li>
-                        <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
-                            class="nav-text">Actas</span></a></li>
-                                <li><a  href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                    class="nav-text">Documentacion</span></a></li>
-                                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                        class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']== 1):?>
-                                        <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li><?php endif ?>
+                                class="nav-text">Reuniones</span></a></li>
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
+                                class="nav-text">Actas</span></a></li>
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Documentacion</span></a></li>
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Comites</span></a></li>
+                     <?php endif ?>
         </div>
     </div>
 <!--**********************************
@@ -153,7 +163,7 @@ if(!isset($_SESSION['user_id'])){
             <div class="row page-titles mx-0">
                 <div class="col-sm-6 p-md-0">
                     <div class="welcome-text">
-                        <h4>COMITES</h4>
+                        <h4>Comités</h4>
                     </div>
                 </div>
             </div>
@@ -325,7 +335,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <thead>
                                                                                                 <tbody>
                                                                                                     <tr>
-                                                                                                        <th>Acciones</th>
+                                                                                                        
                                                                                                         <th>Nombres</th>
                                                                                                         <th>Comité</th>
                                                                                                         <th>Período</th>
@@ -334,20 +344,16 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
-<<<<<<< HEAD
+
                                                                                             $sel= $connection->prepare("SELECT * FROM  vtaintegrantecomite ");
-=======
                                                                                             $sel= $connection->prepare("SELECT * FROM vtaintegrantecomite  ");
->>>>>>> 62347c883e9a7cebae108c548ce92a7833e48b56
+
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
                                                                                             while($integrante = $sel->fetch()){
                                                                                             ?>
                                                                                             <tr>
-                                                                                                 <td>
-                                                                                                     <a type="button" class="btn btn-primary"href="formulario-editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
-                                                                                                     <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
-                                                                                                 </td>
+                                                                                                 
                                                                                                  <td><?php echo "{$integrante["nombres"]} {$integrante["apellidos"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["nombre"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["fechaInicio"]} - {$integrante["fechaFinal"]}";?></td>

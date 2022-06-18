@@ -14,15 +14,15 @@ $perfil = $_POST['perfil'];
 $foto = $_POST['foto'];
 $direccion = $_POST['direccion'];
 $email = $_POST['email'];
-$estado = ($_POST['estado'] == 'on') ? 1 : 0;
 
-$ins = $connection->prepare("INSERT INTO tblusuario (docIdentidad,nombres,apellidos,direccion,telefonoFijo, telefonoCelular,email,clave,fechaNacimiento,foto,perfil,estado) VALUES ('$numeroDocumento','$nombres','$apellidos','$direccion','$telefonoFijo','$celular','$email','$clave','$fechaNacimiento','$foto','$perfil','$estado')");
+
+$ins = $connection->prepare("INSERT INTO tblusuario (docIdentidad,nombres,apellidos,direccion,telefonoFijo, telefonoCelular,email,clave,fechaNacimiento,foto,perfil) VALUES ('$numeroDocumento','$nombres','$apellidos','$direccion','$telefonoFijo','$celular','$email','$clave','$fechaNacimiento','$foto','$perfil')");
 
 $ins->execute();
 if ($ins) {
-     echo "<script> alert('El registro fue Exitoso'); 	location.href='../usuarios.php'; </script>";
+     echo "<script> alert('El registro fue exitoso'); 	location.href='../usuarios.php'; </script>";
    }
    else  {
-    echo "<script> alert('El registro no fue Exitoso'); 	location.href='../usuarios.php'; </script>";
+    echo "<script> alert('El registro no fue exitoso'); 	location.href='../usuarios.php'; </script>";
    }
  ?>
