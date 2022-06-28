@@ -1,4 +1,5 @@
 <?php 
+//Usuario de logueo.
 	session_start();
 	if(!isset($_SESSION['user_id'])){
         header('Location: page-login.php');
@@ -8,9 +9,10 @@
 	if (!isset($_SESSION['user_id'])) {
 		header('Location: page-login.php');
 	}elseif(isset($_SESSION['user_id'])){
+        //Conexión base de datos.
 		include ('util/conexion.php');
 		$id = $_GET['id'];
-
+        //Consulta a la tabla jac para actualizar los registros.
 		$sel = $connection->prepare("SELECT * FROM tbljac WHERE id = ?;");
 		$sel->execute([$id]);
 		$fila = $sel->fetch(PDO::FETCH_OBJ);
@@ -150,6 +152,9 @@
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -159,6 +164,7 @@
                         </div>
                     </div>
                 </div>
+                 <!-- inicio formulario-->
                 <form action="controllers/actualizarJac.php" method="post" id="" name="">
                     <div class="row card">
                         <div class="col-12 pt-3">
@@ -201,6 +207,7 @@
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
+                                                <!-- Consulta para traer las listas desplegables o select dinamico. En este caso la lista de todos los municipios. -->
                                                 <?php
                                            $query=$connection->prepare("SELECT * FROM tblmunicipio");
                                            $query->execute();
@@ -231,7 +238,7 @@
                      <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                 </form>
             </div>
-
+             <!-- fin formulario-->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

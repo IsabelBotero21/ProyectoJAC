@@ -1,15 +1,18 @@
 <?php
+//Conexxion base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//Get se utilza con el id para actualizar. 
 if(!isset($_GET['id'])){
     exit();
  }
     $id=$_GET['id'];
+    //Consulta a la tabla integrantescomite para actualizar los registros.
     $sentencia=$connection->prepare("SELECT * FROM tblintegrantescomite WHERE id=?;");
     $sentencia->execute([$id]);
     $integrante = $sentencia->fetch(PDO::FETCH_OBJ);
@@ -174,7 +177,7 @@ if(!isset($_GET['id'])){
                                                             <div class="card">
                                             
                                                                 <div class="card-body">
-                                                                    
+                                                                    <!-- inicio formulario-->
                                                                     <div class="basic-form">
                                                                         <form action="controllers/editarIntegranteComite.php" method="post">
                                                                             <div class="form-row align-items-center">
@@ -183,7 +186,7 @@ if(!isset($_GET['id'])){
                                                                                 <div>
                                                                                         <div class="input-group-prepend">
                                                                                         <select class="form-control" name="usuario">
-                                                                                         
+                                                                                         <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                          <?php
                                                                                             $query=$connection->prepare("SELECT * FROM tblusuario");
                                                                                             $query->execute();
@@ -202,7 +205,7 @@ if(!isset($_GET['id'])){
                                                                                 <div >
                                                                                         <div >
                                                                                         <select class="form-control" name="comite" value="<?php echo $edit? $actividad["comite"]: ""?>">
-                                                                                            
+                                                                                            <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                             <?php
                                                                                                $query=$connection->prepare("SELECT * FROM tblcomite");
                                                                                                $query->execute();
@@ -222,7 +225,7 @@ if(!isset($_GET['id'])){
                                                                                     <div>
                                                                                         <div >
                                                                                            <select class="form-control" name="periodo" value="<?php echo $edit? $actividad["periodo"]: ""?>">
-                                                                                               
+                                                                                               <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                                <?php
                                                                                                   $query=$connection->prepare("SELECT * FROM tblperiodo");
                                                                                                   $query->execute();
@@ -256,31 +259,17 @@ if(!isset($_GET['id'])){
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                           
-                                        
+                                                                <!-- fin formulario-->
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <!-- /# card -->
                 </div>
         <!--**********************************
             Content body end
         ***********************************-->
-
-
-        <!--**********************************
-            Footer start
-        ***********************************-->
-      
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
     <!-- Required vendors -->
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>

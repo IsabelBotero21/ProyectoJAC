@@ -1,12 +1,13 @@
-<?php
+<?php 
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario loguado.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-
+//Consulta a la tabla documentacio  para taer los datos.
     $stmt=$connection->query("SELECT * FROM tbldocumentacion");
     $documento = $stmt->fetchAll(PDO::FETCH_OBJ);
     
@@ -157,6 +158,7 @@ if(!isset($_SESSION['user_id'])){
                         </div>
                     </div>
                 </div>
+                <!-- inicio formulario-->
                 <div class="card">
                     <div class="card-header">
                     </div>
@@ -238,27 +240,14 @@ if(!isset($_SESSION['user_id'])){
                         </div>
                     </div>
                 </div>
+                <!-- fin  formulario-->
 
                 <!--**********************************
             Content body end
         ***********************************-->
-                <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-                <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
-            </div>
-            <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-            <!--**********************************
-        Scripts
-    ***********************************-->
+                
+</div>
+            
             <!-- Required vendors -->
             <script src="./vendor/global/global.min.js"></script>
             <script src="./js/quixnav-init.js"></script>

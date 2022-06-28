@@ -1,7 +1,8 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logue.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -138,6 +139,10 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+        <!-- inicio formulario-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -219,7 +224,7 @@ if(!isset($_SESSION['user_id'])){
                      <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
-
+<!-- fin  formulario-->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

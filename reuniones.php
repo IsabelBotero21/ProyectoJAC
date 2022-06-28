@@ -1,12 +1,14 @@
 <?php
+//conexión base de datos.
 include('util/conexion.php');
 session_start();
-
+//Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
  $_SESSION['perfil'];
+ //Consulta a la tabla documentacion para traer los datos.
 $sel = $connection->prepare("SELECT * FROM tblactividad");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -140,11 +142,14 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
+                                class="nav-text">Comites</span></a><!-- Control de privilegio segun perfil --></li><?php if ($_SESSION['perfil']==1):?>
                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li><?php endif ?>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -156,6 +161,7 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
+                        <!-- Control de privilegio segun perfil -->
                         <div class="card-header"><?php if ($_SESSION['perfil']==2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='reuniones-formulario.php'"><span
@@ -181,7 +187,7 @@ $sel->execute();
                                         <div class="table-responsive">
                                             <table id="" class="display" style="width:100%">
                                                 <thead style="width: 100px;"> 
-                                                    <tr>
+                                                    <tr><!-- Control de privilegio segun perfil -->
                                                         <th><?php if ($_SESSION['perfil']==2):?>Acciones<?php endif ?></th>
                                                         <th>Encargado</th>
                                                         <th>Comité Encargado</th>
@@ -196,22 +202,26 @@ $sel->execute();
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $sel= $connection->prepare("SELECT * FROM vtareunion  ");
+                                                    <?php
+                                                     //Consulta a la vista reunion para traer los datos con su respectivo nombre de campo.
+                                                      $sel= $connection->prepare("SELECT * FROM vtareunion  ");
                                                     $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                     $sel->execute();
                                                     while($fila=$sel->fetch())
                                                     {
                                                     ?>
                                                 <tr>
+                                                        <!-- Control de privilegio segun perfil -->
                                                         <td> <?php if ($_SESSION['perfil']==2):?>
-                                                            
+                                                            <!-- Botón Actualizar -->
                                                             <a type="button" class="btn btn-primary"
                                                          href="editarReuniones.php? id=<?php echo"{$fila["id"]}"?>
                                                          "><i class="far fa-edit"></i> </a><br><br>
+                                                         <!-- Botón Eliminar -->
                                                          <a type="button" class="btn btn-primary" href="controllers/eliminarReunion.php?id=<?php echo "{$fila["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                          <?php endif ?>
                                                         </td>
-                                                       
+                                                       <!-- Mostar los datos Insertados en la tabla con el array -->
                                                         <td><?php echo  "{$fila ["nombres"]} {$fila ["apellidos"]}" ?></td>
                                                         <td><?php echo  "{$fila ["nombre"]}" ?></td>
                                                         <td><?php echo  "{$fila ["fecha"]}" ?></td>

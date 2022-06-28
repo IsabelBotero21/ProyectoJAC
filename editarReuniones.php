@@ -1,8 +1,8 @@
 <?php
-
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -11,6 +11,7 @@ if(!isset($_GET['id'])){
     exit();
  }
  $id=$_GET['id'];
+ //Consulta a la tabla actividad para actualizar los registros.
  $sentecia=$connection->prepare("SELECT * FROM  tblactividad WHERE id=?;");
  $sentecia->execute([$id]);
  $persona=$sentecia->fetch(PDO::FETCH_OBJ);
@@ -18,23 +19,6 @@ if(!isset($_GET['id'])){
 
 
 ?>
-<script>
-var fecha = new Date();
-var anio = fecha.getFullYear();
-var dia = fecha.getDate();
-var _mes = fecha.getMonth(); //viene con valores de 0 al 11
-_mes = _mes + 1; //ahora lo tienes de 1 al 12
-if (_mes < 10) //ahora le agregas un 0 para el formato date
-{
-  var mes = "0" + _mes;
-} else {
-  var mes = _mes.toString;
-}
-
-let fecha_minimo = anio + '-' + mes + '-' + dia; // Nueva variable
-
-document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
-                                                </script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -165,6 +149,9 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -174,9 +161,8 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                         </div>
                     </div>
                 </div>
-                
+                <!-- inicio formulario-->
                 <form action="controllers/editarProceso.php" method="post">
-                
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
@@ -188,6 +174,7 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                                         <option selected value="">
                                         --Selecciona--
                                                 </option>
+                                                <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                            <?php
                                            $query=$connection->prepare("SELECT * FROM tblusuario");
                                            $query->execute();
@@ -205,6 +192,7 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha Inicio</label>
+                                            <!-- Atributo para min para dar formato a la fecha, no podemos seleccionar fechas que ya pasaron. -->
                                             <input type="date" min="<?php echo date_format(date_create(), 'Y-m-d');
                                              ?>" name="fechaInicio" class="form-control input-default" value="<?php echo $persona->fecha;?>">
                                         </div>
@@ -225,6 +213,7 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                                         <div class="form-group" >
                                         <label>Acta *</label>
                                     <select class="form-control" required name="acta" >
+                                        <!-- Consulta para traer  lista desplegables o select dinamico. -->
                                     <?php
                                            $query=$connection->prepare("SELECT * FROM tblacta");
                                            $query->execute();
@@ -247,6 +236,7 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                                         <div class="form-group">
                                             <label>Comité Encargado *</label>
                                             <select class="form-control" required name="comiteEncargado">
+                                                <!-- Consulta para traer lista desplegables o select dinamico. -->
                                             <?php
                                            $query=$connection->prepare("SELECT * FROM tblcomite");
                                            $query->execute();
@@ -294,7 +284,7 @@ document.getElementById("fechaReserva").setAttribute('min',fecha_minimo);
                 </form>
 
             </div>
-
+<!-- Fin formulario-->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

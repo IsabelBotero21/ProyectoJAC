@@ -1,11 +1,13 @@
 <?php
+//Conexxion base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//Consulta a la tabla usuario.
 $_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
@@ -95,7 +97,7 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
@@ -116,14 +118,6 @@ $sel->execute();
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
         <!--**********************************
             Sidebar start
         ***********************************-->
@@ -202,21 +196,7 @@ $sel->execute();
         <!--**********************************
             Footer end
         ***********************************-->
-
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-        
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
     <!--**********************************
         Scripts
     ***********************************-->

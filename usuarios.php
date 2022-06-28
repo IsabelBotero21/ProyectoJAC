@@ -1,12 +1,14 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuariomde logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
  $_SESSION['perfil'];
+ //Consulta a la tabla usuario para traer los datos.
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -97,7 +99,8 @@ $sel->execute();
                             </li>
                             <li class="nav-item dropdown header-profile">
                             <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <i class="mdi mdi-account"> 
+                                    <i class="mdi mdi-account">
+                                          <!-- Control de privilegio segun perfil -->
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
                                 </a>
@@ -139,11 +142,14 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                     class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']==1):?>
+                     class="nav-text">Comites</span> <!-- Control de privilegio segun perfil --></a></li><?php if ($_SESSION['perfil']==1):?>
                      <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li><?php endif ?>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -155,6 +161,7 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
+                         <!-- Control de privilegio segun perfil -->
                         <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='crearUsuario.php'"><span
@@ -169,7 +176,7 @@ $sel->execute();
                                         <div class="table-responsive">
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
-                                                    <tr>
+                                                     <tr> <!-- Control de privilegio segun perfil -->
                                                         <th><?php if ($_SESSION['perfil']== 2):?>Accione<?php endif ?></th>
                                                         <th>Número de Documento</th>
                                                         <th>Nombres</th>
@@ -184,17 +191,21 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                     <?php
+                                                    //Consulta a la vista user para traer los datos con su respectivo nombre de campo.
                                                         $sel = $connection->prepare("SELECT * FROM vtauser ");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($fila = $sel->fetch())
                                                         {
                                                     ?>
-                                                    <tr>
+                                                    <tr> <!-- Control de privilegio segun perfil -->
                                                         <td><?php if ($_SESSION['perfil']== 2):?>
+                                                            <!-- Botón Actualizar -->
                                                             <a type="button" class="btn btn-primary" href="editarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
+                                                            <!-- Botón Eliminar -->
                                                             <a type="button" class="btn btn-primary" href="controllers/eliminarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                         </td><?php endif ?>
+                                                         <!-- Mostar los datos Insertados en la tabla con el array -->
                                                         <td><?php echo "{$fila["docIdentidad"]}" ?></td>
                                                         <td><?php echo "{$fila["nombres"]}" ?></td>
                                                         <td><?php echo "{$fila["apellidos"]}" ?></td>

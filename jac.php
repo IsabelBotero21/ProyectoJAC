@@ -1,11 +1,13 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//Consulta a la tabla jac para traer los datos.
 $sel = $connection->prepare("SELECT * FROM tbljac");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -125,7 +127,8 @@ $sel->execute();
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Inicio</span></a></li><?php if ($_SESSION['perfil']==2):?>
+                                class="nav-text">Inicio</span></a> <!-- Control de privilegio segun perfil -->
+                      </li><?php if ($_SESSION['perfil']==2):?>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -142,6 +145,9 @@ $sel->execute();
                                 class="nav-text">Secretario</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -179,6 +185,7 @@ $sel->execute();
                                 </thead>
                                 <tbody>
                                                     <?php
+                                                     //Consulta a la tabla jac para traer los datos con su respectivo nombre de campo.
                                                         $sel = $connection->prepare("SELECT * FROM tbljac");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
@@ -187,9 +194,12 @@ $sel->execute();
                                                     ?>
                                                      <tr>
                                                     <td>
+                                                         <!-- Botón Actualizar -->
                                                       <a type="button" class="btn btn-primary" href="FormActualizarJac.php?id=<?php  echo "{$fila["id"]}" ?>"><i class="far fa-edit"></i></a><br><br>
+                                                       <!-- Botón Eliminar -->
                                                       <a type="button" class="btn btn-primary" href="controllers/eliminarJac.php?id=<?php  echo "{$fila["id"]}" ?>" ?><i class="fa fa-trash-o"></i></a>
                                                       </td> 
+                                                      <!-- Mostar los datos Insertados en la tabla con el array -->
                                                         <td><?php echo "{$fila["nit"]}" ?></td>
                                                         <td><?php echo "{$fila["nombre"]}" ?></td>
                                                         <td><?php echo "{$fila["municipio"]}" ?></td>

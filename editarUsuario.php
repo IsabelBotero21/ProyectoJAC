@@ -1,10 +1,14 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
+//Usuario de logueo.
 if(!isset($_GET['id'])){
     header('Location: page-login.php');
 }
+
 $documento = $_GET['id'];
+ //Consulta a la tabla usuario para actualizar los registros.
 $consulta=$connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = ?;");
 $consulta->execute([$documento]);
 $persona=$consulta->fetch(PDO::FETCH_OBJ);
@@ -139,6 +143,9 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -148,6 +155,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                         </div>
                     </div>
                 </div>
+                <!-- inicio formulario-->
                 <form action="controllers/editarUsuario.php" method="POST">
                     <div class="row card">
                         <div class="col-12 pt-3">
@@ -188,6 +196,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha de Nacimiento *</label>
+                                            <!-- Atributo para max para dar formato a la fecha, no podemos seleccionar fechas que aun no pasan. -->
                                             <input type="date" max="<?php echo date_format(date_create(),'Y-m-d');?>"class="form-control input-default" name="fechaNacimiento" value="<?php echo $persona->fechaNacimiento ?>">
                                         </div>
                                     </div>
@@ -206,6 +215,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                                                 <option value="">
                                                     --Selecciona--
                                                 </option>
+                                                <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                 <?php
                                                 $query = $connection->prepare("SELECT * FROM tblperfil");
                                                 $query->execute();
@@ -260,7 +270,7 @@ $persona=$consulta->fetch(PDO::FETCH_OBJ);
                 </form>
 
             </div>
-
+            <!-- fin formulario-->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

@@ -1,7 +1,8 @@
 <?php
+//Conexion base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -10,6 +11,7 @@ if(!isset($_SESSION['user_id'])){
 $edit=false;
 if($id){
     $edit=true;
+    //Consulta a la tabla actividad  para taer los datos.
     $stmt=$connection->prepare("SELECT * FROM tblactividad WHERE id = $id");
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -155,6 +157,9 @@ if($id){
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+             <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -166,12 +171,11 @@ if($id){
                         </div>
                     </div>
                 </div>
-               
+               <!-- inicio formulario-->
                 <?php
                 echo $edit? '<form action="controllers/actualizarReunion.php" method="post">':
                     '<form action="controllers/insertarReunion.php" method="post">'
                 ?>
-              
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
@@ -183,6 +187,7 @@ if($id){
                                             <option selected value="">
                                                     --Selecciona --
                                                 </option>
+                                                 <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                            <?php
                                            $query=$connection->prepare("SELECT * FROM tblusuario");
                                            $query->execute();
@@ -198,13 +203,14 @@ if($id){
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>Fecha Inicio </label>
+                                            <!-- Atributo para min para dar formato a la fecha, no podemos seleccionar fechas que ya pasaron. -->
                                             <input type="date" min="<?php echo date_format(date_create(), 'Y-m-d'); ?>" name="fechaInicio" class="form-control input-default" >
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                         <label>Hora fin </label>
-                                            <input type="time" name="horaFinal" class="form-control input-default " value="<?php echo $edit? $actividad["horaFinal"]: ""?>">
+                                            <input type="time"   name="horaFinal" class="form-control input-default ">
                                         </div>
                                         </div>
                                     <div class="col-12">
@@ -223,6 +229,7 @@ if($id){
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
+                                                 <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                 <?php
                                            $query=$connection->prepare("SELECT * FROM tblcomite");
                                            $query->execute();
@@ -263,6 +270,7 @@ if($id){
                                                 <option selected value="">
                                                     --Selecciona--
                                                 </option>
+                                                 <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                 <?php
                                            $query=$connection->prepare("SELECT * FROM tblacta");
                                            $query->execute();
@@ -288,7 +296,7 @@ if($id){
                         </div>
                     </div>
                 </form>
-
+                 <!-- fin formulario-->
             </div>
 
         </div>

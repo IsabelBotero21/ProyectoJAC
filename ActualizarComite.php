@@ -1,7 +1,9 @@
 <?php
+//Conexión  base de datos.
 include("util/conexion.php");
 session_start();
  
+//Usuario Logueado.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -9,6 +11,7 @@ if(!isset($_SESSION['user_id'])){
 if(!isset($_GET['id'])){
     exit;
 }
+//Consulta a la tabla comite  para actualizar los registros.
 $id=$_GET['id'];
 $stmt=$connection->prepare("SELECT * FROM tblcomite WHERE id=?;" );
 $stmt->execute([$id]);
@@ -125,6 +128,7 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
         <!--**********************************
             Sidebar start
         ***********************************-->
+         <!-- Inicio de menú -->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -145,6 +149,11 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!-- Inicio del formulario  -->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -191,54 +200,30 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                         <input type="hidden" name="oculto" value="">
                         <input type="hidden" name="id" value="<?php echo $comite->id;?>">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <input  type="submit" class="btn btn-primary" name="continuar" value="continuar">
-                    </div>
-                    </form>                    
                 </div>
-            </div>
-            <br><br><br><br><br><br><br><br><br><br>    
-            <footer class=" bg-dark text-white py-3">
-            <div class="container">
-                <nav class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                    <ul class="list-unstyled">
-                        <li class="font-weight-bold text-uppercase" >Contáctenos</li>
-                        <li ><a href="#" class="text-reset"> <i class="fab fa-instagram" ></i>  Nombre de Usaurio</a></li>
-                        <li ><a href="#" class="text-reset"><i class="fab fa-facebook-f"></i>  Nombre de Usuario</a></li>
-                        <li ><a href="#" class="text-reset"><i class="fab fa-twitter"></i> Nombre de Usuario</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3 col-md-3 col-lg-6">
-                        <ul class="list-unstyled">
-                            <li class="font-weight-bold text-uppercase" >¿Quienes Somos?</li>
-                            <p>​Somos una historia de trabajo y esfuerzo continuo que año tras año nos va reforzando gracias al apoyo de nuestros proveedores y fidelidad de nuestros clientes.
-                                La misión, visión y valores de Isaac Lema están dirigidos a satisfacer las necesidades de nuestros clientes</p>
-                        </ul>
-                </div>
-                <div class="col-sm-2 col-md-3 col-lg-3">
-                    <ul class="list-unstyled">
-                        <li class="font-weight-bold text-uppercase" >PQRS</li>
-                        <li class="d-flex justify-content-between " >
-                        <p>Si tiene peticiones, quejas, reclamos o sugerencias haga clic en el enlace <a href="#" style="color: rgb(133, 133, 212);"> Gmail </a></p>
-                        </li>
-                            
-                    </ul>
-                </div>
-                </nav>
-            </div>
-            <div class="text-center p-3" style="background-color: rgba(22, 16, 16, 0.2);">
-                © 2021 Copyright: Todos los derechos reservados a..........
-            </div>
-            </footer>
+             </div>
+        </div>
+ <!-- Fin del formulario --> 
+
+                   
         
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div  class= "footer bg-dark text-white">
+            <div class="copyright">
+                <p>© 2021 Copyright: Todos los derechos reservados a</p>
+                <p>..........</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
 </body>
 
 </html>

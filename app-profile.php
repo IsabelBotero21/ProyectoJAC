@@ -1,7 +1,8 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logue.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;

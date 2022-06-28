@@ -1,11 +1,13 @@
 <?php
+//Conexión a base de datos. 
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//Consulta a la tabla acta para traer los datos.
 $sel = $connection->prepare("SELECT * FROM tblacta");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -121,6 +123,7 @@ $sel->execute();
         <!--**********************************
             Sidebar start
         ***********************************-->
+        <!--Opciones de menú -->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -141,6 +144,9 @@ $sel->execute();
                      class="nav-text">Jac</span></a></li><?php endif ?>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -152,12 +158,14 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
+                        <!-- Control de privilegio segun perfil -->
                         <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='crearActa.php'"><span
                                     class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
                                 </span>Crear Acta</button><?php endif ?>
                         </div>
+                        <!-- Incio tabla con el contenido de registros creados  -->
                         <div class="card-body">
                             <!-- Nav tabs -->
                             <div class="default-tab">
@@ -166,9 +174,10 @@ $sel->execute();
                                         <div class="table-responsive">
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
-                                                <tr>
+                                                <tr> 
+                                                            <!-- Control de privilegio segun perfil -->
                                                         <th><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?></th>
-                                                        <th>Ttulo</th>
+                                                        <th>Título</th>
                                                         <th>Fecha</th>
                                                         <th>Hora Inicio</th>
                                                         <th>Hora Fin</th>
@@ -183,6 +192,7 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                     <?php
+                                                    //Consulta a la vista acta para traer los datos con su respectivo nombre de campo.
                                                         $sel = $connection->prepare("SELECT * FROM vtaacta");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
@@ -190,10 +200,14 @@ $sel->execute();
                                                         {
                                                     ?>
                                                      <tr>
+                                                         <!-- Control de privilegio segun perfil -->
                                                     <td><?php if ($_SESSION['perfil']== 2):?>
+                                                        <!-- Botón Actualizar  -->
                                                       <a type="button" class="btn btn-primary" href="FormActualizarActa.php?id=<?php  echo "{$fila["id"]}" ?>"><i class="far fa-edit"></i></a><br><br>
+                                                        <!-- Botón Eliminar -->
                                                       <a type="button" class="btn btn-primary" href="controllers/eliminarActa.php?id=<?php  echo "{$fila["id"]}" ?>" ?><i class="fa fa-trash-o"></i></a>
                                                       </td> <?php endif ?>
+                                                         <!-- Mostar los datos Insertados en la tabla con el array -->
                                                         <td><?php echo "{$fila["titulo"]}" ?></td>
                                                         <td><?php echo "{$fila["fecha"]}" ?></td>
                                                         <td><?php echo "{$fila["horaInicio"]}" ?></td>
@@ -202,7 +216,7 @@ $sel->execute();
                                                         <td><?php echo "{$fila["objetivo"]}" ?></td>
                                                         <td><?php echo "{$fila["listaInvitados"]}" ?></td>
                                                         <td><?php echo "{$fila["desarrolloAgenda"]}" ?></td>
-                                                        <td><?php echo "{$fila["archivoActa"]}" ?></td>
+                                                        <td><a href="web/viewer.html"> <?php echo "{$fila["archivoActa"]}" ?> </a></td>
                                                         <td><?php echo "{$fila["archivoAsistencia"]}" ?></td>
                                                         <td><?php echo "{$fila["nombres"]} {$fila["apellidos"]}" ?></td>
 
@@ -218,6 +232,7 @@ $sel->execute();
                                 </div>
                             </div>
                         </div>
+                        <!-- Fin tabla  -->
                     </div>
                 </div>
                 <script src="./vendor/global/global.min.js"></script>

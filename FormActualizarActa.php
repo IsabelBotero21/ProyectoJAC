@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+    //Usuario de lo logue.
 	if(!isset($_SESSION['user_id'])){
         header('Location: page-login.php');
         exit;
@@ -8,8 +9,10 @@
 	if (!isset($_SESSION['user_id'])) {
 		header('Location: page-login.php');
 	}elseif(isset($_SESSION['user_id'])){
+        //Conexión base de datos.
 		include ('util/conexion.php');
 		$id = $_GET['id'];
+         //Consulta a la tabla acta para actualizar los registros.
 		$sel = $connection->prepare("SELECT * FROM tblacta WHERE id = ?;");
 		$sel->execute([$id]);
 		$fila = $sel->fetch(PDO::FETCH_OBJ);
@@ -149,6 +152,9 @@
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -158,7 +164,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- inicio insert -->
+                <!-- inicio formulario. -->
                 <div class="card">
                             <div class="card-body">
                                 <div class="basic-form">
@@ -173,6 +179,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Fecha *</label>
+                                                <!-- Atributo para min para dar formato a la fecha, no podemos seleccionar fechas que ya pasaron. -->
                                             <input type="date"  name="fecha2" min="<?php echo date_format(date_create(), 'Y-m-d'); ?>" class="form-control input-default " value="<?php echo $fila->fecha; ?>" required="">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -223,7 +230,7 @@
                                 </div>
                             </div>
                         </div>
-                <!-- fin insert-->
+                <!-- fin formulario. -->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

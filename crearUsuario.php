@@ -1,7 +1,8 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
-
+//Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -9,7 +10,7 @@ if(!isset($_SESSION['user_id'])){
 if(!empty($_REQUEST['id'])){
     $id = $_REQUEST['id'];
 }
-
+//Consulta a la tabla usuario para traer los datos.
 if(!empty($id)){
     $edit = true;
     $stmt = $connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = $id");
@@ -151,6 +152,10 @@ if(!empty($id)){
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+        <!-- inicio formulario-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -275,6 +280,7 @@ if(!empty($id)){
             </div>
 
         </div>
+        <!-- fin formulario-->
     </div>
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>

@@ -1,15 +1,18 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//Get se utilza con el id para actualizar. 
 if(!isset($_GET['id'])){
     exit();
  }
  $id=$_GET['id'];
+ //Consulta a la tabla documentacion para actualizar los registros.
  $sentecia=$connection->prepare("SELECT * FROM  tbldocumentacion WHERE id=?;");
  $sentecia->execute([$id]);
  $documento=$sentecia->fetch(PDO::FETCH_OBJ);
@@ -162,6 +165,7 @@ if(!isset($_GET['id'])){
                 <div class="card">
                     <div class="card-header">
                     </div>
+                     <!-- inicio formulario-->
                     <div class="card-body">
                         <div class="basic-form">
                         <form action="controllers/editarDocumentacion.php" method="post">
@@ -173,9 +177,10 @@ if(!isset($_GET['id'])){
                                     <div class="form-group col-md-4">
                                         <label>Jac * </label>
                                         <select name="jac" id="" class="form-control" value="" Required>
-                                                                <option selected value="">
-                                                                    --Selecciona--
-                                                                </option>
+                                                      <option selected value="">
+                                                         --Selecciona--
+                                                      </option>
+                                                     <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                     <?php
                                                     $query=$connection->prepare("SELECT * FROM tbljac");
                                                     $query->execute();
@@ -190,9 +195,10 @@ if(!isset($_GET['id'])){
                                     <div class="form-group col-md-4">
                                         <label>Tipo de documento *</label>
                                         <select name="tipoDocumento" id="" class="form-control" value="" Required>
-                                                                <option selected value="">
-                                                                    --Selecciona--
-                                                                </option>
+                                                    <option selected value="">
+                                                     --Selecciona--
+                                                    </option>
+                                                     <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                     <?php
                                                     $query=$connection->prepare("SELECT * FROM tbltipodocumentacion");
                                                     $query->execute();
@@ -210,6 +216,7 @@ if(!isset($_GET['id'])){
                                              <option selected value="">
                                                      --Selecciona--
                                              </option>
+                                              <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                              <?php
                                                 $query=$connection->prepare("SELECT * FROM tblusuario");
                                                 $query->execute();
@@ -238,32 +245,13 @@ if(!isset($_GET['id'])){
                             </form>
                         </div>
                     </div>
+                     <!-- fin formulario-->
                 </div>
 
                 <!--**********************************
             Content body end
         ***********************************-->
-
-
-                
-
-                <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-                <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
-            </div>
-            <!--**********************************
-        Main wrapper end
-    ***********************************-->
-
-            <!--**********************************
-        Scripts
-    ***********************************-->
+</div>
             <!-- Required vendors -->
             <script src="./vendor/global/global.min.js"></script>
             <script src="./js/quixnav-init.js"></script>
@@ -272,8 +260,8 @@ if(!isset($_GET['id'])){
 
             <script src="./vendor/select2/js/select2.full.min.js"></script>
             <script src="./js/plugins-init/select2-init.js"></script>
-                                            </div>
-                                            </div>
+</div>
+</div>
 <!--**********************************
             Footer start
         ***********************************-->

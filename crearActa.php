@@ -136,6 +136,9 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -145,7 +148,7 @@ if(!isset($_SESSION['user_id'])){
                         </div>
                     </div>
                 </div>
-                <!-- inicio insert -->
+                <!-- inicio formulario-->
                 <div class="card">
                             <div class="card-body">
                                 <div class="basic-form">
@@ -208,7 +211,7 @@ if(!isset($_SESSION['user_id'])){
                                 </div>
                             </div>
                         </div>
-                <!-- fin insert-->
+                <!-- fin  formulario-->
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>

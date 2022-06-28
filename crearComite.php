@@ -1,12 +1,13 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-
+//Consulta a la tabla comite para traer los datos.
     $stmt=$connection->query("SELECT * FROM tblcomite");
     $comite = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -141,6 +142,9 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Jac</span></a></li>
             </div>
         </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -150,6 +154,7 @@ if(!isset($_SESSION['user_id'])){
                         </div>
                     </div>
                 </div>
+                <!-- inicio formulario-->
                 <div class="card-body">
                 <form action="controllers/insertarcomite.php" method="POST">
                                     <div class="contenedor-inputs">
@@ -196,7 +201,7 @@ if(!isset($_SESSION['user_id'])){
                 </div>
                 
             </div>
-             
+             <!-- fin  formulario-->
         </div>
 
     </div>

@@ -1,12 +1,13 @@
 <?php
+//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- 
+ //Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-
+//Consulta a la tabla comite para traer los datos.
     $stmt=$connection->query("SELECT * FROM tblcomite");
     $comite = $stmt->fetchAll(PDO::FETCH_OBJ);
     $stmt=$connection->query("SELECT * FROM tblintegrantescomite;");
@@ -161,6 +162,7 @@ if(!isset($_SESSION['user_id'])){
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
+                        <!-- Control de privilegio segun perfil -->
                         <h4 class="card-title"></h4><?php if ($_SESSION['perfil']== 2):?>
                         <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                         onclick="location.href='crearComite.php'"><span
@@ -175,6 +177,7 @@ if(!isset($_SESSION['user_id'])){
                             <table class="table table-hover table-responsive-sm">
                                 <thead>
                                     <tr>
+                                            <!-- Control de privilegio segun perfil -->
                                             <th scope="col"><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?>  </th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">JAC</th>
@@ -183,7 +186,8 @@ if(!isset($_SESSION['user_id'])){
                                     <tbody>
                                         <tr>
                                             <td>  <!-- Large modal -->
-                                                    <?php
+                                                    <?php 
+                                                        //Consulta a la tabla comite para traer los datos.
                                                         $sel = $connection->prepare("SELECT * FROM tblcomite");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
@@ -191,8 +195,11 @@ if(!isset($_SESSION['user_id'])){
                                                         {
                                                     ?>
                                                      <tr>
+                                                     <!-- Control de privilegio segun perfil -->
                                                     <td><?php if ($_SESSION['perfil']== 2):?>
+                                                      <!-- Botón Eliminar  -->
                                                       <a  class="btn btn-primary" href="controllers/eliminarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class=" fas fa-trash" ></i></a>
+                                                      <!-- Botón Actualizar  -->
                                                       <a  class="btn btn-primary" href="Actualizarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class="far fa-edit" ></i></a>
                                                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-user-plus"></i></button>
                                                       </td> <?php endif ?>  
@@ -214,7 +221,7 @@ if(!isset($_SESSION['user_id'])){
             Content body end
         ***********************************-->
         <!--**********************************
-            Modal Start
+            Modal Start Inegrantes comite 
         ***********************************-->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
@@ -226,6 +233,7 @@ if(!isset($_SESSION['user_id'])){
                                                             </div><br>
                                                             <div class="card">
                                                                 <div class="card-body">
+                                                                    <!-- inicio formulario-->
                                                                     <div class="basic-form">
                                                                         <form action="controllers/insertarIntegranteComite.php" method="post">
                                                                         <div class="form-row align-items-center">
@@ -237,6 +245,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                          <option selected value="">
                                                                                                  --Selecciona--
                                                                                          </option>
+                                                                                         <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                          <?php
                                                                                             $query=$connection->prepare("SELECT * FROM tblusuario");
                                                                                             $query->execute();
@@ -258,6 +267,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <option selected value="">
                                                                                                 --Selecciona--
                                                                                             </option>
+                                                                                            <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                             <?php
                                                                                                $query=$connection->prepare("SELECT * FROM tblcomite");
                                                                                                $query->execute();
@@ -279,6 +289,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <option selected value="">
                                                                                                 --Selecciona--
                                                                                             </option>
+                                                                                            <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                             <?php
                                                                                                 $query=$connection->prepare("SELECT * FROM tblperiodo");
                                                                                                 $query->execute();
@@ -310,6 +321,7 @@ if(!isset($_SESSION['user_id'])){
                                                                         </div>
                                                                         </form>
                                                                     </div>
+                                                                    <!-- inicio formulario-->
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <!-- row -->
@@ -334,6 +346,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
+                                                                                             //Consulta a la vista integrantecomite para traer los datos con su respectivo nombre de campo.
                                                                                             $sel= $connection->prepare("SELECT * FROM vtaintegrantecomite  ");
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
@@ -341,9 +354,12 @@ if(!isset($_SESSION['user_id'])){
                                                                                             ?>
                                                                                             <tr>
                                                                                                  <td>
+                                                                                                     <!-- Botón Actualizar  -->
                                                                                                      <a type="button" class="btn btn-primary"href="formulario-editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
+                                                                                                      <!-- Botón Eliminar  -->
                                                                                                      <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                                                                  </td>
+                                                                                                 <!-- Mostar los datos Insertados en la tabla con el array -->
                                                                                                  <td><?php echo "{$integrante["nombres"]} {$integrante["apellidos"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["nombre"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["fechaInicio"]} - {$integrante["fechaFinal"]}";?></td>
@@ -373,20 +389,7 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Modal end
         ***********************************-->
-        
-        <!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-        <!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-        
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
 
     <!--**********************************
         Scripts

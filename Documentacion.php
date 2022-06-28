@@ -1,12 +1,14 @@
 <?php
+//Conexión bese de datos.
 include('util/conexion.php');
 session_start();
-
+//Usuario de logueo.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
 $_SESSION['perfil'];
+//Consulta a la tabla documentacion para traer los datos.
 $sel = $connection->prepare("SELECT * FROM tbldocumentacion");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
@@ -159,6 +161,7 @@ $sel->execute();
                 </div>
                 <div class="col-md-12">
                     <div class="card">
+                        <!-- Control de privilegio segun perfil -->
                         <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
                             <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
                                 onclick="location.href='Documentacion-formulario.php'"><span
@@ -188,6 +191,7 @@ $sel->execute();
                                             <table id="" class="display" style="width:100%">
                                                 <thead>
                                                     <tr>
+                                                        <!-- Control de privilegio segun perfil -->
                                                         <th><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?></th>
                                                         <th>Descripcion</th>
                                                         <th>Jac</th>
@@ -199,16 +203,21 @@ $sel->execute();
                                                 </thead>
                                                 <tbody>
                                                 <?php
+                                                 //Consulta a la tabla documentacion para traer los datos con su respectivo nombre de campo.
                                                 $sel= $connection->prepare("SELECT * FROM tbldocumentacion   ");
                                                 $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                 $sel->execute();
                                                 while($documento = $sel->fetch()){
                                                 ?>
                                                 <tr>
+                                                    <!-- Control de privilegio segun perfil --> 
                                                      <td><?php if ($_SESSION['perfil']== 2):?>
+                                                        <!-- Botón Actualizar -->
                                                          <a type="button" class="btn btn-primary"href="formulario-editarDocumento.php?id=<?php echo"{$documento["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
+                                                         <!-- Botón Eliminar -->
                                                          <a type="button" class="btn btn-primary" href="controllers/eliminarDocumento.php?id=<?php echo "{$documento["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
                                                      </td><?php endif ?>
+                                                     <!-- Mostar los datos Insertados en la tabla con el array -->
                                                      <td><?php echo "{$documento["descripcion"]}";?></td>
                                                      <td><?php echo "{$documento["jac"]}";?></td>
                                                      <td><?php echo "{$documento["tipodocumentacion"]}";?></td>
