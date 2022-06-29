@@ -28,7 +28,7 @@ $sel->execute();
     <link href="./css/style.css" rel="stylesheet">
     <!-- Custom style reuniones -->
     <link rel="stylesheet" href="./css/reuniones.css">
-    <!-- Fontawesome -->
+    <!-- Fontawesome  -->
     <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 

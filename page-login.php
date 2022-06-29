@@ -32,7 +32,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                                             </div>
-                                                            <input type="text" class="form-control" id="docIdentidad" name="docIdentidad" placeholder="">
+                                                            <input type="text" class="form-control" id="docIdentidad" name="docIdentidad" placeholder="Ingrese su número de documento">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -41,7 +41,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                                             </div>
-                                                            <input type="password" class="form-control" id="clave" name="clave" placeholder="">
+                                                            <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese su clave">
                                                             <div class="input-group-append show-pass">
                                                                 <span class="input-group-text"> <i class="fa fa-eye-slash"></i>
                                                                 </span>
