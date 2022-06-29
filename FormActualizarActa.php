@@ -110,7 +110,7 @@
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
+                                    <a href="perfil.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil </span>
                                     </a>
@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Usuario *</label>
-                                            <input type="text" name="usuario2"  class="form-control input-default " readonly required value="<?php echo ($_SESSION['user_id']) ?>" required="" >
+                                            <input type="text" name="usuario2"  class="form-control input-default "  required="" >
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6"></div>

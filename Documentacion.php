@@ -3,6 +3,7 @@
 include('util/conexion.php');
 session_start();
 //Usuario de logueo.
+$_SESSION['perfil'];
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -100,7 +101,7 @@ $sel->execute();
                                     </i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="./app-profile.php" class="dropdown-item">
+                                <a href="perfil.php" class="dropdown-item">
                                     <i class="icon-user"></i>
                                     <span class="ml-2">Perfil </span>
                                 </a>
@@ -127,9 +128,20 @@ $sel->execute();
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENÚ</li>
-                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i>
+                    <?php if ($_SESSION['perfil']==1): ?>
+                        <span
                                 class="nav-text">Inicio</span></a></li>
-                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Jac</span></a></li>
+                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Secretario</span></a></li>
+                     <?php endif ?>
+
+                     <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                        <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -138,9 +150,8 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li><?php if ($_SESSION['perfil']== 1):?>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li><?php endif ?>
+                                class="nav-text">Comites</span></a></li>
+                     <?php endif ?>
             </div>
         </div>
         <!--**********************************

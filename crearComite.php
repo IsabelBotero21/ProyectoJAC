@@ -100,7 +100,7 @@ if(!isset($_SESSION['user_id'])){
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
+                                    <a href="perfil.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil </span>
                                     </a>

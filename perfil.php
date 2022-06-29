@@ -1,36 +1,21 @@
-<?php 
-//Usuario de logueo.
-	session_start();
-	if(!isset($_SESSION['user_id'])){
-        header('Location: page-login.php');
-        exit;
-    }
-
-	if (!isset($_SESSION['user_id'])) {
-		header('Location: page-login.php');
-	}elseif(isset($_SESSION['user_id'])){
-        //Conexión base de datos.
-		include ('util/conexion.php');
-		$id = $_GET['id'];
-        //Consulta a la tabla jac para actualizar los registros.
-		$sel = $connection->prepare("SELECT * FROM tbljac WHERE id = ?;");
-		$sel->execute([$id]);
-		$fila = $sel->fetch(PDO::FETCH_OBJ);
-		//print_r($persona);
-	}else{
-		echo "Error en el sistema";
-	}
-
+<?php
+include("util/conexion.php");
+session_start();
+$_SESSION['perfil'];
+$documento = $_SESSION['docIdentidad'];
+$consulta=$connection->prepare("SELECT * FROM tblusuario WHERE docIdentidad = ?;");
+$consulta->execute([$documento]);
+$persona=$consulta->fetch(PDO::FETCH_OBJ);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Crear Jac</title>
+    <title>Usuarios</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -136,9 +121,20 @@
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
-                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i>
+                    <?php if ($_SESSION['perfil']==1): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Jac</span></a></li>
+                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                     class="nav-text">Secretario</span></a></li>
+                     <?php endif ?>
+
+                     <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
+                        <span
+                                class="nav-text">Inicio</span></a></li>
+                        <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -148,97 +144,131 @@
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                     <?php endif ?>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Crear Jac</h4>
+                               <h4>Editar usuario</h4>
                         </div>
                     </div>
                 </div>
-                 <!-- inicio formulario-->
-                <form action="controllers/actualizarJac.php" method="post" id="" name="">
+                <form action="controllers/editarUsuario.php" method="POST">
                     <div class="row card">
                         <div class="col-12 pt-3">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Nit *</label>
-                                            <input type="number" name="nit2" class="form-control input-default " value="<?php echo $fila->nit; ?>" Required>
+                                            <label>Número de Documento *</label>
+                                            <input type="number" class="form-control input-default" name="documento" readonly value="<?php echo $persona->docIdentidad ?>">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Dirección</label>
-                                            <input type="text" name="direccion2" class="form-control input-default " value="<?php echo $fila->direccion; ?>">
+                                            <label>Teléfono Fijo</label>
+                                            <input type="number" class="form-control input-default" name="telefonoFijo" value="<?php echo $persona->telefonoFijo ?>">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="col-4">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Nombre *</label>
-                                            <input type="text" name="nombre2" class="form-control input-default " value="<?php echo $fila->nombre; ?>" Required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Telefono</label>
-                                            <input type="text" name="telefono2" class="form-control input-default " value="<?php echo $fila->telefono; ?>">
+                                            <label>Contraseña *</label>
+                                            <input type="password" class="form-control input-default" name="clave" value="<?php echo $persona->clave ?>">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label>Municipio *</label>
-                                            <select class="form-control" name="municipio2" value="<?php echo $edit? $fila["nombre"]: ""?>" Required>
-                                                <option selected value="">
+                                            <label>Nombres *</label>
+                                            <input type="text" class="form-control input-default" name="nombres" value="<?php echo $persona->nombres?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Teléfono Celular *</label>
+                                            <input type="Number" class="form-control input-default" name="celular" value="<?php echo $persona->telefonoCelular?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Fecha de Nacimiento *</label>
+                                            <input type="date" max="<?php echo date_format(date_create(),'Y-m-d');?>"class="form-control input-default" name="fechaNacimiento" value="<?php echo $persona->fechaNacimiento ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Apellidos *</label>
+                                            <input type="text" class="form-control input-default" name="apellidos" value="<?php echo $persona->apellidos ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Perfil *</label>
+                                            <select class="form-control" name="perfil" required>
+                                                <option value="">
                                                     --Selecciona--
                                                 </option>
-                                                <!-- Consulta para traer las listas desplegables o select dinamico. En este caso la lista de todos los municipios. -->
                                                 <?php
-                                           $query=$connection->prepare("SELECT * FROM tblmunicipio");
-                                           $query->execute();
-                                           $data=$query->fetchAll();
-
-                                           foreach ($data as $municipio):
-                                            echo '<option '.(($fila->id == $municipio["id"]) ? 'selected' : '').' value="'.$municipio["id"].'">'.$municipio["nombre"].'</option>';
-                                           endforeach;
-                                           ?>
+                                                $query = $connection->prepare("SELECT * FROM tblperfil");
+                                                $query->execute();
+                                                $data = $query->fetchAll();
+                                                foreach($data as $opt):
+                                                    echo '<option '.(($persona->perfil == $opt["id"]) ? 'selected' : '').' value="'.$opt["id"].'">'.$opt["descripcion"].'</option>';
+                                                endforeach;
+                                                ?>
                                             </select>
                                         </div>
                                     </div>
-                                    
-                                <div class="col-12">
-                                <div class="form-group">
-                                            <label>Correo</label>
-                                            <input type="text" name="gmail" class="form-control input-default " value="<?php echo $fila->email; ?>">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Foto de perfil</label>
+                                            <input type="file" class="form-control input-default" name="foto" value="<?php echo $persona->foto ?>">
                                         </div>
-                                    </div>        
-                                <div >
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Dirección *</label>
+                                            <input type="text" class="form-control input-default" name="direccion" value="<?php echo $persona->direccion ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="form-group"> 
+                                            <label>Correo *</label>
+                                            <input type="email" class="form-control input-default" name="email" value="<?php echo $persona->email ?>">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-auto"><br>
+                                    <div class="form-check mb-2">
+                                             <input class="form-check-input" name="estado" type="checkbox" <?php if($persona->estado == 1) {echo 'checked="checked"';} ?>>
+                                             <label class="form-check-label">
+                                            Estado
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                                </div>
+                            </div>
+                            <p>Los campos con * son requeridos</p>
+                            <div class="p-3">
+                                <button type="button" class="btn btn-primary" onclick="location.href='usuarios.php'">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" value="guardar" >Guardar</button>
                             </div>
                         </div>
-                        <div class="col-12" >
-                        <p>Los campos con * son requeridos</p>
-                        </div>
                     </div>
-                    <button type="reset" class="btn btn-primary"><a href="jac.php">Cancelar</button>
-                     <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                 </form>
+
             </div>
-             <!-- fin formulario-->
+
         </div>
     </div>
     <script src="./vendor/global/global.min.js"></script>
@@ -246,9 +276,7 @@
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-                                        </div>
-                                        </div>
-<!--**********************************
+ <!--**********************************
             Footer start
         ***********************************-->
         <div  class= "footer bg-dark text-white">
