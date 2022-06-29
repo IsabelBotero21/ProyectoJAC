@@ -141,7 +141,7 @@ $sel->execute();
                                 class="nav-text">Comites</span></a></li><?php endif ?>
                     <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li>
-                    <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                    <li><a href="secretaria.php" aria-expanded="false">  <i class="fas fa-book"></i><span
                                 class="nav-text">Secretario</span></a></li>
             </div>
         </div>
