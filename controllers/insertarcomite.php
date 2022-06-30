@@ -20,7 +20,7 @@
 
 ?>
 <?php
-if(!isset($_POST['oculto'])){
+if(!isset($_POST['id'])){
    exit();
 }
 include ('../util/conexion.php');

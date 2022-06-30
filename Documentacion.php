@@ -57,7 +57,7 @@ $sel->execute();
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -95,20 +95,19 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                            <i class="mdi mdi-account"> 
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="perfil.php" class="dropdown-item">
-                                    <i class="icon-user"></i>
-                                    <span class="ml-2">Perfil </span>
                                 </a>
-                                <a href="./page-login.php" class="dropdown-item">
-                                    <i class="icon-key"></i>
-                                    <span class="ml-2">Cerrar sesión </span>
-
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="perfil.php" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Perfil </span>
+                                    </a>
+                                    <a href="./page-login.php" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Cerrar sesión </span>
                                     </a>
                                 </div>
                             </li>
@@ -183,8 +182,8 @@ $sel->execute();
                             <!-- Nav tabs -->
                             <div class="default-tab">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#libro">Libros</a>
+                                  <!--  <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#libro">Documentos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#estatutos">Estatutos</a>
@@ -194,7 +193,7 @@ $sel->execute();
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#informes">Informes</a>
-                                    </li>
+                                    </li>  -->
                                 </ul>
                                 <div class="tab-content pt-3">
                                     <div class="tab-pane fade show active" id="libro" role="tabpanel">
@@ -209,7 +208,7 @@ $sel->execute();
                                                         <th>Tipo Documento</th>
                                                         <th>Usuario</th>
                                                         <th>Archivo</th>
-                                                        <th>Ver</th>
+                                                        <th>Ver</th> 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -234,7 +233,7 @@ $sel->execute();
                                                      <td><?php echo "{$documento["tipodocumentacion"]}";?></td>
                                                      <td><?php echo "{$documento["usuario"]}";?></td>
                                                      <td><?php echo "{$documento["archivo"]}";?></td>
-                                                     <td><a type="button" class="btn btn-primary" href=""><i class="fa fa-eye"></i></a></td>
+                                                     <td><a type="button" class="btn btn-primary" href="web/viewer.html"> <i class="fa fa-eye"></i></a></td>
                                                 </tr>
                                                 <?php
                                                 }

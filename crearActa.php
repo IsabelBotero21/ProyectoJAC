@@ -51,7 +51,7 @@ if(!isset($_SESSION['user_id'])){
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -88,7 +88,7 @@ if(!isset($_SESSION['user_id'])){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id']) ?><br>
                                     </i>
@@ -120,7 +120,19 @@ if(!isset($_SESSION['user_id'])){
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
-                    
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
+                                class="nav-text">Home</span></a></li>
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                                class="nav-text">Usuarios</span></a></li>
+                    <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
+                                class="nav-text">Reuniones</span></a></li>
+                    <li><a href="actas.php" aria-expanded="false"><i class="fas fa-folder"></i><span
+                                class="nav-text">Actas</span></a></li>
+                    <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
+                                class="nav-text">Documentacion</span></a></li>
+                    <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
+                                class="nav-text">Comites</span></a></li>
+                               
             </div>
         </div>
         <!--**********************************
@@ -192,7 +204,7 @@ if(!isset($_SESSION['user_id'])){
                                         <div class="form-group col-md-6"></div>
                                             <p>Los campos con * son requeridos</p>
                                                 </div>
-                                        <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
+                                        <button type="reset" class="btn btn-primary" onclick="location.href='actas.php'">Cancelar</a></button>
                                         <button type="submit" class="btn btn-primary">Guardar</button>
                                     </form>
                                 </div>

@@ -1,4 +1,5 @@
 <?php
+//conexion a la base de datos
 include("util/conexion.php");
 session_start();
  
@@ -6,12 +7,14 @@ if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
+//llamado a la tabla requerida de la base de datos
 $_SESSION['perfil'];
 $sel = $connection->prepare("SELECT * FROM tblusuario");
 $sel->setFetchMode(PDO::FETCH_ASSOC);
 $sel->execute();
 ?>
 
+<!--inicio de la conexion a la base de datos para realizar la copia de seguridad-->
 <?php
 $connect = new PDO("mysql:host=localhost;dbname=jac", "root", "");
 $get_all_table_query = "SHOW TABLES";
@@ -48,6 +51,7 @@ if(isset($_POST['table']))
    $output .= "'" . implode("','", $table_value_array) . "');\n";
   }
  }
+ //nombre del archivo sql que se descargara
  $file_name = 'Backup_jac_in_' . date('d-m-y') . '.sql';
  $file_handle = fopen($file_name, 'w+');
  fwrite($file_handle, $output);
@@ -58,12 +62,12 @@ if(isset($_POST['table']))
  header('Content-Transfer-Encoding: binary');
  header('Expires: 0');
  header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize($file_name));
-    ob_clean();
-    flush();
-    readfile($file_name);
-    unlink($file_name);
+ header('Pragma: public');
+ header('Content-Length: ' . filesize($file_name));
+ ob_clean();
+ flush();
+ readfile($file_name);
+ unlink($file_name);
 }
 
 ?>
@@ -127,7 +131,7 @@ if(isset($_POST['table']))
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -153,7 +157,6 @@ if(isset($_POST['table']))
                                 </span>
                             </div>
                         </div>
-                        
                         <ul class="navbar-nav header-right">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
@@ -161,9 +164,11 @@ if(isset($_POST['table']))
                                     <li class="media dropdown-item">
                                         <span class="success"><i class="ti-user"></i></span>
                                         <div class="media-body">
+                                            
                                 </ul>
                             </div>
                             </li>
+                            <!--llamado al nombre del usuario logueado que se mostrara en el header-->
                             <li class="nav-item dropdown header-profile">
                             <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"> 
@@ -209,6 +214,8 @@ if(isset($_POST['table']))
                      class="nav-text">Jac</span></a></li>
                      <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
                      class="nav-text">Secretario</span></a></li>
+                     <li><a href="gestiones.php" aria-expanded="false"><i class="mdi mdi-account-search"></i><span
+                                class="nav-text">Gestiones</span></a></li>
                      <?php endif ?>
 
                      <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
@@ -235,6 +242,7 @@ if(isset($_POST['table']))
         <!--**********************************
             Content body start
         ***********************************-->
+        <!--título inicial de la pantalla-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -250,8 +258,8 @@ if(isset($_POST['table']))
                             <div class="card-header">
                             </div>
                             <div class="card-body">
+                                <!--inicio de la tabla -->
                                 <div class="table-responsive">
-                                    <!--imagen-->
                                     <table class="table header-border" style="min-width: 500px;">
                                         <thead>
                                            
@@ -265,9 +273,10 @@ if(isset($_POST['table']))
     <div class="card-body">
     <div class="basic-list-group">
     <div class="list-group">
-    <li class="list-group-item list-group-item-secondary">
-    <center><p> Seleccione las tablas de la base de datos de las que desee hacer la copia de seguridad</p></center><p>La sigla tbl significa "Tabla"</p></li>
-      <li class="list-group-item list-group-item-info">
+    <li class="list-group-item list-group-item-dark"><center><p> Seleccione las tablas de la base de datos de las que desee hacer la copia de seguridad</p></center></li>
+    <li class="list-group-item list-group-item-secondary"><p>La sigla tbl significa "Tabla"</p><p>La sigla vta significa "vista" esta ayuda a entender mejor la información de la aplicación.</p></li>
+      <!--inicio del check para seleccionar todas las tablas-->
+    <li class="list-group-item list-group-item-info">
       <input type="checkbox" onclick="marcar(this);" /> Marcar/Desmarcar Todas
     <hr/><br><br>
     <?php
@@ -280,14 +289,17 @@ if(isset($_POST['table']))
     <?php
     }
     ?>
+    <!--fin de check-->
      <div class="form-group">
-      <br><br><input type="submit" name="submit" id="submit" class="btn btn-info" value="Generar Copia de Seguridad" />
+      <br><br><button type="reset" class="btn btn-primary" onclick="location.href='gestiones.php'">Cancelar</button>
+      <!--input para generar la copia de seguridad--><input type="submit" name="submit" id="submit" class="btn btn-primary" value="Generar Copia de Seguridad" />
      </div></a></li>
     </form>
                                         </tbody></center>
                                     </table>
                                 </div>
                             </div>
+                            <!--fin de la tabla-->
                         </div>
                     </div>
                 </div>
@@ -334,6 +346,7 @@ if(isset($_POST['table']))
 </body>
 
 </html>
+<!--validacion por si el usuario no selecciona ninguna tabla y da click en el botón generar copia-->
 <script>
 $(document).ready(function(){
  $('#submit').click(function(){

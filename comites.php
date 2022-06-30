@@ -1,146 +1,130 @@
 <?php
-//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- //Usuario de logueo.
-$_SESSION['perfil'];
+ 
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-//Consulta a la tabla comite para traer los datos.
-    $stmt=$connection->query("SELECT * FROM tblcomite");
-    $comite = $stmt->fetchAll(PDO::FETCH_OBJ);
-    $stmt=$connection->query("SELECT * FROM tblintegrantescomite;");
-    $integrante = $stmt->fetchAll(PDO::FETCH_OBJ);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Comites</title>
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/escudo.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
-
+    <!-- Custom style reuniones -->
+    <link rel="stylesheet" href="./css/reuniones.css">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
 
-<!--*******************
-    Preloader start
-********************-->
-<div id="preloader">
-    <div class="sk-three-bounce">
-        <div class="sk-child sk-bounce1"></div>
-        <div class="sk-child sk-bounce2"></div>
-        <div class="sk-child sk-bounce3"></div>
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
     </div>
-</div>
-<!--*******************
-    Preloader end
-********************-->
+    <!--*******************
+        Preloader end
+    ********************-->
 
 
-<!--**********************************
-    Main wrapper start
-***********************************-->
-<div id="main-wrapper">
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
 
-<!--**********************************
-    Nav header start
-***********************************-->
-    <div class="nav-header">
-        <a href="index.html" class="brand-logo">
-        <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
-        <img class="brand-title" src="./images/mj.jpeg" alt="">
-        </a>
-        <div class="nav-control">
-            <div class="hamburger">
-                <span class="line"></span><span class="line"></span><span class="line"></span>
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="index.php" class="brand-logo">
+                <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
+                <img class="brand-title" src="./images/mj.jpeg" alt="">
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
             </div>
         </div>
-    </div>
-<!--**********************************
-    Nav header end
-***********************************-->
+        <!--**********************************
+            Nav header end
+        ***********************************-->
 
-<!--**********************************
-    Header start
-***********************************-->
-    <div class="header">
-        <div class="header-content">
-            <nav class="navbar navbar-expand">
-                <div class="collapse navbar-collapse justify-content-between">
-                    <div class="header-left">
-                        <div class="search_bar dropdown">
-                            </span>
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                            <div class="search_bar dropdown">
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <ul class="navbar-nav header-right">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <ul class="list-unstyled">
-                                <li class="media dropdown-item">
-                                    <span class="success"><i class="ti-user"></i></span>
-                                    <div class="media-body">         
-                            </ul>
-                                    </div>
-                                </li>
-                        <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                            <i class="mdi mdi-account"> 
-                                        <?php echo ($_SESSION['user_id'] ) ?>
-                                    </i>
+                        <ul class="navbar-nav header-right">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="perfil.php" class="dropdown-item">
-                                    <i class="icon-user"></i>
-                                    <span class="ml-2">Perfil </span>
-                                </a>
-                                <a href="./page-login.php" class="dropdown-item">
-                                    <i class="icon-key"></i>
-                                    <span class="ml-2">Cerrar sesión </span>
-                                </a>
+                                <ul class="list-unstyled">
+                                    <li class="media dropdown-item">
+                                        <span class="success"><i class="ti-user"></i></span>
+                                        <div class="media-body">
+                                </ul>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+                            </li>
+                            <li class="nav-item dropdown header-profile">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
+                                        <?php echo ($_SESSION['user_id'] ) ?>
+                                    </i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="perfil.php" class="dropdown-item">
+                                        <i class="icon-user"></i>
+                                        <span class="ml-2">Perfil </span>
+                                    </a>
+                                    <a href="./page-login.php" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Cerrar sesión </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
-<!--**********************************
-    Header end ti-comment-alt
-***********************************-->
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
 
-<!--**********************************
-     Sidebar start
-***********************************-->
-    <div class="quixnav">
-        <div class="quixnav-scroll">
-            <ul class="metismenu" id="menu">
-                <li class="nav-label first">MENU</li>
-                <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i>
-                    <?php if ($_SESSION['perfil']==1): ?>
-                        <span
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="quixnav">
+            <div class="quixnav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label first">MENU</li>
+                    <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
                                 class="nav-text">Inicio</span></a></li>
-                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                     class="nav-text">Jac</span></a></li>
-                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                     class="nav-text">Secretario</span></a></li>
-                     <?php endif ?>
-
-                     <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
-                        <span
-                                class="nav-text">Inicio</span></a></li>
-                        <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
+                    <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
                                 class="nav-text">Reuniones</span></a></li>
@@ -150,89 +134,74 @@ if(!isset($_SESSION['user_id'])){
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                     <?php endif ?>
-        </div>
-    </div>
-<!--**********************************
-    Sidebar end
-***********************************-->
-
-<!--**********************************
-    Content body start
-***********************************-->
-    <div class="content-body">
-        <div class="container-fluid">
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="welcome-text">
-                        <h4>Comités</h4>
-                    </div>
-                </div>
             </div>
-        <!-- row -->
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-header">
-                        <!-- Control de privilegio segun perfil -->
-                        <h4 class="card-title"></h4><?php if ($_SESSION['perfil']== 2):?>
-                        <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
-                        onclick="location.href='crearComite.php'"><span
-                            class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
-                        </span>Crear Comite</button> <?php endif ?>                       
+        </div>
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Comités</h4>
+                        </div>
                     </div>
                 </div>
-                
-                
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-responsive-sm">
-                                <thead>
-                                    <tr>
-                                            <!-- Control de privilegio segun perfil -->
-                                            <th scope="col"><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?>  </th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">JAC</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>  <!-- Large modal -->
-                                                    <?php 
-                                                        //Consulta a la tabla comite para traer los datos.
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header"><?php if ($_SESSION['perfil']== 2):?>
+                            <button type="button" class="btn btn-rounded btn-info add-reunion ml-auto"
+                                onclick="location.href='crearComite.php'"><span 
+                                    class="btn-icon-left text-info"><i class="fa fa-plus color-info"></i>
+                                </span>Crear Comité</button>
+                        </div><?php endif ?> 
+
+                        <div class="card-body">
+                            <!-- Nav tabs -->
+                            <div class="default-tab">
+                                <div class="tab-content pt-3">
+                                    <div class="tab-pane fade show active" role="tabpanel">
+                                        <div class="table-responsive">
+                                            <table id="" class="display" style="width:100%">
+                                                <thead>
+                                                <tr>
+                                        <th>Acciones</th>
+                                        <th>Nombre</th>
+                                        <th>Jac</th> 
+                                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
                                                         $sel = $connection->prepare("SELECT * FROM tblcomite");
                                                         $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                         $sel->execute();
                                                         while ($comite = $sel->fetch())
                                                         {
                                                     ?>
-                                                     <tr>
-                                                     <!-- Control de privilegio segun perfil -->
-                                                    <td><?php if ($_SESSION['perfil']== 2):?>
-                                                      <!-- Botón Eliminar  -->
+                                                    <tr>
+                                                    <td>
+                                                    <?php if ($_SESSION['perfil']== 2):?>
                                                       <a  class="btn btn-primary" href="controllers/eliminarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class=" fas fa-trash" ></i></a>
-                                                      <!-- Botón Actualizar  -->
-                                                      <a  class="btn btn-primary" href="Actualizarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class="far fa-edit" ></i></a>
+                                                      <a  class="btn btn-primary" href="Actualizarcomite.php?id=<?php  echo "{$comite["id"]}" ?>"><i class="far fa-edit" ></i></a><?php endif ?> 
                                                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-user-plus"></i></button>
-                                                      </td> <?php endif ?>  
-                                                        <td><?php echo "{$comite["nombre"]}" ?></td>
-                                                        <td><?php echo "{$comite["jac"]} " ?></td>
+                                                    </td> 
+                                                    <td><?php echo "{$comite["nombre"]}" ?></td>
+                                                    <td><?php echo "{$comite["jac"]} " ?></td>
                                                     </tr>
                                                     <?php
                                                         }
-                                                    ?>
-                                                
-                                    </tbody>
-                                </table>
+                                                    ?>  
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /# card -->
                 </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        <!--**********************************
-            Modal Start Inegrantes comite 
+                
+                        
+                 <!--**********************************
+            Modal Start
         ***********************************-->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
@@ -243,8 +212,7 @@ if(!isset($_SESSION['user_id'])){
                                                                 </button>
                                                             </div><br>
                                                             <div class="card">
-                                                                <div class="card-body">
-                                                                    <!-- inicio formulario-->
+                                                                <div class="card-body"><?php if ($_SESSION['perfil']== 2):?>
                                                                     <div class="basic-form">
                                                                         <form action="controllers/insertarIntegranteComite.php" method="post">
                                                                         <div class="form-row align-items-center">
@@ -256,7 +224,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                          <option selected value="">
                                                                                                  --Selecciona--
                                                                                          </option>
-                                                                                         <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                          <?php
                                                                                             $query=$connection->prepare("SELECT * FROM tblusuario");
                                                                                             $query->execute();
@@ -278,7 +245,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <option selected value="">
                                                                                                 --Selecciona--
                                                                                             </option>
-                                                                                            <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                             <?php
                                                                                                $query=$connection->prepare("SELECT * FROM tblcomite");
                                                                                                $query->execute();
@@ -300,7 +266,6 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <option selected value="">
                                                                                                 --Selecciona--
                                                                                             </option>
-                                                                                            <!-- Consulta para traer las listas desplegables o select dinamico. -->
                                                                                             <?php
                                                                                                 $query=$connection->prepare("SELECT * FROM tblperiodo");
                                                                                                 $query->execute();
@@ -329,10 +294,9 @@ if(!isset($_SESSION['user_id'])){
                                                                             <div class="col-auto"><br>
                                                                                 <button type="submit" class="btn btn-primary mb-2" style="margin-left: 20px;">Agregar</button>
                                                                             </div>
-                                                                        </div>
+                                                                        </div><?php endif ?>
                                                                         </form>
                                                                     </div>
-                                                                    <!-- inicio formulario-->
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <!-- row -->
@@ -348,7 +312,7 @@ if(!isset($_SESSION['user_id'])){
                                                                                             <thead>
                                                                                                 <tbody>
                                                                                                     <tr>
-                                                                                                        
+                                                                                                        <th><?php if ($_SESSION['perfil']== 2):?>Acciones<?php endif ?></th>
                                                                                                         <th>Nombres</th>
                                                                                                         <th>Comité</th>
                                                                                                         <th>Período</th>
@@ -357,30 +321,16 @@ if(!isset($_SESSION['user_id'])){
                                                                                             </thead>
                                                                                             <tbody>
                                                                                             <?php
-<<<<<<< HEAD
-                                                                                             //Consulta a la vista integrantecomite para traer los datos con su respectivo nombre de campo.
-=======
-
-                                                                                            $sel= $connection->prepare("SELECT * FROM  vtaintegrantecomite ");
->>>>>>> 6601fc3e5c1cb52fbb2d741939d981f5b00de2ac
-                                                                                            $sel= $connection->prepare("SELECT * FROM vtaintegrantecomite  ");
-
+                                                                                            $sel= $connection->prepare("SELECT * FROM vtaIntegrantesComite   ");
                                                                                             $sel->setFetchMode(PDO::FETCH_ASSOC);
                                                                                             $sel->execute();
                                                                                             while($integrante = $sel->fetch()){
                                                                                             ?>
                                                                                             <tr>
-<<<<<<< HEAD
-                                                                                                 <td>
-                                                                                                     <!-- Botón Actualizar  -->
+                                                                                                 <td><?php if ($_SESSION['perfil']== 2):?>
                                                                                                      <a type="button" class="btn btn-primary"href="formulario-editarIntegranteComite.php?id=<?php echo"{$integrante["id"]}"?>"><i class="far fa-edit"></i> </a><br><br>
-                                                                                                      <!-- Botón Eliminar  -->
-                                                                                                     <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a>
+                                                                                                     <a type="button" class="btn btn-primary" href="controllers/eliminarIntegranteComite.php?id=<?php echo "{$integrante["id"]}" ?>"><i class="fa fa-trash-o"></i></a><?php endif ?>
                                                                                                  </td>
-                                                                                                 <!-- Mostar los datos Insertados en la tabla con el array -->
-=======
-                                                                                                 
->>>>>>> 6601fc3e5c1cb52fbb2d741939d981f5b00de2ac
                                                                                                  <td><?php echo "{$integrante["nombres"]} {$integrante["apellidos"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["nombre"]}";?></td>
                                                                                                  <td><?php echo "{$integrante["fechaInicio"]} - {$integrante["fechaFinal"]}";?></td>
@@ -410,18 +360,14 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Modal end
         ***********************************-->
-    </div>
-
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-    <script src="./vendor/global/global.min.js"></script>
-    <script src="./js/quixnav-init.js"></script>
-    <script src="./js/custom.min.js"></script>
-    
-
-<!--**********************************
+                <script src="./vendor/global/global.min.js"></script>
+                <script src="./js/quixnav-init.js"></script>
+                <script src="./js/custom.min.js"></script>
+                <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
+                <script src="./js/plugins-init/datatables.init.js"></script>
+            </div>
+        </div>
+         <!--**********************************
             Footer start
         ***********************************-->
         <div  class= "footer bg-dark text-white">
@@ -433,7 +379,6 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Footer end
         ***********************************-->
-
 </body>
 
 </html>

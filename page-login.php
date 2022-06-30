@@ -43,15 +43,15 @@
                                                             </div>
                                                             <input type="password" class="form-control" id="clave" name="clave" placeholder="Ingrese su clave">
                                                             <div class="input-group-append show-pass">
-                                                                <span class="input-group-text"> <i class="fa fa-eye-slash"></i>
+                                                                <!-- <span class="input-group-text"> <i class="fa fa-eye-slash"></i> -->
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div><!-- 
                                             <div class="form-group">
                                                 <a href="page-forgot-password.html">¿Haz olvidado tu contraseña?</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block" name="login" value="login">Iniciar sesión</button>

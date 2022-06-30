@@ -1,13 +1,12 @@
 <?php
-//Conexión base de datos.
 include("util/conexion.php");
 session_start();
- //Usuario de logueo.
+ 
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-//Consulta a la tabla comite para traer los datos.
+
     $stmt=$connection->query("SELECT * FROM tblcomite");
     $comite = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -20,7 +19,7 @@ if(!isset($_SESSION['user_id'])){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>comite</title>
+    <title>Crear comité</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -94,7 +93,7 @@ if(!isset($_SESSION['user_id'])){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                 <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
@@ -127,7 +126,7 @@ if(!isset($_SESSION['user_id'])){
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">MENU</li>
                     <li><a href="index.php" aria-expanded="false"><i class="fas fa-home"></i><span
-                                class="nav-text">Home</span></a></li>
+                                class="nav-text">Inicio</span></a></li>
                     <li><a href="usuarios.php" aria-expanded="false"><i class="fas fa-users"></i><span
                                 class="nav-text">Usuarios</span></a></li>
                     <li><a href="reuniones.php" aria-expanded="false"><i class="far fa-handshake"></i><span
@@ -137,37 +136,33 @@ if(!isset($_SESSION['user_id'])){
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-                                class="nav-text">Comites</span></a></li>
-                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                                class="nav-text">Comités</span></a></li>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Crear Comite</h4>
+                            <h4>Crear Comité</h4>
                         </div>
                     </div>
                 </div>
-                <!-- inicio formulario-->
-                <div class="card-body">
-                <form action="controllers/insertarcomite.php" method="POST">
-                                    <div class="contenedor-inputs">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for=""><h5>NOMBRE (*)</h5></label>
-                                                <input type="text" name="nombre" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-6">                                        
-                                            <div class="form-group">
-                                                <label for=""><h5>Jac: (*)</h5></label>
-                                                <select name="jac" id="" class="form-control" value="" Required>
+                
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                        <form action="controllers/insertarcomite.php" method="POST">
+                                <div class="form-row">
+                                <div class="col-sm-6">
+                                        <label>Nombre *</label>
+                                        <input type="text" name="nombre" class="form-control">
+                                    </div>
+                                    <div class="col-sm-6 mt-2 mt-sm-0">
+                                        <label>Jac *</label>
+                                        <select name="jac" id="" class="form-control" value="" Required>
                                                                 <option selected value="">
                                                                     --Selecciona--
                                                                 </option>
@@ -181,31 +176,22 @@ if(!isset($_SESSION['user_id'])){
                                                     endforeach;
                                             ?>
                                                 </select>
-                                            </div>
-                                        </div>                                                                                
-                                        <br></br>
-                                        <div class="col-6">                                                                                                                          
-                                            <p>(*) Campos Obligatorios
+                                    </div>
+                                    <div class="col-12">
+                                    <p>Los campos con * son requeridos</p>
                                         </div>
-                                        <ul class="error" id="error"></ul>
-
-                                    </div>
-                                    <div>
-                                    <input type="hidden" name="oculto" >
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <input  type="submit" class="btn btn-primary" name="continuar" value="continuar">
-                                    </div>
-                                    </form>                    
+                            <div>
+                            <input type="hidden" name="id" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
+                                        </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="location.href='comites.php'" class="btn btn-primary"> Cancelar</a></button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                
             </div>
-             <!-- fin  formulario-->
         </div>
-
-    </div>
-    
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
@@ -224,5 +210,4 @@ if(!isset($_SESSION['user_id'])){
             Footer end
         ***********************************-->
 </body>
-
 </html>

@@ -1,33 +1,30 @@
-<?php 
-//Conexión base de datos.
+<!DOCTYPE html>
+<!--conexion a la base de datos-->
+<?php
 include("util/conexion.php");
 session_start();
- //Usuario loguado.
-$_SESSION['perfil'];
+ 
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
 }
-//Consulta a la tabla documentacio  para taer los datos.
-    $stmt=$connection->query("SELECT * FROM tbldocumentacion");
-    $documento = $stmt->fetchAll(PDO::FETCH_OBJ);
-    
-
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/a0b0003306.js" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Documentacion</title>
+    <title>Gestiones</title>
+    <!-- Datatable -->
+    <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
-    <link rel="stylesheet" href="./vendor/select2/css/select2.min.css">
+    <!-- Custom Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
-
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -78,7 +75,6 @@ if(!isset($_SESSION['user_id'])){
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-
                             <div class="search_bar dropdown">
                                 </span>
                             </div>
@@ -93,9 +89,10 @@ if(!isset($_SESSION['user_id'])){
                                 </ul>
                             </div>
                             </li>
+                            <!--llamado al nombre del usuario logueado que se mostrara en el header-->
                             <li class="nav-item dropdown header-profile">
-                                <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
-                                <i class="mdi mdi-account"> 
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
                                 </a>
@@ -107,7 +104,6 @@ if(!isset($_SESSION['user_id'])){
                                     <a href="./page-login.php" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Cerrar sesión </span>
-
                                     </a>
                                 </div>
                             </li>
@@ -151,6 +147,9 @@ if(!isset($_SESSION['user_id'])){
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
                      <?php endif ?>
+                     <li><a href="gestiones.php" aria-expanded="false"><i class="mdi mdi-account-search"></i><span
+                                class="nav-text">Gestiones</span></a></li>
+
             </div>
         </div>
         <!--**********************************
@@ -160,112 +159,79 @@ if(!isset($_SESSION['user_id'])){
         <!--**********************************
             Content body start
         ***********************************-->
+        <!--título de la página-->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Registrar Documentación</h4>
+                            <h4>Gestiones</h4>
                         </div>
                     </div>
                 </div>
-                <!-- inicio formulario-->
-                <div class="card">
-                    <div class="card-header">
-                    </div>
-                    <div class="card-body">
-                        <div class="basic-form">
-                        <form action="controllers/insertarDocumentacion.php" method="post">
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label>Descripción *</label>
-                                        <textarea type="text" name="descripcion" class="form-control input-default" value="<?php echo $edit? $actividad["descripcion"]: ""?>"></textarea>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Jac * </label>
-                                        <select name="jac" id="" class="form-control" value="" Required>
-                                                                <option selected value="">
-                                                                    --Selecciona--
-                                                                </option>
-                                                    <?php
-                                                    $query=$connection->prepare("SELECT * FROM tbljac");
-                                                    $query->execute();
-                                                    $data=$query->fetchAll();
+        <!--fin de título-->
 
-                                                    foreach ($data as $opcion):
-                                                        echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
-                                                    endforeach;
-                                            ?>
-                                                </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Tipo de documento *</label>
-                                        <select name="tipoDocumento" id="" class="form-control" value="" Required>
-                                                                <option selected value="">
-                                                                    --Selecciona--
-                                                                </option>
-                                                    <?php
-                                                    $query=$connection->prepare("SELECT * FROM tbltipodocumentacion");
-                                                    $query->execute();
-                                                    $data=$query->fetchAll();
-
-                                                    foreach ($data as $opcion):
-                                                        echo '<option value="'.$opcion["id"].'">'.$opcion["nombre"].'</option>';
-                                                    endforeach;
-                                            ?>
-                                                </select>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    <label>Usuario *</label>
-                                    <div class="input-group mb-2">
-                                            <select class="form-control" name="usuario" value="<?php echo $edit? $actividad["usuario"]: ""?>">
-                                             <option selected value="">
-                                                     --Selecciona--
-                                             </option>
-                                             <?php
-                                                $query=$connection->prepare("SELECT * FROM tblusuario");
-                                                $query->execute();
-                                                $data=$query->fetchAll();
-
-                                                foreach ($data as $opcion):
-                                                 echo '<option value="'.$opcion["docIdentidad"].'">'.$opcion["nombres"]." ".$opcion["apellidos"].'</option>';
-                                                endforeach;
-                                                ?>
-                                            </select>  
-                                    </div> 
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>Archivo *</label>
-                                        <input type="file" name="archivoAsistencia" class="form-control input-default "  accept="util/pdf.php" Required>
-                                    </div>
-                                    <div class="col-12">
-                                    <p>Los campos con * son requeridos</p>
-                                        </div>
-                            <div>
-                            <input type="hidden" name="id" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
-                                        </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary" onclick="location.href='Documentacion.php'"> Cancelar</a></button>
-                                <button type="submit" class="btn btn-primary">Registrar</button>
-                            </form>
+        <!--inicio de contenido-->
+                <!--inicio del div para las copia de seguridad-->
+                <div class="row">
+                    <div class="col-xl-4 col-xxl-6 col-lg-6 col-sm-6">
+                        <div class="card mb-3">
+                            <img  src="./images/card/22.jpeg" alt="Card image cap" class="img-thumbnail">
+                            <div class="card-header">
+                                <h5 class="card-title">Copia de Seguridad</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Las copias de seguridad permiten tener la tranquilidad de que la información puede recuperarse en caso de que los equipos o las aplicaciones se dañen.</p>
+                                <button type="button" class="btn btn-primary" onclick="location.href='copiaDeSeguridad.php'">Generar Copia de Seguridad <span
+                                    class="btn-icon-right"><i class="fa fa-star"></i></span>
+                            </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- fin  formulario-->
+                <!--fin del div de copias de seguridad-->    
 
-                <!--**********************************
+                <!--inicio del vdiv para las consultas-->
+                    <div class="col-xl-4 col-xxl-6 col-lg-6 col-sm-6">
+                        <div class="card mb-3">
+                            <img  src="./images/card/24.jpeg" alt="Card image cap" class="img-thumbnail">
+                            <div class="card-header">
+                                <h5 class="card-title">Consultas</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Las Consultas te ayudan a resolver dudas acerca de la comunidad que conforma la aplicación y aclararlas de manera eficiente. 
+                                <p class="card-text">Las aplicaciones son las herramientas que aligeran nuestro trabajo, permiten comunicarnos con nuestro entorno y simplifican el acceso a la información.</p>
+                                </p>
+                                <button type="button" class="btn btn-primary" onclick="location.href='consultas.php'">Realizar una consulta <span
+                                    class="btn-icon-right"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                <!--fin del div de las consultas-->
+                    <br><br>
+                    <!-- Column ends -->
+                   
+                        
+                    <div class="alert alert-secondary alert-dismissible alert-alt fade show">
+                        <strong>Entérate!</strong> Con esta Herramienta Realiza Gestiones de las Juntas De accion Comunal de manera Fácil y Rapida.
+                    </div>
+                    <!--fin de column end-->
+                    </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+</div>
+<!--fin de contenido-->
+
+        <!--**********************************
             Content body end
         ***********************************-->
-                
-</div>
-            
-            <!-- Required vendors -->
-            <script src="./vendor/global/global.min.js"></script>
-            <script src="./js/quixnav-init.js"></script>
-            <script src="./js/custom.min.js"></script>
-                                            </div>
-                                            </div>
-<!--**********************************
+
+
+        <!--**********************************
             Footer start
         ***********************************-->
         <div  class= "footer bg-dark text-white">
@@ -278,9 +244,31 @@ if(!isset($_SESSION['user_id'])){
             Footer end
         ***********************************-->
 
-            <script src="./vendor/select2/js/select2.full.min.js"></script>
-            <script src="./js/plugins-init/select2-init.js"></script>
- 
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="./vendor/global/global.min.js"></script>
+    <script src="./js/quixnav-init.js"></script>
+    <script src="./js/custom.min.js"></script>
+    
+
+
+
 </body>
 
 </html>

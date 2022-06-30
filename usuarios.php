@@ -62,7 +62,7 @@ $sel->execute();
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -99,14 +99,14 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account">
                                           <!-- Control de privilegio segun perfil -->
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
+                                    <a href="perfil.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil</span>
                                     </a>
@@ -140,6 +140,8 @@ $sel->execute();
                      class="nav-text">Jac</span></a></li>
                      <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
                      class="nav-text">Secretario</span></a></li>
+                     <li><a href="gestiones.php" aria-expanded="false"><i class="mdi mdi-account-search"></i><span
+                                class="nav-text">Gestiones</span></a></li>
                      <?php endif ?>
 
                      <?php if ($_SESSION['perfil']==2 || $_SESSION['perfil']==3 || $_SESSION['perfil']==4 || $_SESSION['perfil']==5 || $_SESSION['perfil']==6 || $_SESSION['perfil']==7 ): ?>
@@ -154,14 +156,14 @@ $sel->execute();
                     <li><a href="Documentacion.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
-<<<<<<< HEAD
+
                      class="nav-text">Comites</span> <!-- Control de privilegio segun perfil --></a></li><?php if ($_SESSION['perfil']==1):?>
                      <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Jac</span></a></li><?php endif ?>
-=======
-                                class="nav-text">Comites</span></a></li>
+
+                               
                      <?php endif ?>
->>>>>>> 6601fc3e5c1cb52fbb2d741939d981f5b00de2ac
+
             </div>
         </div>
         <!--**********************************
@@ -214,14 +216,14 @@ $sel->execute();
                                                         while ($fila = $sel->fetch())
                                                         {
                                                     ?>
-<<<<<<< HEAD
+
                                                     <tr> <!-- Control de privilegio segun perfil -->
                                                         <td><?php if ($_SESSION['perfil']== 2):?>
                                                             <!-- Botón Actualizar -->
-=======
+                                                            <?php endif ?>
                                                     <tr>
                                                         <td><?php if ($_SESSION['perfil']== 2 || $_SESSION['perfil']== 1):?>
->>>>>>> 6601fc3e5c1cb52fbb2d741939d981f5b00de2ac
+
                                                             <a type="button" class="btn btn-primary" href="editarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="far fa-edit"></i></a><br><br>
                                                             <!-- Botón Eliminar -->
                                                             <a type="button" class="btn btn-primary" href="controllers/eliminarUsuario.php?id=<?php echo "{$fila["docIdentidad"]}" ?>"><i class="fa fa-trash-o"></i></a>

@@ -6,7 +6,7 @@ if(!isset($_POST['oculto'])){
 }
 
 
-   $id = $_POST['id'];
+   @$id = $_POST['id'];
 	@$nombre = $_POST['nombre'];
 	@$jac = $_POST['jac'];
 

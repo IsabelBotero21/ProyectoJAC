@@ -1,9 +1,7 @@
 <?php
-//Conexión  base de datos.
 include("util/conexion.php");
 session_start();
  
-//Usuario Logueado.
 if(!isset($_SESSION['user_id'])){
     header('Location: page-login.php');
     exit;
@@ -11,7 +9,6 @@ if(!isset($_SESSION['user_id'])){
 if(!isset($_GET['id'])){
     exit;
 }
-//Consulta a la tabla comite  para actualizar los registros.
 $id=$_GET['id'];
 $stmt=$connection->prepare("SELECT * FROM tblcomite WHERE id=?;" );
 $stmt->execute([$id]);
@@ -26,7 +23,7 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>comite</title>
+    <title>Actualizar comite</title>
     <!-- Datatable -->
     <link href="./vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Favicon icon -->
@@ -63,7 +60,7 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -100,13 +97,13 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                 <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="./app-profile.php" class="dropdown-item">
+                                    <a href="perfil.php" class="dropdown-item">
                                         <i class="icon-user"></i>
                                         <span class="ml-2">Perfil </span>
                                     </a>
@@ -128,7 +125,6 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
         <!--**********************************
             Sidebar start
         ***********************************-->
-         <!-- Inicio de menú -->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -145,15 +141,8 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                                <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!-- Inicio del formulario  -->
         <div class="content-body">
             <div class="container-fluid">
                 <div class="row page-titles mx-0">
@@ -163,19 +152,20 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="controllers/Actualizarcomite.php" method="POST">
-                        <div class="contenedor-inputs">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label>NOMBRE *</label>
+                <div class="card">
+                    <div class="card-header">
+                    </div>
+                    <div class="card-body">
+                        <div class="basic-form">
+                        <form action="controllers/Actualizarcomite.php" method="POST">
+                                <div class="form-row">
+                                <div class="col-sm-6">
+                                        <label>NOMBRE *</label>
                                     <input type="text" name="nombre" class="form-control" value="<?php echo $comite->nombre?>">
-                                </div>
-                            </div>
-                            <div class="col-6">                                        
-                                <div class="form-group">
-                                    <label>Jac *</label>
-                                    <select name="jac" class="form-control" Required>
+                                    </div>
+                                    <div class="col-sm-6 mt-2 mt-sm-0">
+                                        <label>Jac *</label>
+                                        <select name="jac" class="form-control" Required>
                                         <option value="">
                                             --Selecciona--
                                         </option>
@@ -189,30 +179,33 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
                                             endforeach;
                                         ?>
                                     </select>
-                                </div>
-                            </div>                                                                                
-                            <br></br>
-                            <div class="col-6">                                                                                                                          
-                                <p>(*) Campos Obligatorios
-                            </div>
-                        </div>
-                    <div>
-                        <input type="hidden" name="oculto" value="">
+                                    </div>
+                                    <div class="col-12">
+                                    <p>Los campos con * son requeridos</p>
+                                        </div>
+                            <div>
+                            <input type="hidden" name="oculto" value="<?php echo  $edit? $actividad["id"]: ""?>"> 
+                            <
                         <input type="hidden" name="id" value="<?php echo $comite->id;?>">
+                                        </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="location.href='comites.php'" class="btn btn-primary"> Cancelar</button>
+                                <input  type="submit" class="btn btn-primary" name="continuar" value="Guardar">
+                            </form>
+                        </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
- <!-- Fin del formulario --> 
 
-                   
-        
+    <div>
+<div>
     <script src="./vendor/global/global.min.js"></script>
     <script src="./js/quixnav-init.js"></script>
     <script src="./js/custom.min.js"></script>
     <script src="./vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="./js/plugins-init/datatables.init.js"></script>
-        <!--**********************************
+    <!--**********************************
             Footer start
         ***********************************-->
         <div  class= "footer bg-dark text-white">
@@ -224,6 +217,7 @@ $comite = $stmt->fetch(PDO::FETCH_OBJ);
         <!--**********************************
             Footer end
         ***********************************-->
+
 </body>
 
 </html>

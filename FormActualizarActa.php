@@ -67,7 +67,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -104,7 +104,7 @@
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id']) ?><br>
                                     </i>
@@ -148,8 +148,7 @@
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                    
             </div>
         </div>
         <!--**********************************
@@ -224,7 +223,7 @@
                                         <div class="form-group col-md-6"></div>
                                             <p>Los campos con * son requeridos</p>
                                                 </div>
-                                        <button type="reset" class="btn btn-primary"><a href="actas.php">Cancelar</a></button>
+                                        <button type="reset" class="btn btn-primary" onclick="location.href='actas.php'">Cancelar</a></button>
                                         <button type="submit" class="btn btn-primary" name="id2" value="<?php echo $fila->id; ?>">Guardar</button>
                                     </form>
                                 </div>

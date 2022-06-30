@@ -1,5 +1,5 @@
 <?php
-if(!isset($_POST['oculto'])){
+if(!isset($_POST['oculto1'])){
    exit();
 }
 include ('../util/conexion.php');

@@ -1,4 +1,4 @@
-<?php}
+<?php
 //Conexión base de datos.
 include("util/conexion.php");
 session_start();
@@ -60,7 +60,7 @@ $sel->execute();
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -97,7 +97,7 @@ $sel->execute();
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                            <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
@@ -145,6 +145,8 @@ $sel->execute();
                                 class="nav-text">Jac</span></a></li>
                     <li><a href="secretaria.php" aria-expanded="false"><i class="fas fa-book"></i><span
                                 class="nav-text">Secretario</span></a></li>
+                    <li><a href="gestiones.php" aria-expanded="false"><i class="mdi mdi-account-search"></i><span
+                                class="nav-text">Gestiones</span></a></li>
             </div>
         </div>
         <!--**********************************

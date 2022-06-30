@@ -59,7 +59,7 @@ if(!isset($_GET['id'])){
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="index.php" class="brand-logo">
                 <img class="logo-abbr" src="icons/bandera2.jpg" alt="">
                 <img class="brand-title" src="./images/mj.jpeg" alt="">
             </a>
@@ -97,7 +97,7 @@ if(!isset($_GET['id'])){
                             </div>
                             </li>
                             <li class="nav-item dropdown header-profile">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                <a class="Nav-link" href="#" role="button" data-toggle="dropdown">
                                 <i class="mdi mdi-account"> 
                                         <?php echo ($_SESSION['user_id'] ) ?>
                                     </i>
@@ -142,8 +142,7 @@ if(!isset($_GET['id'])){
                                 class="nav-text">Documentacion</span></a></li>
                     <li><a href="comites.php" aria-expanded="false"><i class="fas fa-user-friends"></i><span
                                 class="nav-text">Comites</span></a></li>
-                    <li><a href="jac.php" aria-expanded="false"><i class="fas fa-book"></i><span
-                                class="nav-text">Jac</span></a></li>
+                    
             </div>
         </div>
         <!--**********************************
@@ -158,7 +157,7 @@ if(!isset($_GET['id'])){
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Registrar Documentación</h4>
+                            <h4>Editar Documentación</h4>
                         </div>
                     </div>
                 </div>
@@ -240,7 +239,7 @@ if(!isset($_GET['id'])){
                             <input type="hidden" name="id" value="<?php echo $documento->id;?>">
                                         </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary"><a href="Documentacion.php"> Cancelar</a></button>
+                                <button type="submit" class="btn btn-primary" onclick="location.href='Documentacion.php'"> Cancelar</a></button>
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
                             </form>
                         </div>
